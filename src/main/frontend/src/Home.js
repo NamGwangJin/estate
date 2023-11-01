@@ -7,7 +7,7 @@ function Home() {
     return (
         <div className="App">
           <Header />
-          <div className='mainSection'>메인섹션</div>
+          <div className='mainSection'>메인섹션123123</div>
           <Bottom />
         </div>
       );
