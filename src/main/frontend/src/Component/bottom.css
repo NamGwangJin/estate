@@ -1,0 +1,32 @@
+.bottom {
+    background-color: #f5f5f5;
+    padding: 20px;
+  }
+  
+  .bottomHeader {
+    display: flex;
+    margin-left: 400px;
+    /* justify-content: space-between; */
+    align-items: center;
+  }
+  
+  .bottomHeader img {
+    max-width: 300px; /* 이미지 크기 조정 */
+  }
+  
+  .bottomMenu{
+    margin-left: 700px;
+  }
+  .bottomMenu a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .bottomMenu a:last-child {
+    margin-right: 0;
+  }
+  .bar_list.company_info{
+    list-style-type: none;
+    text-align: left;
+  }

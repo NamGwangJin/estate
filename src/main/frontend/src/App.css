@@ -1,0 +1,10 @@
+.App {
+  text-align: center;
+  width: 80%;
+  margin-left: 10%;
+}
+.mainSection{
+  margin-top: 20px;
+  height: 800px;
+  background-color: rgb(187, 188, 244);
+}
