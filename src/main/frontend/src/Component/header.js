@@ -23,6 +23,7 @@ export default function header() {
       </div>
       <hr />
       <div className='underHeader'>
+        <Link to='/qna'><a>질문/답변</a></Link>
         <a href='#'>매물의뢰</a>
         <a href='#'>부동산뉴스</a>
         <a href='#'>고객후기</a>
