@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EstateApplication<estate>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.real.estate.EstateApplication",
+            "projectName": "estate",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

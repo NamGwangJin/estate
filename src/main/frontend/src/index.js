@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from './Home'
 import Intro from './Component/Home/intro.js'
+import QNA from './Component/QNA/QNA'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +13,7 @@ root.render(
     <Routes>
       <Route path={"/"} exact element={<Home />}></Route>
       <Route path={"/intro"} exact element={<Intro />}></Route>
-      
+      <Route path={"/qna"} exact element={<QNA />}></Route>
     </Routes>
   </BrowserRouter>
 );
