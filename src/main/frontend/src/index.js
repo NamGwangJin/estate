@@ -4,12 +4,15 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from './Home'
+import Intro from './Component/Home/intro.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
       <Route path={"/"} exact element={<Home />}></Route>
+      <Route path={"/intro"} exact element={<Intro />}></Route>
+      
     </Routes>
   </BrowserRouter>
 );
