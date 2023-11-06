@@ -11,7 +11,7 @@ export default function bottom() {
           <li><a href='#'>이용약관</a></li>
           <li><a href='#'>개인정보처리방침</a></li>
         </ul>
-      </div> 
+      </div>
       <div className='footer_bottom'>
         <div className='wrap_1140'>
           <table>
