@@ -9,7 +9,7 @@ export default function header() {
       <div className='upHeader'>
           <div className='logoIMG'><img className="logoImg" src="/img/ruruLogo.png" /></div>
         <div className='category'>
-          <a href='#'>오피스텔123</a>
+          <a href='#'>오피스텔</a>
           <a href='#'>아파트/단독주택/원룸</a>
           <a href='#'>상가/사무실</a>
           <a href='#'>지식산업센터</a>
