@@ -1,12 +1,3 @@
-.bottom {
-    background-color: #f5f5f5;
-    padding: 20px;
-    
-/* body {
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #333;
-} */
 
 .footer {
   background-color: #333;
@@ -57,12 +48,12 @@
   display: block;
 }
 
-table {
+.table_style {
   border-spacing: 0;
   border-collapse: collapse;
 }
 
-th {
+.th_style {
   text-align: left;
 }
 /* 콜론(:)을 추가하는 부분 */
@@ -159,33 +150,6 @@ img {
   .wrap_1140 {
     width: 100%;
     padding: 0 20px;
->>>>>>> Stashed changes
   }
-  
-  .bottomHeader {
-    display: flex;
-    margin-left: 400px;
-    /* justify-content: space-between; */
-    align-items: center;
-  }
-  
-  .bottomHeader img {
-    max-width: 300px; /* 이미지 크기 조정 */
-  }
-  
-  .bottomMenu{
-    margin-left: 700px;
-  }
-  .bottomMenu a {
-    margin-right: 20px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .bottomMenu a:last-child {
-    margin-right: 0;
-  }
-  .bar_list.company_info{
-    list-style-type: none;
-    text-align: left;
-  }
+} 
+ 
