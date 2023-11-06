@@ -1,0 +1,56 @@
+.introMain {
+  margin-left: 15%;
+  margin-top: 10px;
+  margin-bottom: 70px;
+  display: flex;
+}
+
+.introMap {
+  width: 1000px;
+  height: 700px;
+}
+
+
+
+.businessName {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px 15px;
+  background-color: #3cb3c5;
+  margin: 0 auto;
+  color: #fff6f6;
+  letter-spacing: 2px;
+}
+.comeTo{
+  position: relative;
+  left: 380px;
+}
+.introBox {
+  background-color: #fff6f6; /* 배경색 지정 */
+  border: 3px solid #3cb3c5;; /* 테두리 추가 */
+  border-radius: 5px; /* 둥근 모서리를 위한 반경 설정 */
+  max-width: 400px; /* 최대 너비 설정 */
+  width: 370px;
+  margin: 0 auto; /* 가운데 정렬을 위한 왼쪽 및 오른쪽 마진 설정 */
+  height: 400px;
+  position: relative;
+  top: 250px;
+  right: 250px;
+}
+
+
+.introBoxDiv {
+  padding: 5px; /* 패딩 추가 */
+  margin: 15px 0; /* 각 하위 요소 간의 간격 설정 */
+}
+
+.introBox h5 {
+  font-size: 19px; /* 세부 정보 제목의 폰트 크기 설정 */
+  margin: 0; /* 기본 마진 제거 */
+}
+
+.introBox p {
+  font-size: 16px; /* 세부 정보의 폰트 크기 설정 */
+  margin: 0; /* 기본 마진 제거 */
+}

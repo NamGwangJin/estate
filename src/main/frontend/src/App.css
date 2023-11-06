@@ -3,7 +3,8 @@
   width: 80%;
   margin-left: 10%;
 }
-.mainSection{
+
+.mainSection {
   margin-top: 20px;
   height: 800px;
   background-color: rgb(187, 188, 244);
@@ -104,3 +105,25 @@
   padding: 10px;
 }
 /* 게시판 CSS 끝 */
+
+.inquiry1 {
+  position: absolute;
+  right: 270px;
+  top: 150px;
+}
+.inquiry2{
+  position: absolute;
+  top: 500px;
+  left: 600px;
+}
+
+.inquiry1 {
+  position: absolute;
+  right: 270px;
+  top: 150px;
+}
+.inquiry2{
+  position: absolute;
+  top: 500px;
+  left: 600px;
+}
