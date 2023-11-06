@@ -1,15 +1,18 @@
 
 .footer {
-  background-color: #333;
+  background: #333;
   color: #eee;
   width: 100%;
   float: left;
 }
  
 .footer_ul {
-  list-style: none; /* 리스트 스타일 제거 */
-  padding: 0; /* 내부 패딩 제거 */
-  display: flex; /* 항목을 수평으로 배치하기 위해 Flexbox 레이아웃 사용 */
+  list-style: none;
+  padding: 5px;
+  display: flex;
+  margin-top: 0px;
+  border-bottom: 5px solid gray;
+
 }
 
 .footer_ul li {
@@ -85,17 +88,25 @@
 }
 
 .footer_right {
+  display: grid;
+  align-items: center;
   width: 100%;
+  height: auto;
   padding-left: 30px;
   border-left: 1px solid rgba(255,255,255,.4);
-  float: left;
+  margin-left: 50px;
+  position: relative;
+  top: 20px;
 }
 
 .footer_left {
   width: 100%;
   padding-left: 50px;
   float: left;
+  white-space: nowrap;
 }
+
+
 
 .footer_top .footer_ul li:hover a {
   color: #7ed0c9;
@@ -112,7 +123,7 @@
 
 .footer_left .logo_footer {
   width: auto;
-  height: 50px;
+  height: 65px;
   padding: 0;
   margin-right: 0;
 }
@@ -129,15 +140,16 @@ img {
 }
 
 .footer_title {
-  font-size: 18px;
-}
+  font-size: 22px;
+} 
 
-.foot_title span {
+.footer_title_span {
   margin-left: 5px;
   font-size: 16px;
   font-weight: normal;
   color: rgba(255,255,255,.6);
 }
+
 .call_number {
   margin-bottom: 5px;
   font-weight: bold;
