@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from './Home'
 import QNA from './Component/QNA/QNA'
+import QuestionWrite from './Component/QNA/QuestionWrite'
+import QuestionDetail from './Component/QNA/QuestionDetail'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,6 +14,8 @@ root.render(
     <Routes>
       <Route path={"/"} exact element={<Home />}></Route>
       <Route path={"/qna"} exact element={<QNA />}></Route>
+      <Route path={"/question/write"} exact element={<QuestionWrite />}></Route>
+      <Route path={"/question/detail"} exact element={<QuestionDetail />}></Route>
     </Routes>
   </BrowserRouter>
 );
