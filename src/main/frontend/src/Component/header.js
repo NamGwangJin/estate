@@ -28,7 +28,7 @@ export default function header() {
         <a href='#'>부동산뉴스</a>
         <a href='#'>고객후기</a>
         <a href='#'>공지사항</a>
-        <a href='#'>찾아오시는길</a>
+        <a href='/intro'>찾아오시는길</a>
         <a href='https://blog.naver.com/youghoa'>네이버블로그</a>
       </div>
     </div>
