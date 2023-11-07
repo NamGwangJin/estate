@@ -38,7 +38,7 @@ export default function QuestionWrite() {
         </div>
         <table className="write">
             <tbody>
-                <tr><td>제목</td><td><input type="text" placeholder='제목' id='title' style={{width:'500px'}}></input></td></tr>
+                <tr><td>제목</td><td><input type="text" id='title' style={{width:'500px'}}></input></td></tr>
                 <tr><td>내용</td><td><textarea id='content' style={{width:'500px', height:'300px'}}></textarea></td></tr>
             </tbody>
         </table>

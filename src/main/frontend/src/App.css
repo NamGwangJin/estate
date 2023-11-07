@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  width: 100%;;
+  width: 100%;
 }
 
 .mainSection {
@@ -10,6 +10,9 @@
 }
 
 /* 게시판 CSS */
+.body {
+  height: 800px;
+}
 
 .btn {
 	cursor: pointer;
@@ -25,6 +28,7 @@
   transition: 0.25s;
   margin-top: 20px;
   margin-bottom: 20px;
+  width: 10%;
 }
 
 .status {
@@ -64,6 +68,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid gray;
 }
 
 .write td:nth-child(2) {
@@ -76,8 +81,7 @@
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
-  margin: 10% auto 0;
-  width: 80%;
+  width: 90%;
 }
 
 .tblBoard th {
@@ -103,6 +107,44 @@
 .tblBoard tbody td {
   padding: 10px;
 }
+
+.prev {
+  text-align: left;
+  margin-left: 15%;
+}
+
+.postTitle {
+  font-family: 'RIDIBatang';
+	margin-left:5%;
+	font-size:25px;
+}
+
+.showView {
+  margin-left: 15%;
+  margin-top: 1%;
+  padding: 40px 40px 20px;
+}
+
+.showView a {
+  font-family: 'SUITE-Regular';
+  font-size: 30px;
+  color: #535353;
+  margin-bottom : 10px;
+}
+
+.showView span {
+  display: inline-block;
+  font-size: 20px;
+  font-weight:bold;
+  font-family: 'GmarketSansMedium';
+}
+
+.hr1 {
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid #3cb3c5;
+}
+
 /* 게시판 CSS 끝 */
 
 .inquiry1 {
