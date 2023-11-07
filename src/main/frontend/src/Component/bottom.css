@@ -1,0 +1,160 @@
+body {
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+}
+
+.footer {
+  background-color: #333;
+  color: #eee;
+  width: 100%;
+  float: left;
+}
+ 
+.footer_ul {
+  list-style: none; /* 리스트 스타일 제거 */
+  padding: 0; /* 내부 패딩 제거 */
+  display: flex; /* 항목을 수평으로 배치하기 위해 Flexbox 레이아웃 사용 */
+}
+
+.footer_ul li {
+  margin: 0 10px; /* 항목 간격을 조절할 수 있습니다. */
+}
+
+.footer_top .footer_ul li a {
+  height: 40px;
+  line-height: 40px;
+  color: white;
+}
+
+/* 파이프 기호 스타일링 */
+.footer_ul li:not(:last-child):after {
+  content: "|"; /* 파이프 기호 추가 */
+  margin-left: 10px; /* 파이프 기호와 항목 사이 간격 조절 */
+  color: white; /* 파이프 기호 색상 설정 */
+}
+
+.footer_bottom .wrap_1140 {
+  padding: 15px 0;
+}
+
+.wrap_1140 {
+  width: 1140px;
+  margin: 0 auto;
+}
+
+.logo_footer {
+  width: 300px; /* 로고 이미지의 너비 설정 (예시로 주어진 값) */
+  height: auto; /* 높이 자동으로 조정하여 가로세로 비율 유지 */
+  cursor: pointer;
+}
+
+.company_box {
+  display: block;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+}
+/* 콜론(:)을 추가하는 부분 */
+.footer_company_name > span:first-child::after,
+.footer_ceo > span:first-child::after,
+.footer_address > span:first-child::after,
+.footer_biz_num > span:first-child::after,
+.real_estate_num > span:first-child::after,
+.footer_tel > span:first-child::after,
+.footer_fax > span:first-child::after,
+.footer_email > span:first-child::after {
+  content: ":";
+  margin-right: 5px; 
+  margin-left: 5px;
+}
+
+
+.footer_company_name > span:last-child::after,
+.footer_ceo > span:last-child::after,
+.footer_address > span:last-child::after,
+.footer_biz_num > span:last-child::after,
+.real_estate_num > span:last-child::after,
+.footer_tel > span:last-child::after,
+.footer_fax > span:last-child::after,
+.footer_email > span:last-child::after {
+  content: "|";
+  margin-left: 10px;
+  margin-right: 10px ;
+}
+
+.footer_right {
+  width: 100%;
+  padding-left: 30px;
+  border-left: 1px solid rgba(255,255,255,.4);
+  float: left;
+}
+
+.footer_left {
+  width: 100%;
+  padding-left: 50px;
+  float: left;
+}
+
+.footer_top .footer_ul li:hover a {
+  color: #7ed0c9;
+  transition: all .2s;
+}
+
+.footer_bottom .wrap_1140 {
+  padding: 15px 0;
+}
+.wrap_1140 {
+  width: 1140px;
+  margin: 0 auto;
+}
+
+.footer_left .logo_footer {
+  width: auto;
+  height: 50px;
+  padding: 0;
+  margin-right: 0;
+}
+
+img {
+  vertical-align: middle;
+}
+img {
+  border: 0;
+}
+
+.company_box {
+  margin-bottom: 10px;
+}
+
+.footer_title {
+  font-size: 18px;
+}
+
+.foot_title span {
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: normal;
+  color: rgba(255,255,255,.6);
+}
+.call_number {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* Responsive styles (adjust as needed) */
+@media (max-width: 768px) {
+  .wrap_1140 {
+    width: 100%;
+    padding: 0 20px;
+  }
+} 
+ 
