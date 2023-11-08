@@ -15,7 +15,6 @@ export default function QNA() {
       url: '/api/question/list',
     })
       .then((res) => {
-        console.log(res.data);
         setBoardList(res.data);
       })
       .catch((error) => {
@@ -30,35 +29,37 @@ export default function QNA() {
   return (
     <div className="App">
       <Header />
-      <div className='title'>
-            질문 / 답변
-      </div>
-      <table className="tblBoard">
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>답변상태</th>
-            <th>작성일</th>
-          </tr>
-        </thead>
-        <tbody>
-          {boardList.map((elem) => (
-            <tr onClick={() => detail(elem.question_no)}>
-              <td>{elem.question_no}</td>
-              <td>{elem.question_title}</td>
-              {
-                elem.question_answer === "답변대기"
-                ?<td className="status btn-white">{elem.question_answer}</td> // 답변대기 상태면 답변대기 표시, 답변완료 상태면 답변완료 표시
-                :<td className="status btn-ruru">{elem.question_answer}</td>
-              }
-              <td>{elem.question_created}</td>
+      <div className='body'>
+        <div className='title'>
+              질문 / 답변
+        </div>
+        <table className="tblBoard">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>제목</th>
+              <th>답변상태</th>
+              <th>작성일</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {boardList.map((elem, index) => (
+              <tr onClick={() => detail(elem.question_no)} key={index}>
+                <td>{elem.question_no}</td>
+                <td>{elem.question_title}</td>
+                {
+                  elem.question_answer === "답변대기"
+                  ?<td className="status btn-white">{elem.question_answer}</td> // 답변대기 상태면 답변대기 표시, 답변완료 상태면 답변완료 표시
+                  :<td className="status btn-ruru">{elem.question_answer}</td>
+                }
+                <td>{elem.question_created}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <Link to='/question/write'>
-        <button className="btn btn-ruru">질문 작성하기</button>
+          <button className="btn btn-ruru">질문 작성하기</button>
       </Link>
       <Bottom />
     </div>

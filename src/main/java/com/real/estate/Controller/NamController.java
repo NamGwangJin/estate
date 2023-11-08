@@ -33,5 +33,14 @@ public class NamController {
 
         return boardList;
     }
+
+    // 질문/답변 상세 내용 불러오는 코드
+    @GetMapping("/api/question/view")
+    public QuestionDTO getDetail(@RequestParam int no){
+        
+        QuestionDTO getDetail = qnaDAO.getDetail(no);
+
+        return getDetail;
+    }
     
 }
