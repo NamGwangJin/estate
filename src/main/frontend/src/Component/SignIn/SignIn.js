@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './signin.css';
+import './SignIn.css';
 
-export default function Signin({ isOpen, onClose }) {
+export default function SignIn({ isOpen, onClose }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

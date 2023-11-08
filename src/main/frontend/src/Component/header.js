@@ -1,10 +1,31 @@
-import React from 'react';
 import './header.css';
-import Signin from './signin';
+import SignIn from './SignIn/SignIn.js';
 import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import SignUp from './SingUp/SignUp.js';
 
-export default function header() {
-  
+export default function Header() {
+
+  const [signIn, signInModalOpen] = useState(false);
+  const [signUp, signUpModalOpen] = useState(false);
+
+  const signInOpen = () => {
+    signInModalOpen(true);
+  };
+
+  const signInClose = () => {
+    signInModalOpen(false);
+  };
+
+  const signUpOpen = () => {
+    signUpModalOpen(true);
+  }
+
+  const signUpClose = () => {
+    signUpModalOpen(false);
+  }
+
+
   return (
 <div className='header_wrap' style={{ opacity: 1 }}>
   <div className='header_category_wrap'>
@@ -22,8 +43,11 @@ export default function header() {
         <div className='header_top_right'>
         <ul>
           <li className='sign_btn_box'>
-            <a className="sign_list" herf="#">로그인</a>
-            <a className="sign_list" href="#">회원가입</a>
+            <button onClick={signInOpen}>로그인</button>
+            <SignIn isOpen={signIn} onClose={signInClose} />
+            <button onClick={signUpOpen}>회원가입</button>
+            <SignUp isOpen={signUp} onClose={signUpClose} />
+            {/* <SignUp isOpen={signUp} onClose={SignUpClose} /> */}
           </li>
         </ul>
         </div>
@@ -58,9 +82,6 @@ export default function header() {
         </li>
         <li className='header_list'>
         <a herf="#" >회사소개</a>
-        </li>
-        <li className='header_list'>
-        <Signin />
         </li>
       </ul>
     </div>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.real.estate.DAO.qnaDAO">
+
+<insert id="insertQuestion">
+insert into question set question_title = #{param1}, question_content = #{param2}, question_writer = #{param3};
+</insert>
+
+<select id="getBoardList" resultType="com.real.estate.DTO.QuestionDTO">
+select * from question;
+</select>
+
+</mapper>

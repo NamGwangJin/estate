@@ -121,11 +121,16 @@
   }
 
   .header_top_wrap .header_1140 > .header_top_right ul li {
-    display: inline-block;
+    display: flex;
     height: 24px;
     line-height: 24px;
     font-weight: bold;
     float: left;
+  }
+
+  .header_top_wrap .header_1140 > .header_top_right ul li  button {
+    margin-right: 10px; /* 버튼 사이의 간격을 조절할 수 있습니다. */
+    
   }
 
   ul, li {
@@ -219,3 +224,4 @@
     color: #333;
     cursor: pointer;
   }
+
