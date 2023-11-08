@@ -1,7 +1,7 @@
 import React from 'react'
 import './bottom.css';
 
-export default function bottom() {
+export default function Bottom() {
   return (
     <div className='footer'>
       <div className='footer_top'>
