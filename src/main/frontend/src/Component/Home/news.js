@@ -1,12 +1,39 @@
-import React from 'react';
-import Header from '../header.js';
+import React, { useEffect, useState } from 'react';
 import Bottom from '../bottom.js';
+import Header from '../header.js';
+import axios from 'axios';
 import './news.css';
 
 export default function News() {
+
+  const [newsList, setNewsList] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: '/api/newslist',
+    })
+      .then((res) => {
+        console.log(res.data);
+        setNewsList(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  function truncateText(text, maxLength) {
+    if (text.length <= maxLength) {
+      return text;
+    } else {
+      return text.slice(0, maxLength) + '...';
+    }
+  }
+
   return (
     <div className='news'>
       <Header />
+      <h2 className='title'>부동산 뉴스</h2>
       <div className="newsTableDiv">
         <table className="newTable">
           <thead>
@@ -18,44 +45,21 @@ export default function News() {
             </tr>
           </thead>
           <tbody>
-            <tr className="news_tr" onClick={() => window.open('디비에서 링크 가져오기')}>
-              <td className="news_number">디비1</td>
-              <td className="news_title">
-                <span>디비에서 제목가져와서</span><span>줄바꿈하고 내용. 글자수 제한 둬서 ... 으로 </span>
-              </td>
-              <td className="more_see_td">
-                <div className="more_see">
-                  <span>더보기</span>
-                  <i className="more_see_i"></i>
-                </div>
-              </td>
-              <td className="news_writeDate">2023.11.06</td>
-            </tr>
-            <tr className="news_tr" onClick={() => window.open('디비에서 링크 가져오기')}>
-              <td className="news_number">2</td>
-              <td className="news_title">
-                <span>디비에서 제목가져와서</span><span>줄바꿈하고 내용. 글자수 제한 둬서 ... 으로 </span>
-              </td>
-              <td className="more_see_td">
-                <div className="more_see">
-                  <span>더보기</span>
-                  <i className="more_see_i"></i>
-                </div>
-              </td>
-              <td className="news_writeDate">디비에서 작성일 날짜 가져오기</td>
-            </tr><tr className="news_tr" onClick={() => window.open('디비에서 링크 가져오기')}>
-              <td className="news_number">3</td>
-              <td className="news_title">
-                <span>디비에서 제목가져와서</span><span>줄바꿈하고 내용. 글자수 제한 둬서 ... 으로 </span>
-              </td>
-              <td className="more_see_td">
-                <div className="more_see">
-                  <span>더보기</span>
-                  <i className="more_see_i"></i>
-                </div>
-              </td>
-              <td className="news_writeDate">디비에서 작성일 날짜 가져오기</td>
-            </tr>
+            {newsList.map((news) => (
+              <tr className='news_tr' onClick={() => window.open(news.news_link)}>
+                <td className='news_number'>{news.news_id}</td>
+                <td className='news_title'>
+                  <span className='newsTitle'>{news.news_title}</span><span className='newsContent'>{truncateText(news.news_content, 100)}</span>
+                </td>
+                <td className="more_see_td">
+                  <div className="more_see">
+                    <span>더보기</span>
+                    <i className="more_see_i"></i>
+                  </div>
+                </td>
+                <td className='news_writeDate' style={{ color: '#999' }}>{news.news_writeDate.split(' ')[0]}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

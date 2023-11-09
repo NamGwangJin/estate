@@ -5,6 +5,10 @@
 <insert id='inquiryInsert'>
 insert into inquiry set inquiry_name = #{param1}, inquiry_contact = #{param2}, inquiry_message =#{param3}
 </insert>
-
-
+<insert id='newsInsert'>
+insert into news set news_title = #{param1}, news_content=#{param2}, news_writeDate=now(), news_link=#{param3};
+</insert>
+<select id='getListNews' resultType='com.real.estate.DTO.NewsDTO'>
+select * from news
+</select>
 </mapper>

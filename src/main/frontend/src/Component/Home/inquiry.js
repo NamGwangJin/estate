@@ -63,7 +63,7 @@ export default function InquiryForm() {
           <input type='checkbox' onChange={handleCheckboxChange} />
           <label>개인정보 수집·이용</label>
         </div>
-        <button onClick={inquiry_insert}>상담문의 남기기</button>
+        <button className='insert_button' onClick={inquiry_insert}>상담문의 남기기</button>
       </div>
     </div>
   );
