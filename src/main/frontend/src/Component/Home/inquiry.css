@@ -31,7 +31,7 @@
     padding: 10px;
   }
   
-  input, textarea {
+  .input-container input, textarea {
     margin: 5px 0;
     padding: 5px;
     width: 95%;
@@ -44,7 +44,7 @@
     align-items: center;
   }
   
-  input[type="checkbox"] {
+  .checkbox-container input[type="checkbox"] {
     margin-right: -5px;
     width: 40px;
   }
@@ -52,7 +52,7 @@
     resize: none;
   }
   
-  button {
+  .insert_button {
     margin-top: 20px;
     width: 100%;
     background-color: #0077cc;
@@ -64,7 +64,7 @@
     font-weight: bold;
   }
   
-  button:hover {
+  .insert_button:hover {
     background-color: #0055aa;
   }
   
