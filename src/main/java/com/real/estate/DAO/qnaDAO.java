@@ -11,5 +11,6 @@ public interface qnaDAO {
     
     int insertQuestion(String title, String content, String writer);
     ArrayList<QuestionDTO> getBoardList();
+    QuestionDTO getDetail(int no);
 
 }
