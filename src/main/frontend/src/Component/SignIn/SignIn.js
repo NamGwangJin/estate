@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SignIn.css';
+import axios from 'axios';
 
 export default function SignIn({ isOpen, onClose }) {
   const [username, setUsername] = useState('');
@@ -7,9 +8,31 @@ export default function SignIn({ isOpen, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios({
+        method: 'post',
+        url: '/api/login',
+        params: { email : username, pw : password }
+    })
+    .then((res) => {
+      if ( res.data !== 0 ){
+        alert('로그인 완료');
+        sessionStorage.setItem("id", res.data);
+        close();
+      } else {
+        alert('아이디와 비밀번호를 확인해주세요.');
+      }
+    })
+    .catch(error => {
+        console.log(error);
+        alert('error!');
+        close();
+    })
 
-    console.log('사용자 이름:', username);
-    console.log('비밀번호:', password);
+    function close() {
+      setUsername('');
+      setPassword('');
+      onClose();
+    }
 
   };
 
@@ -19,9 +42,9 @@ export default function SignIn({ isOpen, onClose }) {
         <span className="close" onClick={onClose}>&times;</span>
         <p>로그인</p>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="username">사용자 이름:</label>
+          <label htmlFor="username">이메일</label>
           <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required /><br />
-          <label htmlFor="password">비밀번호:</label>
+          <label htmlFor="password">비밀번호</label>
           <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required /><br />
           <button type="submit">로그인</button>
         </form>
