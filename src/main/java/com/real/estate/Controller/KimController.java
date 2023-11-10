@@ -43,7 +43,7 @@ public class KimController {
     @PostMapping("/api/requestInsert")
     public String requestInsert(){
 
-        mDAO.requestInsert();
+        // mDAO.requestInsert();
 
         return "success";
     }
