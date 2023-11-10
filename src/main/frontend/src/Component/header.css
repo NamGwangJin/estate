@@ -53,11 +53,7 @@
 
   .header_btn > span.title {
     background: rgba(0,116,221,.1);
-  }
-
-  .header_btn > span.title {
-    background: rgba(0,116,221,.1);
-  
+    font-size: 20px;
   }
 
   .header_top_left .header_btn > span {
@@ -184,11 +180,12 @@
     height: 80px;
   }
 
-  .sign_btn_box a {
+  .sign_btn_box {
     display: inline-block;
-    height: 24px;
-    line-height: 24px;
-    text-align: right;
+    margin: 10px;
+    height: 50px;
+    width: 100px;
+    text-align: center;
   }
 
   .header_bottom > div > ul > li {
