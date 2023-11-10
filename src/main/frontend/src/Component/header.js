@@ -1,13 +1,18 @@
 import './header.css';
 import SignIn from './SignIn/SignIn.js';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import SignUp from './SingUp/SignUp.js';
+import axios from 'axios';
 
 export default function Header() {
 
   const [signIn, signInModalOpen] = useState(false);
   const [signUp, signUpModalOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const id = sessionStorage.getItem("id");
 
   const signInOpen = () => {
     signInModalOpen(true);
@@ -25,6 +30,25 @@ export default function Header() {
     signUpModalOpen(false);
   }
 
+  function logout(){
+      axios({
+        method: 'post',
+        url: '/api/logout',
+      })
+      .then((res) => {
+        alert(res.data);
+        sessionStorage.removeItem("id");
+        navigate('/');
+      })
+      .catch(error => {
+        console.log(error);
+        alert('error!');
+      })
+  }
+
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
 
   return (
 <div className='header_wrap' style={{ opacity: 1 }}>
@@ -41,47 +65,47 @@ export default function Header() {
           </div>
         </div>
         <div className='header_top_right'>
-        <ul>
-          <li className='sign_btn_box'>
-            <button onClick={signInOpen}>로그인</button>
-            <SignIn isOpen={signIn} onClose={signInClose} />
-            <button onClick={signUpOpen}>회원가입</button>
-            <SignUp isOpen={signUp} onClose={signUpClose} />
-            {/* <SignUp isOpen={signUp} onClose={SignUpClose} /> */}
-          </li>
-        </ul>
+          {id === null
+            ?<>
+              <button className='sign_btn_box' onClick={signInOpen}>로그인</button>
+              <SignIn isOpen={signIn} onClose={signInClose} />
+              <button className='sign_btn_box' onClick={signUpOpen}>회원가입</button>
+              <SignUp isOpen={signUp} onClose={signUpClose} />
+            </>
+            :<button className='sign_btn_box' onClick={logout}>로그아웃</button>
+          }
         </div>
       </div>
     </div>
   </div>
   <div className='header_bottom'>
     <div className='header-left'>
-      <span className='navbar_logo'>
+      <span className='navbar_logo' style={{cursor: 'pointer'}} onClick={() => handleNavigate('/')}>
         <img className='logo_header logo' src="/img/bottomLogo.png" alt='푸터 로고' />
       </span>
     </div>
     <div className='header_center'>
       <ul className='header_menu_etc_box'>
         <li className='header_list'>
-        <a herf="#" >매물검색</a>
+        <a onClick={() => handleNavigate('/search')}>매물검색</a>
         </li>
         <li className='header_list'>
-        <a herf="#" >매물 의뢰하기</a>
+        <a onClick={() => handleNavigate('/request')}>매물 의뢰하기</a>
         </li>
         <li className='header_list'>
-        <a herf="#" >매물투어 신청</a>
+        <a onClick={() => handleNavigate('/tour')}>매물투어 신청</a>
         </li>
         <li className='header_list'>
-        <a herf="#" >부동산 소식</a>
+        <a onClick={() => handleNavigate('/news')}>부동산 소식</a>
         </li>
         <li className='header_list'>
-        <a herf="#" >질문과 답변</a>
+        <a onClick={() => handleNavigate('/qna')}>질문과 답변</a>
         </li>
         <li className='header_list'>
-        <a herf="#" >공지사항</a>
+        <a onClick={() => handleNavigate('/notice')}>공지사항</a>
         </li>
         <li className='header_list'>
-        <a herf="#" >회사소개</a>
+        <a onClick={() => handleNavigate('/intro')}>회사소개</a>
         </li>
       </ul>
     </div>
