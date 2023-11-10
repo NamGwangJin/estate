@@ -7,6 +7,7 @@ import Home from './Home'
 import Intro from './Component/Home/intro.js'
 import News from './Component/Home/news.js'
 import NewsInsert from './Component/Home/newsInsert.js'
+import RequestWrite from './Component/Home/requestWrite.js'
 import QNA from './Component/QNA/QNA'
 import QuestionWrite from './Component/QNA/QuestionWrite'
 import QuestionDetail from './Component/QNA/QuestionDetail'
@@ -19,6 +20,7 @@ root.render(
       <Route path={"/intro"} exact element={<Intro />}></Route>
       <Route path={"/news"} exact element={<News />}></Route>
       <Route path={"/newsinsert"} exact element={<NewsInsert />}></Route>
+      <Route path={"/requestWrite"} exact element={<RequestWrite />}></Route>
       <Route path={"/qna"} exact element={<QNA />}></Route>
       <Route path={"/question/write"} exact element={<QuestionWrite />}></Route>
       <Route path={"/question/detail"} exact element={<QuestionDetail />}></Route>

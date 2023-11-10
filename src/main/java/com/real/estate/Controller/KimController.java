@@ -39,4 +39,13 @@ public class KimController {
 
         return newsList;
     }
+
+    @PostMapping("/api/requestInsert")
+    public String requestInsert(){
+
+        mDAO.requestInsert();
+
+        return "success";
+    }
+    
 }

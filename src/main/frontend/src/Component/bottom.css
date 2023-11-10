@@ -4,6 +4,8 @@
   color: #eee;
   width: 100%;
   float: left;
+  position: fixed;
+  bottom: 0;
 }
  
 .footer_ul {

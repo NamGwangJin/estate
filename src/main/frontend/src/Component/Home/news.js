@@ -14,7 +14,7 @@ export default function News() {
       url: '/api/newslist',
     })
       .then((res) => {
-        console.log(res.data);
+        console.log('받아온데이터'+res.data);
         setNewsList(res.data);
       })
       .catch((error) => {
