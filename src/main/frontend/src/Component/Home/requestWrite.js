@@ -32,7 +32,7 @@ export default function RequestWrite() {
   return (
     <div className='requestWrite'>
       <Header />
-      <h2 className='title'>매물의뢰2</h2>
+      <h2 className='title'>매물의뢰 2</h2>
       <div className='requestWriteMain'>
         <div className='firstType_select'>
           <label>
