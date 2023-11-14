@@ -48,7 +48,7 @@ export default function Intro() {
   return (
     <div className='intro'>
       <Header />
-      <h2 className='comeTo'>오시는길</h2>
+      <h2 className='title'>오시는길</h2>
       <div className='introMain'>
         
         <div className='introMap' id="introMap">

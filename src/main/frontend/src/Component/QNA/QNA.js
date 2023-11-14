@@ -38,7 +38,7 @@ export default function QNA() {
             <tr>
               <th>번호</th>
               <th>제목</th>
-              <th>답변상태</th>
+              <th>상태</th>
               <th>작성일</th>
             </tr>
           </thead>

@@ -67,12 +67,12 @@ export default function Header() {
         <div className='header_top_right'>
           {id === null
             ?<>
-              <button className='sign_btn_box' onClick={signInOpen}>로그인</button>
+              <button className='sign_btn box' onClick={signInOpen}>로그인</button>
               <SignIn isOpen={signIn} onClose={signInClose} />
-              <button className='sign_btn_box' onClick={signUpOpen}>회원가입</button>
+              <button className='sign_btn box' onClick={signUpOpen}>회원가입</button>
               <SignUp isOpen={signUp} onClose={signUpClose} />
             </>
-            :<button className='sign_btn_box' onClick={logout}>로그아웃</button>
+            :<button className='sign_btn box' onClick={logout}>로그아웃</button>
           }
         </div>
       </div>
@@ -86,9 +86,6 @@ export default function Header() {
     </div>
     <div className='header_center'>
       <ul className='header_menu_etc_box'>
-        <li className='header_list'>
-        <a onClick={() => handleNavigate('/search')}>매물검색</a>
-        </li>
         <li className='header_list'>
         <a onClick={() => handleNavigate('/request')}>매물 의뢰하기</a>
         </li>
@@ -106,6 +103,9 @@ export default function Header() {
         </li>
         <li className='header_list'>
         <a onClick={() => handleNavigate('/intro')}>회사소개</a>
+        </li>
+        <li className='header_list'>
+        <a onClick={() => window.location.href='https://blog.naver.com/youghoa'}>블로그</a>
         </li>
       </ul>
     </div>

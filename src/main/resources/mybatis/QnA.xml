@@ -15,4 +15,12 @@ select * from question;
 select * from question where question_no = #{param1}
 </select>
 
+<insert id="tourApliy">
+insert into tour set tour_date = #{param1}, tour_time = #{param2}, tour_local = #{param3}, tour_name = #{param4}, tour_phone = #{param5}, tour_content = #{param6}, tour_writer = #{param7}, tour_created = #{param8};
+</insert>
+
+<select id="getTourList" resultType="com.real.estate.DTO.TourDTO">
+select * from tour;
+</select>
+
 </mapper>
