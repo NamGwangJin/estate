@@ -11,6 +11,8 @@ import RequestWrite from './Component/Home/requestWrite.js'
 import QNA from './Component/QNA/QNA'
 import QuestionWrite from './Component/QNA/QuestionWrite'
 import QuestionDetail from './Component/QNA/QuestionDetail'
+import Tour from './Component/Tour/Tour'
+import TourApliy from './Component/Tour/TourApliy'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,6 +26,8 @@ root.render(
       <Route path={"/qna"} exact element={<QNA />}></Route>
       <Route path={"/question/write"} exact element={<QuestionWrite />}></Route>
       <Route path={"/question/detail"} exact element={<QuestionDetail />}></Route>
+      <Route path={"/tour"} exact element={<Tour />}></Route>
+      <Route path={"/tour/apliy"} exact element={<TourApliy />}></Route>
     </Routes>
   </BrowserRouter>
 );
