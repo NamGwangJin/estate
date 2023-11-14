@@ -337,7 +337,7 @@ button.close {
   cursor: pointer;
 }
 
-label {
+.이용약관 {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;

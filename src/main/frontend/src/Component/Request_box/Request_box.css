@@ -1,0 +1,117 @@
+.main_realtime_zone .leftBox {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    display: inline-block;
+    width: calc((100% - 15px) / 2);
+    margin-right: 15px;
+    background: #fff;
+    text-align: left;
+    float: left;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+    text-align: left;
+}
+
+.main_realtime_zone .leftBox > form {
+    padding: 30px;
+    padding-bottom: 20px;
+}
+
+.main_realtime_zone .leftBox > form > h2 {
+    margin: 0;
+    font-weight: bold;
+    color: #7ed0c9;
+}
+
+.main_realtime_zone .leftBox > form > p {
+    margin: 10px 0 20px;
+    font-size: 16px;
+    color: #000;
+}
+
+.main_realtime_zone .leftBox .table {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 14px;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    background: #fafafa;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.main_realtime_zone .leftBox .table > .tr:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
+
+.main_realtime_zone .leftBox .table > .tr {
+    display: inline-block;
+    width: 100%;
+    float: left;
+}
+
+.main_realtime_zone .leftBox .table .td:not(:last-child) {
+    border-right: 1px solid #ddd;
+}
+
+.main_realtime_zone .leftBox .table .td {
+    display: inline-table;
+    width: 50%;
+    margin: 0;
+    padding: 10px 15px;
+    float: left;
+}
+
+.main_realtime_zone .leftBox .table .td div:first-child {
+    font-weight: bold;
+    color: #7ed0c9;
+}
+
+.main_realtime_zone .leftBox .table .td input {
+    display: inline-block;
+    width: 90%;
+    margin-top: 5px;
+    padding: 2px 10px;
+    background: transparent;
+    border: none;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.main_realtime_zone .leftBox .table .td div:first-child {
+    font-weight: bold;
+    color: #7ed0c9;
+}
+
+.main_realtime_zone .leftBox .table > .tr {
+    display: inline-block;
+    width: 100%;
+    float: left;
+}
+
+textarea {
+    overflow: auto;
+}
+
+.main_realtime_zone .leftBox > .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 11.5px 15px;
+    background: #7ed0c9;
+    border-radius: 0;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background .3s;
+}
+

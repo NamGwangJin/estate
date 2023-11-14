@@ -4,7 +4,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: white; /* 배경색을 흰색으로 설정합니다 */
   }
   
@@ -12,25 +11,41 @@
     width: 200px; /* 상자의 너비를 늘립니다 */
     height: 200px; /* 상자의 높이를 늘립니다 */
     background-color: white;
-    color: #1abc9c; /* 글자 색상을 하늘색으로 설정합니다 */
+    color: black; /* 글자 색상을 하늘색으로 설정합니다 */
     display: block;
     justify-content: center;
     align-items: center;
     margin: 20px; /* 간격을 늘립니다 */
     border-radius: 10px;
-    font-size: 24px; /* 글자 크기를 키웁니다 */
-    font-weight: bold;
+    font-size: 21px; /* 글자 크기를 키웁니다 */
+    font-weight: normal;
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 1px solid black
+    border: 3px solid grey;
   }
   
   .category-box:hover {
     transform: scale(1.1);
-    background-color: white;
-    color: #1abc9c;
+    background-color: lightgray;
+    color: black;
   }
   
-  .search_img {
-    width: 1%;
+  .category-image {
+    margin-top: 10px;
+    width: 65%;
   }
+
+  /* .shovel-image {
+   width:  50%;
+  } */
+
+  .매물종류 {
+    position: relative;
+    top: -130px;
+    z-index: 999;
+    font-weight: normal;
+    left: 665px;
+  }
+
+
+  

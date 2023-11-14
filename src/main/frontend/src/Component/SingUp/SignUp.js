@@ -69,7 +69,7 @@ export default function SignUp({ isOpen, onClose }) {
             <div className="form-group text-left">
                 <div className="check">
                     <input id="terms_agree" name="terms_agree" type="checkbox" />
-                    <label htmlFor="terms_agree"><span>이용약관 동의</span></label>
+                    <label className="이용약관" htmlFor="terms_agree"><span>이용약관 동의</span></label>
                 </div>
                 <small><a href="#modal-privacy" className="text-info">개인보호 정책</a></small>
             </div>
