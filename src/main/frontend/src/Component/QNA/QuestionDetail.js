@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../header.js';
 import Bottom from '../bottom.js';
+import Answer from './QuestionAnswer.js';
+import AnswerWrite from './AnswerWrite.js';
 import '../../App.css';
 import axios from 'axios';
 
@@ -28,33 +30,58 @@ export default function QuestionDetail() {
       });
   }, [no]);
 
+  const [isAnswerWriteVisible, setAnswerWriteVisible] = useState(false);
+  const answer = document.getElementById('answerOpen');
+
+  const handleButtonClick = () => {
+    if (!isAnswerWriteVisible) {
+      setAnswerWriteVisible(true);
+      answer.style.visibility = 'hidden';
+    } else {
+      setAnswerWriteVisible(false);
+    }
+  };
+
+  const handleAnswerWriteCancel = () => {
+    answer.style.visibility = 'visible';
+    setAnswerWriteVisible(false); // AnswerWrite 컴포넌트는 숨기도록 상태 변경
+  };
+
+
   return (
     <div>
       <Header />
-      {loading ? (<div className='App'>Loading....</div>) :
+      {loading ? (<div>Loading....</div>) :
         (<div className='body'>
-          <div className='title'>
-            질문 상세 보기
-          </div>
-
-          <div className='prev'>
-            <div className='postTitle'>
-              <h2>{detail.question_title}</h2>
+            <div className='title'>
+              질문 상세 보기
             </div>
-          </div>
 
-          <div className='showView'>
-            <span>작성자 : {detail.question_writer}</span><br/>
-            <span>작성일 : {detail.question_created}</span>
-          </div>
+            <div className='prev'>
+              <div className='postTitle'>
+                <h2>{detail.question_title}</h2>
+              </div>
+            </div>
 
-          <hr className='hr1'/>
+            <div className='showView'>
+              <span>작성자 : {detail.question_writer}</span><br/>
+              <span>작성일 : {detail.question_created}</span>
+            </div>
 
-          <div className='showView'>
-            <a>{detail.question_content}</a>
-          </div>
-        </div>)
+            <div className='showView'>
+              <a>{detail.question_content}</a>
+            </div>
+          </div>)
       }
+        <hr className='hr1'/>
+        {isAnswerWriteVisible && <AnswerWrite onCancel={handleAnswerWriteCancel} />}
+        {/* <Answer /> */}
+          <div style={{textAlign:'center'}}>
+            <button className='btn btn-ruru' id='answerOpen' onClick={handleButtonClick}>답변작성</button>
+            <Link to="/qna">
+            <button className='btn btn-white'>목록으로</button>
+            </Link>
+          </div>
       <Bottom />
     </div>
   )

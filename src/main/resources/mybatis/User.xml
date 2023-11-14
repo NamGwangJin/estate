@@ -11,4 +11,8 @@ insert into user set name=#{param1}, phone=#{param2}, email=#{param3}, pw=#{para
 select count(*) from user where email=#{param1} and pw=#{param2};
 </select>
 
+<select id="getUserInfo" resultType="com.real.estate.DTO.UserDTO">
+select * from user where email=#{param1};
+</select>
+
 </mapper>

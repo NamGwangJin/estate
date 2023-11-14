@@ -17,10 +17,18 @@ export default function SignIn({ isOpen, onClose }) {
       if ( res.data !== 0 ){
         alert('로그인 완료');
         sessionStorage.setItem("id", res.data);
-        close();
+        return axios({
+          method: 'get',
+          url: '/api/user',
+          params: { id : sessionStorage.getItem("id") }
+        })
       } else {
         alert('아이디와 비밀번호를 확인해주세요.');
       }
+    })
+    .then((userResponse) => {
+      console.log(JSON.stringify(userResponse));
+      close();
     })
     .catch(error => {
         console.log(error);

@@ -1,0 +1,133 @@
+/* 
+
+.title {
+  text-align: center;
+  margin: 20px 0;
+}
+*/
+.requestWriteMain {
+  max-width: 800px;
+  margin: 70px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.firstType_select {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.firstType_select label {
+  display: flex;
+  align-items: center;
+}
+
+.transactionTypeDIV,
+.locationDIV,
+.desiredAmountDIV,
+.propertyTypeDIV,
+.nameDIV,
+.contactDIV,
+.titleDIV,
+.contentDIV {
+  margin-bottom: 20px;
+}
+
+.transactionType_title,
+.location_title,
+.desiredAmount_title,
+.propertyType_title,
+.name_title,
+.contact_title,
+.title_title,
+.content_title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.transactionType_type,
+.transactionType_type label,
+.location_input,
+.desiredAmount_inputDIV,
+.propertyType_type,
+.propertyType_type label,
+.name_inputDIV,
+.contact_inputDIV,
+.title_inputDIV,
+.content_inputDIV {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.desiredAmount_inputDIV,
+.contact_inputDIV,
+.title_inputDIV,
+.content_inputDIV {
+  margin-top: 5px;
+}
+
+.desiredAmountInput,
+.contactInput,
+.titleInput,
+.contentInput {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  box-sizing: border-box;
+}
+
+.btnsubmit,
+.btnback {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+  border-radius: 3px;
+}
+
+.btnback {
+  background-color: #f44336;
+}
+
+.btnsubmit:hover,
+.btnback:hover {
+  opacity: 0.8;
+}
+/* 라디오 버튼을 버튼 스타일로 꾸미기 */
+.transactionType_type label {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;  /* 조절이 필요한 경우에는 필요에 따라 수정하세요. */
+  color: #333;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+/* 라디오 버튼 동그라미 숨기기 */
+.transactionType_type input[type="radio"] {
+  display: none;
+}
+
+/* 선택된 라디오 버튼의 레이블 스타일 변경 */
+.transactionType_type input[type="radio"]:checked + label {
+  background-color: #4caf50;
+  color: #fff;
+}
+.transactionType_type input[type="radio"]:active + label {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* 호버 효과 추가 */
+.transactionType_type label:hover {
+  background-color: #ddd;
+}

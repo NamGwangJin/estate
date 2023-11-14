@@ -15,4 +15,6 @@ public interface MainDAO {
     void newsInsert(String news_title, String news_content, String news_link);
 
     ArrayList<NewsDTO> getListNews();
+
+    void requestInsert(String selectedType, String transactionType, String location, String desiredAmount, String propertyType, String name, String contact, String title, String content);
 }
