@@ -41,9 +41,11 @@ public class KimController {
     }
 
     @PostMapping("/api/requestInsert")
-    public String requestInsert(){
+    public String requestInsert(@RequestParam String selectedType, @RequestParam String transactionType, @RequestParam String location, @RequestParam String desiredAmount, @RequestParam String propertyType, @RequestParam String name, @RequestParam String contact, @RequestParam String title, @RequestParam String content){
 
-        // mDAO.requestInsert();
+        mDAO.requestInsert(selectedType, transactionType, location, desiredAmount, propertyType, name, contact, title, content);
+        System.out.println("내용들=" + selectedType + " " + transactionType + " " + location + " " + desiredAmount + " " + propertyType + " " + name + " " + contact + " " + title + " " + content);
+
 
         return "success";
     }
