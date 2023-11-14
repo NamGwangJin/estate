@@ -5,8 +5,10 @@
 
 .mainSection {
   margin-top: 20px;
-  height: 800px;
+  height: 1500px;
   background-color: rgb(187, 188, 244);
+  width: 1440px;
+  display: inline-block;
 }
 
 /* 게시판 CSS */

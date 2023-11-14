@@ -5,6 +5,7 @@ import Inquiry from './Component/Home/inquiry.js';
 import SearchBar from './Component/SearchBar/SearchBar.js';
 import MainBox from './Component/MainBox/MainBox.js';
 import './App.css';
+import Request_box from './Component/Request_box/Request_box.js';
 
 function Home() {
     return (
@@ -12,8 +13,9 @@ function Home() {
           <Header />
           <div className='mainSection'>
           <SearchBar/>
-          </div>
           <MainBox />
+          <Request_box/>
+          </div>
           <div className='inquiry1'>
             {/* <Inquiry /> */}
           </div>
