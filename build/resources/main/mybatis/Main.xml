@@ -11,4 +11,7 @@ insert into news set news_title = #{param1}, news_content=#{param2}, news_writeD
 <select id='getListNews' resultType='com.real.estate.DTO.NewsDTO'>
 select * from news
 </select>
+<insert id='requestInsert'>
+insert into requests set request_first_type = #{param1}, request_transactionType =#{param2}, request_location =#{param3}, request_desiredAmount=#{param4}, request_propertyType=#{param5}, request_name=#{param6}, request_contact=#{param7}, request_title=#{param8}, request_content=#{param9}
+</insert>
 </mapper>

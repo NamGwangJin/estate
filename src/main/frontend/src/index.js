@@ -13,6 +13,7 @@ import QuestionWrite from './Component/QNA/QuestionWrite'
 import QuestionDetail from './Component/QNA/QuestionDetail'
 import Tour from './Component/Tour/Tour'
 import TourApliy from './Component/Tour/TourApliy'
+import Admin from './Component/Admin/Admin'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,6 +29,7 @@ root.render(
       <Route path={"/question/detail"} exact element={<QuestionDetail />}></Route>
       <Route path={"/tour"} exact element={<Tour />}></Route>
       <Route path={"/tour/apliy"} exact element={<TourApliy />}></Route>
+      <Route path={"/admin"} exact element={<Admin />}></Route>
     </Routes>
   </BrowserRouter>
 );
