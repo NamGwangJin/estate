@@ -27,13 +27,14 @@ export default function SignIn({ isOpen, onClose }) {
       }
     })
     .then((userResponse) => {
-      console.log(JSON.stringify(userResponse));
+      if( userResponse.data !== "" ) {
+        const userInfo = JSON.stringify(userResponse.data)
+        sessionStorage.setItem("user", userInfo);
+      }
       close();
     })
     .catch(error => {
         console.log(error);
-        alert('error!');
-        close();
     })
 
     function close() {
