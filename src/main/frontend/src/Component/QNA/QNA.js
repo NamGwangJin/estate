@@ -57,10 +57,10 @@ export default function QNA() {
             ))}
           </tbody>
         </table>
-      </div>
-      <Link to='/question/write'>
+        <Link to='/question/write'>
           <button className="btn btn-ruru">질문 작성하기</button>
-      </Link>
+        </Link>
+      </div>
       <Bottom />
     </div>
   );
