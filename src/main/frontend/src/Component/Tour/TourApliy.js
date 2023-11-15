@@ -3,7 +3,7 @@ import Header from '../header'
 import Bottom from '../bottom'
 import { Link, useNavigate } from 'react-router-dom';
 import '../../App.css'
-import { hangjungdong } from "./hangjungdong";
+import { hangjungdong } from "../Home/hangjungdong";
 import axios from 'axios';
 
 export default function TourApliy() {
