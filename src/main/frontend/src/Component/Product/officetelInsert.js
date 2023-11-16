@@ -47,7 +47,7 @@ export default function OfficetelInsert() {
       <div className='InsertDIV'>
         <h3>매물등록</h3>
         <form onSubmit={onSubmit}>
-          <table className='Insert_table'>
+          <table className='content_insert'>
             <tbody>
               <tr>
                 <td>매물종류</td>
@@ -186,6 +186,23 @@ export default function OfficetelInsert() {
                 </td>
               </tr>
             </tbody>
+          </table>
+          <table className='price_insert'>
+<tbody>
+  <tr>
+    <td>거래종류</td>
+    <td>라디오로 매매전세월세단기</td>
+  </tr>
+  <tr>
+    <td>매매가</td><td><input type='text'/>만원 (컴마찍기)</td>
+  </tr>
+  <tr>
+    <td>융자금</td><td><input type='text' />만원</td>
+  </tr>
+  <tr>
+    <td>기전세금(월세금)</td><td>전세(보종금)<input type='text'/>만원 / 월세가<input type='text'/>만원</td>
+  </tr>
+</tbody>
           </table>
           <button type='submit' className='upload'>등록하기</button>
           <button type='button' className='back' onClick={() => { window.location.href = '/' }}>홈으로</button>
