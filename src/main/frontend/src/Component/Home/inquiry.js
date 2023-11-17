@@ -57,7 +57,7 @@ export default function InquiryForm() {
         <div className='input-container'>
           <input type='text' id='name' placeholder='성함' />
           <input type='text' id='contact' placeholder='연락처' />
-          <textarea rows='8' id='message' placeholder='내용입력' />
+          <textarea rows='8' id='message' className='message_text'placeholder='내용입력' />
         </div>
         <div className='checkbox-container'>
           <input type='checkbox' onChange={handleCheckboxChange} />

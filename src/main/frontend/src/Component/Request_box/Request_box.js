@@ -30,7 +30,7 @@ export default function Request_box() {
                   <div className="td" style={{ width: '100%' }}>
                     <div>내용</div>
                     <div className="inputBox">
-                      <textarea name="content" rows="3" placeholder="내용을 입력해주세요." style={{ display: 'inline-block', width: '96%', marginTop: '2px', padding: '10px', border: 'none', background: 'transparent', resize: 'none' }}></textarea>
+                      <textarea className='content_area' name="content" rows="3" placeholder="내용을 입력해주세요." style={{ display: 'inline-block', width: '96%', marginTop: '2px', padding: '10px', border: 'none', background: 'transparent', resize: 'none' }}></textarea>
                     </div>
                   </div>
                 </div>
