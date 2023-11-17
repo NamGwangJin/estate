@@ -10,6 +10,7 @@ import axios from 'axios';
 export default function QuestionDetail() {
   const [detail, setDetail] = useState([]);
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
+  const [admin, setAdmin] = useState(0);
   const query = window.location.search;
   const params = new URLSearchParams(query);
   const no = params.get("no");
@@ -29,6 +30,18 @@ export default function QuestionDetail() {
         setLoading(false); // 에러 발생 시에도 로딩 상태를 false로 설정
       });
   }, [no]);
+
+  useEffect(() => {
+    const userString = sessionStorage.getItem("user");
+    try {
+      if (userString !== null) {
+        const user = JSON.parse(userString);
+        setAdmin(user.admin);
+      }
+    } catch (error) {
+      console.error("사용자 데이터를 파싱하는 중 오류 발생:", error);
+    }
+  }, []);
 
   const [isAnswerWriteVisible, setAnswerWriteVisible] = useState(false);
   const answer = document.getElementById('answerOpen');
@@ -77,7 +90,10 @@ export default function QuestionDetail() {
         {isAnswerWriteVisible && <AnswerWrite onCancel={handleAnswerWriteCancel} />}
         {/* <Answer /> */}
           <div style={{textAlign:'center'}}>
-            <button className='btn btn-ruru' id='answerOpen' onClick={handleButtonClick}>답변작성</button>
+            {admin === 1 
+              ?<button className='btn btn-ruru' id='answerOpen' onClick={handleButtonClick}>답변작성</button>
+              :<></>
+            }
             <Link to="/qna">
             <button className='btn btn-white'>목록으로</button>
             </Link>
