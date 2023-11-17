@@ -168,6 +168,297 @@
 
 /* 게시판 CSS 끝 */
 
+/* 매물 디테일 CSS */
+
+.container1 {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+  padding-top: 200px;
+  min-height: 1750px;
+}
+
+.container1 div {
+  display: block;
+}
+
+.container1 div, p, span, a, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, table, th, td, fieldset, legend, input, button, select, textarea {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  vertical-align: top;
+}
+
+.container1 input, button, select, textarea {
+  font-family: '맑은 고딕', 'Nanum Gothic', '돋움', Dotum, '굴림', Gulim, Sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #333;
+  line-height: 1;
+}
+
+.detail_head {
+  border: 1px solid #e0e0e0;
+  border-top: 2px solid #898989;
+}
+
+.detail_head .info01 {
+  border-bottom: 1px solid #ccc;
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.detail_head .info_apt {
+  width: 468px;
+  padding-left: 15px;
+  border-right: 1px solid #e5e5e6;
+}
+
+.detail_head .info_apt > dl {
+  float: left;
+  margin-top: 18px;
+  font-weight: bold;
+  font-family: 'Dotum';
+  font-size: 12px;
+  text-align: center;
+}
+
+.detail_head .info_apt > dl dt {
+  width: 38px;
+  height: 14px;
+  padding-top: 2px;
+  color: #fff;
+  background: #ff5000;
+}
+
+.detail_head .info_apt > dl dd {
+  width: 62px;
+  height: 22px;
+  color: #ff5000;
+  line-height: 22px;
+  border: 1px solid #ff5000;
+}
+
+.detail_head .info_apt > h3 {
+  float: left;
+  margin-top: 28px;
+  padding-left: 25px;
+  font-size: 16px;
+  display: block;
+}
+
+.detail_head .info_area {
+  width: 266px;
+  padding: 12px 0 0 15px;
+  border-right: 1px solid #e5e5e6;
+}
+
+.detail_head .info_area > p {
+  height: 16px;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.detail_head .info_area > div {
+  padding-top: 5px;
+  font-size: 26px;
+}
+
+.detail_head .info_price {
+  padding: 15px 0 0 15px;
+}
+
+.detail_head .info_price span {
+  font-family: 'Dotum';
+  font-size: 11px;
+  color: #727272;
+}
+
+.detail_head .info_price > p > span {
+  padding-left: 3px;
+  vertical-align: bottom;
+}
+
+.detail_head .info_price > p > strong {
+  font-weight: normal;
+  font-size: 26px;
+  color: #ff3811;
+}
+
+
+.detail_head .info_area > div .bar {
+  padding: 0 3px;
+  color: #c0c0c0;
+}
+
+.detail_head .info_area > div .unit {
+  padding-left: 3px;
+  font-family: 'Dotum';
+  font-size: 12px;
+  color: #727272;
+  vertical-align: bottom;
+}
+
+.detail_head .info_apt, .detail_head .info_area, .detail_head .info_price {
+  float: left;
+  height: 72px;
+  overflow: hidden;
+}
+
+.detail_head .info02 > ul {
+  overflow: hidden;
+  display: block;
+  list-style-type: disc;
+}
+
+.detail_head .info02 > ul > li {
+  float: left;
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 12px;
+  color: #000;
+  border-bottom: 1px solid #f2f2f2;
+  overflow: hidden;
+  list-style: none;
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+.detail_head .info02 > ul > li > span:first-child {
+  display: inline-block;
+  width: 110px;
+  color: #757575;
+}
+
+.detail_head .info_02 > ul > li .tel {
+  color: #5696dc;
+}
+
+.detail_body {
+  position: relative;
+  margin-top: 10px;
+}
+
+.detail_gallery {
+  position: relative;
+  height: 138px;
+  padding-top: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.img_type_text {
+  display: table-cell !important;
+  padding: 0 0 10px 40px !important;
+  cursor: pointer;
+}
+
+.img_type_text.on {
+  font-weight: bold;
+}
+
+.detail_gallery .gallery_wrap {
+  position: relative;
+  padding: 0 0 0 30px;
+}
+
+.detail_gallery .gallery .on {
+  border: 2px solid #eb4042;
+  box-sizing: border-box;
+  opacity: 1;
+}
+
+.detail_gallery .gallery {
+  width: 630px;
+  height: 70px;
+  overflow: hidden;
+}
+
+.detail_map_wrap {
+  border: 1px solid #e0e0e0;
+  border-top: 0;
+}
+
+.detail_map {
+  height: 500px;
+  position: relative;
+}
+
+.info03 {
+  padding: 20px 0 30px;
+  overflow: hidden;
+}
+
+.info03_inr {
+  position: relative;
+  float: left;
+  width: 47%;
+}
+
+.info03_inr:first-child {
+  margin-right: 16px;
+}
+
+.detail_body h4 {
+  padding-bottom: 12px;
+  font-family: 'Dotum';
+  font-size: 12px;
+  display: block;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.info03_inr ul {
+  position: relative;
+  padding: 5px 0;
+  border-top: 1px solid #9fa2a9;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.info03_inr ul li {
+  font-family: 'Dotum';
+  font-size: 12px;
+  color: #323232;
+  line-height: 26px;
+  list-style: none;
+}
+
+.info03_inr ul li span:first-child {
+  display: inline-block;
+  width: 120px;
+  padding-left: 10px;
+  color: #757575;
+}
+
+.info03_inr ul li dt:first-child {
+  display: inline-block;
+  width: 120px;
+  padding-left: 10px;
+  color: #757575;
+}
+
+.info04 {
+  clear: both;
+  padding-top: 12px;
+}
+
+.info04 p {
+  padding: 5px 10px;
+  border-top: 1px solid #9fa2a9;
+  border-bottom: 1px solid #e0e0e0;
+  min-height: 26px;
+  font-family: 'Dotum';
+  font-size: 12px;
+  color: #323232;
+}
+
+/* 매물 디테일 CSS 끝 */
+
 .inquiry1 {
   position: absolute;
   right: 270px;

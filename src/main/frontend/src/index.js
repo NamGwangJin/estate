@@ -14,6 +14,7 @@ import QuestionDetail from './Component/QNA/QuestionDetail'
 import Tour from './Component/Tour/Tour'
 import TourApliy from './Component/Tour/TourApliy'
 import Admin from './Component/Admin/Admin'
+import EstateDetail from './Component/Estate/EstateDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -30,6 +31,7 @@ root.render(
       <Route path={"/tour"} exact element={<Tour />}></Route>
       <Route path={"/tour/apliy"} exact element={<TourApliy />}></Route>
       <Route path={"/admin"} exact element={<Admin />}></Route>
+      <Route path={"/estate/detail"} exact element={<EstateDetail />}></Route>
     </Routes>
   </BrowserRouter>
 );
