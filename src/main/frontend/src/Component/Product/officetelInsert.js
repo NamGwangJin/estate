@@ -59,7 +59,7 @@ export default function OfficetelInsert() {
             <tbody>
               <tr>
                 <td>매물종류</td>
-                <td colSpan={3}>
+                <td colSpan={3}> 
                   <select><option>오피스텔</option><option>아파트</option></select>
                 </td>
               </tr>
