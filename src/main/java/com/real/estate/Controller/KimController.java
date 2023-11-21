@@ -18,14 +18,16 @@ public class KimController {
     private MainDAO mDAO;
 
     @GetMapping("/api/inquiryInsert")
-    public String inquiryInsert(@RequestParam String name, @RequestParam String contact, @RequestParam String message){
-        
+    public String inquiryInsert(@RequestParam String name, @RequestParam String contact, @RequestParam String message) {
+
         mDAO.inquiryInsert(name, contact, message);
 
         return "success";
     }
+
     @GetMapping("/api/newsInsert")
-    public String newsInsert(@RequestParam String news_title, @RequestParam String news_content, @RequestParam String news_link){
+    public String newsInsert(@RequestParam String news_title, @RequestParam String news_content,
+            @RequestParam String news_link) {
 
         mDAO.newsInsert(news_title, news_content, news_link);
 
@@ -34,7 +36,7 @@ public class KimController {
     }
 
     @GetMapping("/api/newslist")
-    public ArrayList<NewsDTO> getListNews(){
+    public ArrayList<NewsDTO> getListNews() {
         ArrayList<NewsDTO> newsList = mDAO.getListNews();
 
         return newsList;
@@ -49,5 +51,11 @@ public class KimController {
 
         return "success";
     }
-    
+
+    @PostMapping("/api/officetel_Insert")
+    public String officetel_Insert(@RequestParam String product_type, @RequestParam String location, @RequestParam String building_name, @RequestParam String building_use, @RequestParam String extent, @RequestParam String address, @RequestParam String floor, @RequestParam String floor_open,@RequestParam String direction_criteria, @RequestParam String direction, @RequestParam String entrance, @RequestParam String rooms, @RequestParam String bathroom, @RequestParam String roomuse, @RequestParam String inner_structure,@RequestParam String administration_cost, @RequestParam String maintenance, @RequestParam String managementCost_includ){
+
+        
+        return "success";
+    }
 }
