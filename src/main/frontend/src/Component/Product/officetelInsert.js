@@ -14,8 +14,13 @@ export default function OfficetelInsert() {
   const [maintenanceCost, setMaintenanceCost] = useState(""); // 관리비 천단위 컴마
   const handleMaintenanceCostChange = (e) => {
     const inputValue = e.target.value.replace(/[^0-9]/g, '');
-    const formattedValue = Number(inputValue).toLocaleString();
-    setMaintenanceCost(formattedValue);
+    if (inputValue !== null) {
+      const formattedValue = Number(inputValue).toLocaleString();
+      setMaintenanceCost(formattedValue);
+    } else {
+      // 값이 null인 경우 0으로 설정
+      setMaintenanceCost("0");
+    }
   };
 
   const [selectedFiles, setSelectedFiles] = useState([]);  // 이미지파일 첨부
@@ -40,7 +45,54 @@ export default function OfficetelInsert() {
   console.log('용도=' + usage);
 
   function upload() {
+    let product_type = document.getElementById('product_type').value;
+    let building_name = document.getElementById('building_name').value;
+    let building_use = document.getElementById('building_use').value;
+    let extent = document.getElementById('extent').value;
+    let address = document.getElementById('address').value +' '+ document.getElementById('address_input').value;
+    let floor = document.getElementById('floor').value;
+    let direction_criteria = document.getElementById('direction_criteria').value;
+    let direction = document.getElementById('direction').value;
+    let entrance = document.getElementById('entrance').value;
+    let rooms = document.getElementById('rooms').value;
+    let bathroom = document.getElementById('bathroom').value;
+    let managementCost_includ = Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => checkbox.value);
 
+
+    axios({
+      method:'post',
+      url: '/api/officetell_Insert',
+      params:{
+        product_type: product_type,
+        location: location,
+        building_name: building_name,
+        building_use: building_use,
+        extent: extent,
+        address: address,
+        floor: floor,
+        floor_open: floorExposure,
+        direction_criteria: direction_criteria,
+        direction: direction,
+        entrance: entrance,
+        rooms: rooms,
+        bathroom: bathroom,
+        roomuse: usage,
+        inner_structure: structure,
+        administration_cost: maintenanceCost,
+        maintenance: maintenance,
+        managementCost_includ: managementCost_includ
+      },
+    })
+    .then((res) => {
+      if(res.data == 'success'){
+        alert('매물등록을 성공하였습니다');
+        window.location.href ='/';  // 매물리스트로 수정
+      }
+    })
+    .catch((error) => {
+      console.error('매물등록실패: ', error);
+      alert(`에러 발생: ${error.message}`);
+    })
   }
 
   const onSubmit = (e) => {
@@ -60,7 +112,14 @@ export default function OfficetelInsert() {
               <tr>
                 <td>매물종류</td>
                 <td colSpan={3}> 
-                  <select><option>오피스텔</option><option>아파트</option></select>
+                  <select id='product_type'>
+                    <option value='오피스텔'>오피스텔</option>
+                    <option value='아파트'>아파트</option>
+                    <option value='상가'>상가</option>
+                    <option value='지식산업센터/사무실'>지식산업센터·사무실</option>
+                    <option value='토지'>토지</option>
+                    <option value='공장/창고'>공장·창고</option>
+                  </select>
                 </td>
               </tr>
               <tr>
@@ -99,30 +158,75 @@ export default function OfficetelInsert() {
               <tr>
                 <td>단지명</td>
                 <td colSpan={3}>
-                  <select><option>여러단지</option></select>
+                  <select id='building_name'>
+                    <option value='단지1'>단지1</option> 
+                    <option value='단지2'>단지2</option>
+                    {/* 디비에서 가져와야함 */}
+                  </select>
                 </td>
               </tr>
               <tr>
                 <td>건축물용도</td>
                 <td colSpan={3}>
-                  <select><option>여러용도</option></select>
+                  <select id='building_use'>
+                    <option value='단독주택'>단독주택</option>
+                    <option value='공동주택'>공동주택</option>
+                    <option value='제1종 근린생활시설'>제1종 근린생활시설</option>
+                    <option value='제2종 근린생활시설'>제2종 근린생활시설</option>
+                    <option value='문화 및 집회시설'>문화 및 집회시설</option>
+                    <option value='종교시설'>종교시설</option>
+                    <option value='판매시설'>판매시설</option>
+                    <option value='운수시설'>운수시설</option>
+                    <option value='의료시설'>의료시설</option>
+                    <option value='교육연구시설'>교육연구시설</option>
+                    <option value='노유자시설'>노유자시설</option>
+                    <option value='수련시설'>수련시설</option>
+                    <option value='운동시설'>운동시설</option>
+                    <option value='업무시설'>업무시설</option>
+                    <option value='숙박시설'>숙박시설</option>
+                    <option value='위락시설'>위락시설</option>
+                    <option value='공장'>공장</option>
+                    <option value='창고시설'>창고시설</option>
+                    <option value='위험물 저장 및 처리 시설'>위험물 저장 및 처리 시설</option>
+                    <option value='자동차 관련 시설'>자동차 관련 시설</option>
+                    <option value='동물 및 식물 관련 시설'>동물 및 식물 관련 시설</option>
+                    <option value='자원순환 관련 시설'>자원순환 관련 시설</option>
+                    <option value='교정 및 군사 시설'>교정 및 군사 시설</option>
+                    <option value='방송통신시설'>방송통신시설</option>
+                    <option value='발전시설'>발전시설</option>
+                    <option value='묘지 관련 시설'>묘지 관련 시설</option>
+                    <option value='관광 휴게시설'>관광 휴게시설</option>
+                    <option value='장례시설'>장례시설</option>
+                    <option value='야영장 시설'>야영장 시설</option>
+                    <option value='미등기건물'>미등기건물</option>
+                    <option value='그 밖에 토지의 정착물'>그 밖에 토지의 정착물</option>
+                  </select>
                 </td>
               </tr>
               <tr>
                 <td>면적</td>
                 <td colSpan={3}>
-                  계약면적<select><option>여러면적</option></select>㎡
+                  계약면적<select id='extent'>
+                    <option value='44A'>44A(44.59㎡ // 18.56㎡)</option>
+                    {/* 디비에서 가져와야. 건물정보들에 타입 업데이트인서트 */}
+                      </select>㎡
                 </td>
               </tr>
               <tr>
                 <td>주소</td>
                 <td colSpan={3}>
-                  <select><option>동선택</option></select><input type='text' className='ho' />호
+                  <select id='address'>
+                    <option value='A동'>A동</option>
+                    <option value='B동'>B동</option>
+                    {/* 건축물대장에서 가져오기 */}
+                  </select>
+                  <input type='text' id='address_input' className='ho' />호
                 </td>
               </tr>
               <tr>
                 <td>층</td>
-                <td colSpan={3}><input type='number' className='floor' placeholder='해당층' />층[저/-층]
+                <td colSpan={3}>
+                  <input type='number' id='floor' className='floor' placeholder='해당층' />층[저/-층] {/* 저/-층 에 건축물대장에서 최고층 가져와야함 */}
                   <input type='radio' value={'노출'} checked={floorExposure == '노출'} onChange={() => setFloorExposure('노출')} />층수노출
                   <input type='radio' value={'노출안함'} checked={floorExposure == '노출안함'} onChange={() => setFloorExposure('노출안함')} />고/중/저
                 </td>
@@ -130,12 +234,26 @@ export default function OfficetelInsert() {
               <tr>
                 <td>방향</td>
                 <td>
-                  <select><option>방향기준선택</option></select>
-                  <select><option>선택</option></select>
+                  <select id='direction_criteria'>
+                    <option value='거실'>거실</option>
+                    <option value='안방'>안방</option>
+                    {/* 아파트.오피스텔만 거실안방, 다른매물은 주된출입구 등 */}
+                  </select>
+                  <select id='direction'>
+                    <option value='' disabled selected>선택</option>
+                    <option value='동'>동</option>
+                    <option value='서'>서</option>
+                    <option value='남'>남</option>
+                    <option value='북'>북</option>
+                    <option value='북동'>북동</option>
+                    <option value='남동'>남동</option>
+                    <option value='북서'>북서</option>
+                    <option value='남서'>남서</option>
+                  </select>
                 </td>
                 <td>현관구조</td>
                 <td>
-                  <select>
+                  <select id='entrance'>
                     <option value="" disabled selected>선택</option>
                     <option value="계단식">계단식</option>
                     <option value="복도식">복도식</option>
@@ -145,9 +263,9 @@ export default function OfficetelInsert() {
               </tr>
               <tr>
                 <td>방수</td>
-                <td><input type='number' className='rooms' />개</td>
+                <td><input type='number' className='rooms' id='rooms'/>개</td>
                 <td>욕실수</td>
-                <td><input type='number' className='bathrooms' />개</td>
+                <td><input type='number' className='bathrooms' id='bathroom'/>개</td>
               </tr>
               <tr>
                 <td>용도</td>
@@ -174,7 +292,7 @@ export default function OfficetelInsert() {
               </tr>
               <tr>
                 <td>관리비포함내역</td>
-                <td colSpan={3}>
+                <td colSpan={3} id='managementCost_includ'>
                   <input type='checkbox' className='input_check' value={'전기'} />전기
                   <input type='checkbox' className='input_check' value={'가스'} />가스
                   <input type='checkbox' className='input_check' value={'수도'} />수도
