@@ -51,7 +51,7 @@ export default function OfficetelInsert() {
 
   const now = new Date();
   const nowYear = now.getFullYear();
-  // 날짜선택 셀렉트
+  // 건축물 날짜선택 셀렉트
   const [form, setForm] = useState({
     year: nowYear,
     month: "01",
@@ -87,7 +87,43 @@ export default function OfficetelInsert() {
   let day = form.day;
 
   let building_date = year + '-' + month + '-' + day;
+  console.log(building_date);
 
+  // 입주가능일 선택 셀렉트
+  const [selectedDateForm, setSelectedDateForm] = useState({
+    year: nowYear,
+    month: '01',
+    day: '01',
+  });
+  let availableYears = [];
+  for (let y = now.getFullYear(); y <= now.getFullYear() + 7; y += 1) {
+    availableYears.push(y);
+  }
+
+  let availableMonths = [];
+  for (let m = 1; m <= 12; m += 1) {
+    if (m < 10) {
+      availableMonths.push('0' + m.toString());
+    } else {
+      availableMonths.push(m.toString());
+    }
+  }
+  let availableDays = [];
+  let maxDay = new Date(
+    selectedDateForm.year,
+    selectedDateForm.month,
+    0
+  ).getDate();
+  for (let d = 1; d <= maxDay; d += 1) {
+    if (d < 10) {
+      availableDays.push('0' + d.toString());
+    } else {
+      availableDays.push(d.toString());
+    }
+  }
+  let enterableDate = selectedDateForm.year + '-' + selectedDateForm.month + '-' + selectedDateForm.day;
+  console.log('Selected Value:', moveable_date);
+  console.log('Selected Date Form:', enterableDate);
 
 
   function upload() {
@@ -102,6 +138,7 @@ export default function OfficetelInsert() {
     let entrance = document.getElementById('entrance').value;
     let rooms = document.getElementById('rooms').value;
     let bathroom = document.getElementById('bathroom').value;
+    
     let managementCost_includ = Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => checkbox.value);
     let building_dateType = document.getElementById('building_dateType').value;
     let desiredAmount = document.getElementById('desiredAmount').value;
@@ -120,14 +157,15 @@ export default function OfficetelInsert() {
     let security_facilities = Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => checkbox.value);
     let other_facilities = Array.from(document.querySelectorAll('#other_facilities .input_check:checked')).map(checkbox => checkbox.value);
     let balcony = Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => checkbox.value);
-
+    let product_title = document.getElementById('product_title').value;
+    let product_content = document.getElementById('product_content').value;
 
     console.log('가격=' + desiredAmount);
 
     axios({
       method: 'post',
-      url: '/api/officetell_Insert',
-      params: {
+      url: '/api/officetel_Insert',
+      data: {
         product_type: product_type,
         location: location,
         building_name: building_name,
@@ -161,7 +199,10 @@ export default function OfficetelInsert() {
         living_facilities: living_facilities,
         security_facilities: security_facilities,
         other_facilities: other_facilities,
-        balcony:balcony
+        balcony: balcony,
+        moveable_date: moveable_date,
+        product_title: product_title,
+        product_content: product_content
       },
     })
       .then((res) => {
@@ -172,6 +213,7 @@ export default function OfficetelInsert() {
       })
       .catch((error) => {
         console.error('매물등록실패: ', error);
+        console.error('서버응답:'+JSON.stringify(error.response));
         alert(`에러 발생: ${error.message}`);
       })
   }
@@ -401,7 +443,7 @@ export default function OfficetelInsert() {
                         {item}
                       </option>
                     ))}
-                  </select>년 
+                  </select>년
                   <select id='month'
                     value={form.months}
                     onChange={(e) =>
@@ -413,7 +455,7 @@ export default function OfficetelInsert() {
                         {item}
                       </option>
                     ))}
-                  </select>월 
+                  </select>월
                   <select id='day'
                     value={form.day}
                     onChange={(e) =>
@@ -505,7 +547,7 @@ export default function OfficetelInsert() {
             </tr>
             <tr>
               <td>냉방시설</td>
-              <td colspan="3" id= 'airCondition'>
+              <td colspan="3" id='airCondition'>
                 <ul class="optionList">
                   <li><input value="벽걸이에어컨" type="checkbox" class="input_check" /><label>벽걸이에어컨</label></li>
                   <li><input value="스탠드에어컨" type="checkbox" class="input_check" /><label>스탠드에어컨</label></li>
@@ -580,11 +622,54 @@ export default function OfficetelInsert() {
               <tr>
                 <td>입주가능일</td>
                 <td>
-                  <input type='radio' value={'즉시입주'} checked={moveable_date == '즉시입주'} onChange={() => setMoveable_date('즉시입주')} />즉시입주<br/>
-                  <input type='radio' value={''} checked={moveable_date == ''} onChange={() => setMoveable_date('')} />이후 <br/>
-                  {/* 날짜 입력되도록 해야하고 */}
-                  {/* 체크되어있으면 디비에 올라가야함. 디비에 칼럼 추가할지 생각해보기 */}
-                  <input type='checkbox' value='입주협의가능' id='Negotiable'/>입주협의가능
+                  <input type='radio' value={'즉시입주'} checked={moveable_date == '즉시입주'} onChange={() => setMoveable_date('즉시입주')} />즉시입주<br />
+                  <input type='radio' value={enterableDate} checked={moveable_date === enterableDate} onChange={() => setMoveable_date(enterableDate)} />
+                  {/* 연/월/일 선택 */}
+                  <select
+                    id='year'
+                    value={selectedDateForm.year}
+                    onChange={(e) =>
+                      setSelectedDateForm({ ...selectedDateForm, year: e.target.value })
+                    }
+                  >
+                    {availableYears.map((item) => (
+                      <option value={item} key={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                  년
+                  <select
+                    id='month'
+                    value={selectedDateForm.month}
+                    onChange={(e) =>
+                      setSelectedDateForm({ ...selectedDateForm, month: e.target.value })
+                    }
+                  >
+                    {availableMonths.map((item) => (
+                      <option value={item} key={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                  월
+                  <select
+                    id='day'
+                    value={selectedDateForm.day}
+                    onChange={(e) =>
+                      setSelectedDateForm({ ...selectedDateForm, day: e.target.value })
+                    }
+                  >
+                    {availableDays.map((item) => (
+                      <option value={item} key={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                  일 이후
+
+
+                  {/* <input type='checkbox' value='입주협의가능' id='Negotiable' />입주협의가능 */}
                 </td>
               </tr>
             </tbody>
@@ -594,16 +679,16 @@ export default function OfficetelInsert() {
             <tbody>
               <tr>
                 <td>매물특징</td>
-                <td><input type='text' placeholder='리스트에 노출되는 문구' /></td>
+                <td><input id='product_title' type='text' placeholder='리스트에 노출되는 문구' /></td>
               </tr>
               <tr>
                 <td>상세설명</td>
                 <td>
-                  <textarea placeholder='매물 상세 페이지에 노출되는 문구입니다.'></textarea>
+                  <textarea id='product_content' placeholder='매물 상세 페이지에 노출되는 문구입니다.'></textarea>
                 </td>
               </tr>
               <tr>
-                <td>매물사진</td>
+                {/* <td>매물사진</td>
                 <td>
                   <input type='file' multiple onChange={handleFileChange} /><br />
                   <div>
@@ -611,7 +696,7 @@ export default function OfficetelInsert() {
                       <img key={index} src={URL.createObjectURL(file)} alt={`Preview ${index}`} style={{ width: '100px', height: '100px', marginRight: '10px' }} />
                     ))}
                   </div>
-                </td>
+                </td> */}
               </tr>
             </tbody>
           </table>
