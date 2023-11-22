@@ -5,6 +5,6 @@
 
 <select id="getProducts" resultType="com.real.estate.DTO.PropertyListingDTO">
     select * from products;
-<select>
+</select>
 
 </mapper>
