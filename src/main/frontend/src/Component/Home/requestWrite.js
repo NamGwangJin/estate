@@ -102,6 +102,49 @@ export default function RequestWrite() {
     btnInsert();
   };
 
+  const [buttonStates, setButtonStates] = useState({
+    transactionType: {
+      분양: false,
+      매매: false,
+      월세: false,
+      전세: false,
+    },
+    propertyType: {
+      오피스텔: false,
+      아파트: false,
+      지식산업센터: false,
+      상가: false,
+      공장: false,
+    },
+    Search_or_Sell: {
+      구해요: false,
+      팔아요: false,
+    }
+  });
+
+  const handleButtonClick = (group, buttonName) => {
+    setButtonStates((prevStates) => ({
+      ...prevStates,
+      [group]: {
+        ...Object.fromEntries(
+          Object.entries(prevStates[group]).map(([name, value]) => [name, name === buttonName])
+        ),
+      },
+    }));
+  };
+
+  // 버튼 스타일을 반환하는 함수 정의
+  const getButtonStyle = (group, buttonName) => {
+    return {
+      padding: '10px',
+      backgroundColor: 'white',
+      color: buttonStates[group][buttonName] ? '#3cb3c5' : 'black',
+      border: buttonStates[group][buttonName] ? '2px solid #3cb3c5' : '2px solid #ddd',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      transition: 'color 0.3s, border-color 0.3s, box-shadow 0.3s',
+    };
+  };
 
   return (
     <div className='requestWrite'>
@@ -110,35 +153,47 @@ export default function RequestWrite() {
       <div className='requestWriteMain'>
         <form onSubmit={onSubmit}>
           <div className='firstType_select'>
-            <label>
-              <input type='radio' value={'구해요'} checked={selectedType === '구해요'} onChange={() => setSelectedType('구해요')} />구해요
-            </label>
-            <label>
-              <input type='radio' value={'팔아요'} checked={selectedType === '팔아요'} onChange={() => setSelectedType('팔아요')} />팔아요
-            </label>
+          {Object.keys(buttonStates.Search_or_Sell).map((buttonName) => (
+                <button
+                  key={buttonName}
+                  type="button"
+                  style={{
+                    padding: '10px',
+                    backgroundColor: buttonStates['Search_or_Sell'][buttonName] ? '#3cb3c5' : 'white',
+                    color: buttonStates['Search_or_Sell'][buttonName] ? 'white' : 'gray',
+                    border: `2px solid ${buttonStates['Search_or_Sell'][buttonName] ? '#3cb3c5' : '#ddd'}`,
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    transition: 'color 0.3s, border-color 0.3s, box-shadow 0.3s',
+                    width: '40%',
+                  }}
+                  onClick={() => handleButtonClick('Search_or_Sell', buttonName)}
+                >
+                  {buttonName}
+                </button>
+              ))}
           </div>
           <div className='request_body'>
             <div className='transactionTypeDIV'>
               <div className='transactionType_title'>거래종류</div>
               <div className='transactionType_type' data-toggle='buttons'>
-                <label className='parcel_out' data-type='parcel_out'>
-                  <input type='radio' name='transaction_type' value='분양' checked={transactionType === '분양'} onChange={() => setTransactionType('분양')} />분양
-                </label>
-                <label className='sell' data-type='sell'>
-                  <input type='radio' name='transaction_type' value='매매' checked={transactionType === '매매'} onChange={() => setTransactionType('매매')} />매매
-                </label>
-                <label className='full_rent' data-type='full_rent'>
-                  <input type='radio' name='transaction_type' value='전세' checked={transactionType === '전세'} onChange={() => setTransactionType('전세')} />전세
-                </label>
-                <label className='month_rent' data-type='month_rent'>
-                  <input type='radio' name='transaction_type' value='월세' checked={transactionType === '월세'} onChange={() => setTransactionType('월세')} />월세
-                </label>
-              </div>
+              {Object.keys(buttonStates.transactionType).map((buttonName) => (
+                <button
+                  key={buttonName}
+                  type="button"
+                  style={getButtonStyle('transactionType', buttonName)}
+                  onClick={() => handleButtonClick('transactionType', buttonName)}
+                >
+                  {buttonName}
+                </button>
+              ))}
+            </div>
+
             </div>
             <div className='locationDIV'>
               <div className='location_title'>지역선택</div>
               <div className='location_input'>
-                <select onChange={(e) => setVal1(e.target.value)}>
+                <select className='styled-select2' style={{width : '30%'}} onChange={(e) => setVal1(e.target.value)}>
                   <option value="">선택</option>
                   {sido.map((el) => (
                     <option key={el.sido} value={el.sido}>
@@ -146,7 +201,7 @@ export default function RequestWrite() {
                     </option>
                   ))}
                 </select>
-                <select onChange={(e) => setVal2(e.target.value)}>
+                <select className='styled-select2' style={{width : '20%'}} onChange={(e) => setVal2(e.target.value)}>
                   <option value="">선택</option>
                   {sigugun
                     .filter((el) => el.sido === val1)
@@ -156,7 +211,7 @@ export default function RequestWrite() {
                       </option>
                     ))}
                 </select>
-                <select onChange={(e) => setVal3(e.target.value)}>
+                <select className='styled-select2' style={{width : '20%'}} onChange={(e) => setVal3(e.target.value)}>
                   <option value="">선택</option>
                   {dong
                     .filter((el) => el.sido === val1 && el.sigugun === val2)
@@ -171,52 +226,49 @@ export default function RequestWrite() {
             <div className='desiredAmountDIV'>
               <div className='desiredAmount_title'>희망금액</div>
               <div className='desiredAmount_inputDIV'>
-                <input id='desiredAmount' className='desiredAmountInput' type='text' placeholder='미입력시 가격협의' value={desiredAmount} onChange={(e) => onInputChange(e, 'desiredAmount')} />
+                <input id='desiredAmount' className='styled-input' type='text' placeholder='미입력시 가격협의' value={desiredAmount} onChange={(e) => onInputChange(e, 'desiredAmount')} />
               </div>
             </div>
             <div className='propertyTypeDIV'>
               <div className='propertyType_title'>매물종류</div>
-              <div className='transactionType_type' data-toggle='buttons'>
-                <label className='officetel' data-type='officetel'>
-                  <input type='radio' name='item_type' value='오피스텔' checked={propertyType === '오피스텔'} onChange={() => setPropertyType('오피스텔')} />오피스텔
-                </label>
-                <label className='apartment' data-type='apartment'>
-                  <input type='radio' name='item_type' value='아파트' checked={propertyType === '아파트'} onChange={() => setPropertyType('apartment')} />아파트
-                </label>
-                <label className='office' data-type='office'>
-                  <input type='radio' name='item_type' value='지식산업센터/사무실' checked={propertyType === '지식산업센터/사무실'} onChange={() => setPropertyType('지식산업센터/사무실')} />지식산업센터·사무실
-                </label>
-                <label className='store' data-type='store'>
-                  <input type='radio' name='item_type' value='상가' checked={propertyType === '상가'} onChange={() => setPropertyType('상가')} />상가
-                </label>
-                <label className='factory' data-type='factory'>
-                  <input type='radio' name='item_type' value='공장/창고' checked={propertyType === '공장/창고'} onChange={() => setPropertyType('공장/창고')} />공장·창고
-                </label>
+              <div className='propertyType_type' data-toggle='buttons'>
+                {Object.keys(buttonStates.propertyType).map((buttonName) => (
+                <button
+                  key={buttonName}
+                  type="button"
+                  style={getButtonStyle('propertyType', buttonName)}
+                  onClick={() => handleButtonClick('propertyType', buttonName)}
+                >
+                  {buttonName}
+                </button>
+              ))}
+                
+
               </div>
             </div>
             <div className='nameDIV'>
               <div className='name_title'>이름</div>
               <div className='name_inputDIV'>
-                <input id='name' className='nameInput' type='text' placeholder='이름' />
+                <input id='name' className='styled-input' type='text' placeholder='이름' />
               </div>
             </div>
             <div className='contactDIV'>
               <div className='contact_title'>연락처</div>
               <div className='contaact_inputDIV'>
-                <input id='contact' className='contactInput' type='text' placeholder='연락처' value={contact} onChange={(e) => onInputChange(e, 'contact')} />
+                <input id='contact' className='styled-input' type='text' placeholder='연락처' value={contact} onChange={(e) => onInputChange(e, 'contact')} />
               </div>
             </div>
             <div className='titleDIV'>
               <div className='title_title'>제목</div>
               <div className='title_inputDIV'>
-                <input id='title' className='titleInput' type='text' placeholder='제목' />
+                <input id='title' className='styled-input' type='text' placeholder='제목' />
               </div>
             </div>
             <div className='contentDIV'>
               <div className='content_title'>상세내용</div>
               <div className='content_inputDIV'>
                 {/* <input id='content' className='contentInput' type='textarea' placeholder='내용을 입력해주세요'/> */}
-                <textarea id='content' className='contentInput' placeholder='내용을 입력해주세요' onChange={(e) => onInputChange(e, 'content')} />
+                <textarea id='content' className='styled-input' style={{resize : 'none', width : '650px' , height : '200px'}} placeholder='내용을 입력해주세요' onChange={(e) => onInputChange(e, 'content')} />
               </div>
             </div>
           </div>
