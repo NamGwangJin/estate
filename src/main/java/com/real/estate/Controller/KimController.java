@@ -53,7 +53,10 @@ public class KimController {
     }
 
     @PostMapping("/api/officetel_Insert")
-    public String officetel_Insert(@RequestParam String product_type, @RequestParam String location, @RequestParam String building_name, @RequestParam String building_use, @RequestParam String extent, @RequestParam String address, @RequestParam String floor, @RequestParam String floor_open,@RequestParam String direction_criteria, @RequestParam String direction, @RequestParam String entrance, @RequestParam String rooms, @RequestParam String bathroom, @RequestParam String roomuse, @RequestParam String inner_structure,@RequestParam String administration_cost, @RequestParam String maintenance, @RequestParam String managementCost_includ){
+    public String officetel_Insert(@RequestParam String product_type, @RequestParam String location, @RequestParam String building_name, @RequestParam String building_use, @RequestParam String extent, @RequestParam String address, @RequestParam String floor, 
+    @RequestParam String floor_open,@RequestParam String direction_criteria, @RequestParam String direction, @RequestParam String entrance, @RequestParam String rooms, @RequestParam String bathroom, @RequestParam String roomuse, @RequestParam String inner_structure,@RequestParam String administration_cost, @RequestParam String maintenance, @RequestParam String managementCost_includ,
+    @RequestParam String building_dataType, @RequestParam String transactionType, @RequestParam String desiredAmount, @RequestParam String loan, @RequestParam String existingTenant_deposit, @RequestParam String existingTenant_monthlyRent, @RequestParam String total_parking, @RequestParam String parking_per_room, @RequestParam String heating_method, @RequestParam String heating_fuel,
+    ){
 
         
         return "success";

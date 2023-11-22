@@ -181,7 +181,7 @@ export default function RequestWrite() {
                   <input type='radio' name='item_type' value='오피스텔' checked={propertyType === '오피스텔'} onChange={() => setPropertyType('오피스텔')} />오피스텔
                 </label>
                 <label className='apartment' data-type='apartment'>
-                  <input type='radio' name='item_type' value='아파트' checked={propertyType === '아파트'} onChange={() => setPropertyType('apartment')} />아파트
+                  <input type='radio' name='item_type' value='아파트' checked={propertyType === '아파트'} onChange={() => setPropertyType('아파트')} />아파트
                 </label>
                 <label className='office' data-type='office'>
                   <input type='radio' name='item_type' value='지식산업센터/사무실' checked={propertyType === '지식산업센터/사무실'} onChange={() => setPropertyType('지식산업센터/사무실')} />지식산업센터·사무실
