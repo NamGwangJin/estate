@@ -1,3 +1,20 @@
 .optionList li{
   float: left;
 }
+.kkk {
+  text-align: center;
+  width: 100%;
+}
+
+.leftA {
+  text-align: left;
+}
+
+.styled-table td select {
+  margin-right: 10px;
+}
+
+/* Adjust the last select element to remove the margin-right */
+.styled-table td select:last-child {
+  margin-right: 0;
+}
