@@ -8,13 +8,13 @@ import Intro from './Component/Home/intro.js'
 import News from './Component/Home/news.js'
 import NewsInsert from './Component/Home/newsInsert.js'
 import RequestWrite from './Component/Home/requestWrite.js'
-import QNA from './Component/QNA/QNA'
-import QuestionWrite from './Component/QNA/QuestionWrite'
-import QuestionDetail from './Component/QNA/QuestionDetail'
-import Tour from './Component/Tour/Tour'
-import TourApliy from './Component/Tour/TourApliy'
-import Admin from './Component/Admin/Admin'
-import EstateDetail from './Component/Estate/EstateDetail';
+import QNA from './Component/QNA/QNA.js'
+import QuestionWrite from './Component/QNA/QuestionWrite.js'
+import QuestionDetail from './Component/QNA/QuestionDetail.js'
+import Tour from './Component/Tour/Tour.js'
+import TourApliy from './Component/Tour/TourApliy.js'
+import Admin from './Component/Admin/Admin.js'
+import EstateDetail from './Component/Estate/EstateDetail.js';
 import OfficetelInsert from './Component/Product/officetelInsert.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
