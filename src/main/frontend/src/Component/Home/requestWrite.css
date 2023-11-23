@@ -134,7 +134,7 @@
 }
 .firstType_select input[type="radio"]{
   display: none;
-}
+} 
 
 .transactionType_type button,
 .propertyType_type button {

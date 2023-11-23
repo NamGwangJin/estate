@@ -93,7 +93,7 @@ export default function RequestWrite() {
         console.error('에러메세지:', error);
         alert(`에러 발생: ${error.message}`);
       })
-  }
+  } 
 
   const onSubmit = (event) => {
     event.preventDefault(); // 폼의 기본 동작(페이지 새로고침) 방지
