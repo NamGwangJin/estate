@@ -243,7 +243,6 @@ export default function RequestWrite() {
                 </button>
               ))}
                 
-
               </div>
             </div>
             <div className='nameDIV'>
