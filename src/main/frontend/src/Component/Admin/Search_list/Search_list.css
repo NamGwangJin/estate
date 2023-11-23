@@ -1,0 +1,60 @@
+/* Styled Table */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .styled-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Header Cell Style */
+  .header-cell {
+    font-weight: bold;
+  }
+  
+  /* Styled Select */
+  .styled-select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  /* Styled Input */
+  .styled-input {
+    width: calc(33.33% - 6px);
+    padding: 8px;
+    /* margin-right: 6px; */
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Radio Group */
+  .radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    
+  }
+  
+  .radio-group div {
+    margin-right: 20px;
+    margin-bottom: 8px;
+  }
+
+  .button-container {
+    display: flex;
+  }
+  
+  .button-container button {
+    margin-right: 5px; /* 원하는 간격 크기로 조절하세요 */
+  }
+  
+  
+  
+  

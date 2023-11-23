@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.real.estate.DAO.ProductDAO">
+<insert id='product_insert'>
+insert into products set product_type=#{param1}, 
+        location=#{param2}, 
+        building_name=#{param3}, 
+        building_use=#{param4}, 
+        extent=#{param5}, 
+        address=#{param6}, 
+        floor=#{param7}, 
+        floor_open=#{param8}, 
+        direction_criteria=#{param9}, 
+        direction=#{param10}, 
+        entrance=#{param11}, 
+        rooms=#{param12}, 
+        bathroom=#{param13}, 
+        roomuse=#{param14}, 
+        inner_structure=#{param15},
+        administration_cost=#{param16}, 
+        maintenance=#{param17}, 
+        managementCost_includ=#{param18}, 
+        building_dateType=#{param19}, 
+        building_date=#{param20}, 
+        transactionType=#{param21}, 
+        desiredAmount=#{param22}, 
+        loan=#{param23}, 
+        existingTenant_deposit=#{param24}, 
+        existingTenant_monthlyRent=#{param25},
+        total_parking=#{param26}, 
+        parking_per_room=#{param27}, 
+        heating_method=#{param28}, 
+        heating_fuel=#{param29}, 
+        airCondition=#{param30}, 
+        living_facilities=#{param31}, 
+        security_facilities=#{param32}, 
+        other_facilities=#{param33}, 
+        balcony=#{param34}, 
+        moveable_date=#{param35}, 
+        product_title=#{param36}, 
+        product_content=#{param37};
+</insert>
+</mapper>
