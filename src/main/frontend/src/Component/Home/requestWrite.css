@@ -10,6 +10,8 @@
   margin: 70px auto;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .firstType_select {
@@ -132,4 +134,27 @@
 }
 .firstType_select input[type="radio"]{
   display: none;
+} 
+
+.transactionType_type button,
+.propertyType_type button {
+  margin-right: 10px; /* 버튼 간격을 조절합니다. */
+}
+
+.styled-input {
+  width: calc(33.33% - 6px);
+  padding: 8px;
+  margin-right: 6px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.styled-select2 {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
 }
