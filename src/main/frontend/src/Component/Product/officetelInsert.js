@@ -279,7 +279,7 @@ export default function OfficetelInsert() {
   let month = form.months;
   let day = form.day;
 
-  let building_date = year + '-' + month + '-' + day;
+  const building_date = year + '-' + month + '-' + day;
   console.log(building_date);
 
 
@@ -324,10 +324,12 @@ export default function OfficetelInsert() {
 
 
   function upload() {
-    const product_type = encodeURIComponent(document.getElementById('product_type').value);
+    // const product_type = encodeURIComponent(document.getElementById('product_type').value);
+    const product_type = document.getElementById('product_type').value;
     const building_name = document.getElementById('building_name').value;
     const building_use = document.getElementById('building_use').value;
     const extent = document.getElementById('extent').value;
+    // const address = encodeURIComponent(document.getElementById('address').value + ' ' + document.getElementById('address_input').value);
     const address = document.getElementById('address').value + ' ' + document.getElementById('address_input').value;
     const floor = document.getElementById('floor').value;
     const direction_criteria = document.getElementById('direction_criteria').value;
@@ -336,11 +338,11 @@ export default function OfficetelInsert() {
     const rooms = document.getElementById('rooms').value;
     const bathroom = document.getElementById('bathroom').value;
 
-    const managementCost_includ = Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => checkbox.value);
-    const building_dateType = document.getElementById('building_dateType').value;
-    const desiredAmount = document.getElementById('desiredAmount').value;
+    const managementCost_includ = encodeURIComponent(Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => checkbox.value));
+    const building_dateType = encodeURIComponent(document.getElementById('building_dateType').value);
+    const desiredAmount = encodeURIComponent(document.getElementById('desiredAmount').value);
     if (desiredAmount == null) {
-      desiredAmount = document.getElementById('newDeposit').value + '/' + document.getElementById('newMonthlyRent').value;
+      desiredAmount = encodeURIComponent(document.getElementById('newDeposit').value + '/' + document.getElementById('newMonthlyRent').value);
     }
     const loan = document.getElementById('loan').value;
     const existingTenant_deposit = document.getElementById('existingTenant_deposit').value;
@@ -349,18 +351,21 @@ export default function OfficetelInsert() {
     const parking_per_room = document.getElementById('parking_per_room').value;
     const heating_method = document.getElementById('heating_method').value;
     const heating_fuel = document.getElementById('heating_fuel').value;
-    const airCondition = Array.from(document.querySelectorAll('#airCondition .input_check:checked')).map(checkbox => checkbox.value);
-    const living_facilities = Array.from(document.querySelectorAll('#living_facilities .input_check:checked')).map(checkbox => checkbox.value);
-    const security_facilities = Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => checkbox.value);
-    const other_facilities = Array.from(document.querySelectorAll('#other_facilities .input_check:checked')).map(checkbox => checkbox.value);
-    const balcony = Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => checkbox.value);
-    const product_title = document.getElementById('product_title').value;
-    const product_content = document.getElementById('product_content').value;
+    const airCondition = encodeURIComponent(Array.from(document.querySelectorAll('#airCondition .input_check:checked')).map(checkbox => checkbox.value));
+    const living_facilities = encodeURIComponent(Array.from(document.querySelectorAll('#living_facilities .input_check:checked')).map(checkbox => checkbox.value));
+    const security_facilities = encodeURIComponent(Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => checkbox.value));
+    // const security_facilities = Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => checkbox.value);
+    const other_facilities = encodeURIComponent(Array.from(document.querySelectorAll('#other_facilities .input_check:checked')).map(checkbox => checkbox.value));
+    const balcony = encodeURIComponent(Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => checkbox.value));
+    const product_title = encodeURIComponent(document.getElementById('product_title').value);
+    const product_content = encodeURIComponent(document.getElementById('product_content').value);
 
     axios({method: 'post',
       url : '/api/officetel/insert',
       params : {
         product_type: product_type,
+        // product_type: decodeURIComponent(product_type),
+        // location: location,
         location: location,
         building_name: building_name,
         building_use: building_use,
@@ -390,8 +395,10 @@ export default function OfficetelInsert() {
         heating_method: heating_method,
         heating_fuel: heating_fuel,
         airCondition: airCondition,
-        living_facilities: living_facilities,
-        security_facilities: security_facilities,
+        // living_facilities: living_facilities,
+        living_facilities: decodeURIComponent(living_facilities),
+        // security_facilities: security_facilities,
+        security_facilities: decodeURIComponent(security_facilities),
         other_facilities: other_facilities,
         balcony: balcony,
         moveable_date: moveable_date,
@@ -683,6 +690,7 @@ export default function OfficetelInsert() {
                   {transactionType == '월세' ? (
                     <>
                       보증금<input id='newDeposit' type='text' />만원 / 월세가<input id='newMonthlyRent' type='text' />만원
+                      {/* 이거 전송폼에 없음 */}
                     </>
                   ) : (
                     <>
