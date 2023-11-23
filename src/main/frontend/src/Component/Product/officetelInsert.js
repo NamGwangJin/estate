@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../header.js';
 import Bottom from '../bottom.js';
 import axios from 'axios';
@@ -12,6 +12,7 @@ export default function OfficetelInsert() {
   const [maintenance, setMaintenance] = useState('없음');
   const [transactionType, setTransactionType] = useState('매매');
   const [moveable_date, setMoveable_date] = useState('즉시입주');
+
 
 
 
@@ -122,6 +123,9 @@ export default function OfficetelInsert() {
     }
   }
   let enterableDate = selectedDateForm.year + '-' + selectedDateForm.month + '-' + selectedDateForm.day;
+  useEffect(() => {
+    setMoveable_date(enterableDate);
+  }, [enterableDate]);
   console.log('Selected Value:', moveable_date);
   console.log('Selected Date Form:', enterableDate);
 
@@ -160,7 +164,7 @@ export default function OfficetelInsert() {
     let product_title = document.getElementById('product_title').value;
     let product_content = document.getElementById('product_content').value;
 
-    console.log('가격=' + desiredAmount);
+    console.log('타입=' + structure);
 
     axios({
       method: 'post',
@@ -438,6 +442,7 @@ export default function OfficetelInsert() {
                       setForm({ ...form, years: e.target.value })
                     }
                   >
+                    <option value='' disabled selected>선택</option>
                     {years.map(item => (
                       <option value={item} key={item}>
                         {item}
@@ -450,6 +455,7 @@ export default function OfficetelInsert() {
                       setForm({ ...form, months: e.target.value })
                     }
                   >
+                    <option value='' disabled selected>선택</option>
                     {months.map(item => (
                       <option value={item} key={item}>
                         {item}
@@ -462,6 +468,7 @@ export default function OfficetelInsert() {
                       setForm({ ...form, day: e.target.value })
                     }
                   >
+                    <option value='' disabled selected>선택</option>
                     {days.map(item => (
                       <option value={item} key={item}>
                         {item}
@@ -667,9 +674,6 @@ export default function OfficetelInsert() {
                     ))}
                   </select>
                   일 이후
-
-
-                  {/* <input type='checkbox' value='입주협의가능' id='Negotiable' />입주협의가능 */}
                 </td>
               </tr>
             </tbody>
