@@ -13,28 +13,25 @@ export default function OfficetelInsert() {
   const [transactionType, setTransactionType] = useState('매매');
   const [moveable_date, setMoveable_date] = useState('즉시입주');
 
-
-
-
-  const [maintenanceCost, setMaintenanceCost] = useState(""); // 관리비 천단위 컴마
+  const [maintenanceCost, setMaintenanceCost] = useState("");
   const handleMaintenanceCostChange = (e) => {
     const inputValue = e.target.value.replace(/[^0-9]/g, '');
     if (inputValue !== null) {
       const formattedValue = Number(inputValue).toLocaleString();
       setMaintenanceCost(formattedValue);
     } else {
-      // 값이 null인 경우 0으로 설정
       setMaintenanceCost("0");
     }
   };
 
-  const [selectedFiles, setSelectedFiles] = useState([]);  // 이미지파일 첨부
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const handleFileChange = (e) => {
     const files = e.target.files;
     const filesArray = Array.from(files);
     setSelectedFiles(filesArray);
   };
-  const [val1, setVal1] = useState(""); //지역 state
+
+  const [val1, setVal1] = useState("");
   const [val2, setVal2] = useState("");
   const [val3, setVal3] = useState("");
   const { sido, sigugun, dong } = hangjungdong;
@@ -45,14 +42,11 @@ export default function OfficetelInsert() {
   const sidoCodeNm = getSidoCodeNm();
   const sigugunCodeNm = getSigugunCodeNm();
   const dongCodeNm = getDongCodeNm();
-  const location = sidoCodeNm + ' ' + sigugunCodeNm + ' ' + dongCodeNm
-  console.log('주소=' + location);
-  console.log('용도=' + usage);
-  console.log('매물종류=' + transactionType);
+  const location = sidoCodeNm + ' ' + sigugunCodeNm + ' ' + dongCodeNm;
 
   const now = new Date();
   const nowYear = now.getFullYear();
-  // 건축물 날짜선택 셀렉트
+
   const [form, setForm] = useState({
     year: nowYear,
     month: "01",
@@ -67,35 +61,33 @@ export default function OfficetelInsert() {
   let months = [];
   for (let m = 1; m <= 12; m += 1) {
     if (m < 10) {
-      // 날짜가 2자리로 나타나야 했기 때문에 1자리 월에 0을 붙혀준다
       months.push("0" + m.toString());
     } else {
       months.push(m.toString());
     }
   }
+
   let days = [];
   let date = new Date(form.year, form.month, 0).getDate();
   for (let d = 1; d <= date; d += 1) {
     if (d < 10) {
-      // 날짜가 2자리로 나타나야 했기 때문에 1자리 일에 0을 붙혀준다
       days.push("0" + d.toString());
     } else {
       days.push(d.toString());
     }
   }
-  let year = form.years;
-  let month = form.months;
+
+  let year = form.year;
+  let month = form.month;
   let day = form.day;
-
   let building_date = year + '-' + month + '-' + day;
-  console.log(building_date);
 
-  // 입주가능일 선택 셀렉트
   const [selectedDateForm, setSelectedDateForm] = useState({
     year: nowYear,
     month: '01',
     day: '01',
   });
+
   let availableYears = [];
   for (let y = now.getFullYear(); y <= now.getFullYear() + 7; y += 1) {
     availableYears.push(y);
@@ -109,12 +101,9 @@ export default function OfficetelInsert() {
       availableMonths.push(m.toString());
     }
   }
+
   let availableDays = [];
-  let maxDay = new Date(
-    selectedDateForm.year,
-    selectedDateForm.month,
-    0
-  ).getDate();
+  let maxDay = new Date(selectedDateForm.year, selectedDateForm.month, 0).getDate();
   for (let d = 1; d <= maxDay; d += 1) {
     if (d < 10) {
       availableDays.push('0' + d.toString());
@@ -122,93 +111,79 @@ export default function OfficetelInsert() {
       availableDays.push(d.toString());
     }
   }
-  let enterableDate = selectedDateForm.year + '-' + selectedDateForm.month + '-' + selectedDateForm.day;
+
+  const enterableDate = selectedDateForm.year + '-' + selectedDateForm.month + '-' + selectedDateForm.day;
   useEffect(() => {
     setMoveable_date(enterableDate);
   }, [enterableDate]);
-  console.log('Selected Value:', moveable_date);
-  console.log('Selected Date Form:', enterableDate);
-
 
   function upload() {
-    let product_type = document.getElementById('product_type').value;
-    let building_name = document.getElementById('building_name').value;
-    let building_use = document.getElementById('building_use').value;
-    let extent = document.getElementById('extent').value;
-    let address = document.getElementById('address').value + ' ' + document.getElementById('address_input').value;
-    let floor = document.getElementById('floor').value;
-    let direction_criteria = document.getElementById('direction_criteria').value;
-    let direction = document.getElementById('direction').value;
-    let entrance = document.getElementById('entrance').value;
-    let rooms = document.getElementById('rooms').value;
-    let bathroom = document.getElementById('bathroom').value;
-    
-    let managementCost_includ = Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => checkbox.value);
-    let building_dateType = document.getElementById('building_dateType').value;
-    let desiredAmount = document.getElementById('desiredAmount').value;
+    const product_type = encodeURIComponent(document.getElementById('product_type').value);
+    const building_name = encodeURIComponent(document.getElementById('building_name').value);
+    const building_use = encodeURIComponent(document.getElementById('building_use').value);
+    const extent = encodeURIComponent(document.getElementById('extent').value);
+    const address = encodeURIComponent(document.getElementById('address').value + ' ' + document.getElementById('address_input').value);
+    const floor = encodeURIComponent(document.getElementById('floor').value);
+    const direction_criteria = encodeURIComponent(document.getElementById('direction_criteria').value);
+    const direction = encodeURIComponent(document.getElementById('direction').value);
+    const entrance = encodeURIComponent(document.getElementById('entrance').value);
+    const rooms = encodeURIComponent(document.getElementById('rooms').value);
+    const bathroom = encodeURIComponent(document.getElementById('bathroom').value);
+
+    const managementCost_includ = Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
+    const building_dateType = encodeURIComponent(document.getElementById('building_dateType').value);
+    let desiredAmount = encodeURIComponent(document.getElementById('desiredAmount').value);
     if (desiredAmount == null) {
-      desiredAmount = document.getElementById('newDeposit').value + '/' + document.getElementById('newMonthlyRent').value;
+      desiredAmount = encodeURIComponent(document.getElementById('newDeposit').value + '/' + document.getElementById('newMonthlyRent').value);
     }
-    let loan = document.getElementById('loan').value;
-    let existingTenant_deposit = document.getElementById('existingTenant_deposit').value;
-    let existingTenant_monthlyRent = document.getElementById('existingTenant_monthlyRent').value;
-    let total_parking = document.getElementById('total_parking').value;
-    let parking_per_room = document.getElementById('parking_per_room').value;
-    let heating_method = document.getElementById('heating_method').value;
-    let heating_fuel = document.getElementById('heating_fuel').value;
-    let airCondition = Array.from(document.querySelectorAll('#airCondition .input_check:checked')).map(checkbox => checkbox.value);
-    let living_facilities = Array.from(document.querySelectorAll('#living_facilities .input_check:checked')).map(checkbox => checkbox.value);
-    let security_facilities = Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => checkbox.value);
-    let other_facilities = Array.from(document.querySelectorAll('#other_facilities .input_check:checked')).map(checkbox => checkbox.value);
-    let balcony = Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => checkbox.value);
-    let product_title = document.getElementById('product_title').value;
-    let product_content = document.getElementById('product_content').value;
+    const loan = encodeURIComponent(document.getElementById('loan').value);
+    const existingTenant_deposit = encodeURIComponent(document.getElementById('existingTenant_deposit').value);
+    const existingTenant_monthlyRent = encodeURIComponent(document.getElementById('existingTenant_monthlyRent').value);
+    const total_parking = encodeURIComponent(document.getElementById('total_parking').value);
+    const parking_per_room = encodeURIComponent(document.getElementById('parking_per_room').value);
+    const heating_method = encodeURIComponent(document.getElementById('heating_method').value);
+    const heating_fuel = encodeURIComponent(document.getElementById('heating_fuel').value);
+    const airCondition = Array.from(document.querySelectorAll('#airCondition .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
+    const living_facilities = Array.from(document.querySelectorAll('#living_facilities .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
+    const security_facilities = Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
+    const other_facilities = Array.from(document.querySelectorAll('#other_facilities .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
+    const balcony = Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
+    const product_title = encodeURIComponent(document.getElementById('product_title').value);
+    const product_content = encodeURIComponent(document.getElementById('product_content').value);
 
-    console.log('타입=' + structure);
+    const data = {
+      product_type,
+      building_name,
+      building_use,
+      extent,
+      address,
+      floor,
+      direction_criteria,
+      direction,
+      entrance,
+      rooms,
+      bathroom,
+      managementCost_includ,
+      building_dateType,
+      desiredAmount,
+      loan,
+      existingTenant_deposit,
+      existingTenant_monthlyRent,
+      total_parking,
+      parking_per_room,
+      heating_method,
+      heating_fuel,
+      airCondition,
+      living_facilities,
+      security_facilities,
+      other_facilities,
+      balcony,
+      moveable_date,
+      product_title,
+      product_content,
+    };
 
-    axios({
-      method: 'post',
-      url: '/api/officetel_Insert',
-      data: {
-        product_type: product_type,
-        location: location,
-        building_name: building_name,
-        building_use: building_use,
-        extent: extent,
-        address: address,
-        floor: floor,
-        floor_open: floorExposure,
-        direction_criteria: direction_criteria,
-        direction: direction,
-        entrance: entrance,
-        rooms: rooms,
-        bathroom: bathroom,
-        roomuse: usage,
-        inner_structure: structure,
-        administration_cost: maintenanceCost,
-        maintenance: maintenance,
-        managementCost_includ: managementCost_includ,
-        building_dateType: building_dateType,
-        building_date: building_date,
-        transactionType: transactionType,
-        desiredAmount: desiredAmount,
-        loan: loan,
-        existingTenant_deposit: existingTenant_deposit,
-        existingTenant_monthlyRent: existingTenant_monthlyRent,
-        total_parking: total_parking,
-        parking_per_room: parking_per_room,
-        heating_method: heating_method,
-        heating_fuel: heating_fuel,
-        airCondition: airCondition,
-        living_facilities: living_facilities,
-        security_facilities: security_facilities,
-        other_facilities: other_facilities,
-        balcony: balcony,
-        moveable_date: moveable_date,
-        product_title: product_title,
-        product_content: product_content
-      },
-    })
+    axios.post('/api/officetel_Insert', data)
       .then((res) => {
         if (res.data == 'success') {
           alert('매물등록을 성공하였습니다');
@@ -217,10 +192,227 @@ export default function OfficetelInsert() {
       })
       .catch((error) => {
         console.error('매물등록실패: ', error);
-        console.error('서버응답:'+JSON.stringify(error.response));
+        console.error('서버응답:' + JSON.stringify(error.response));
         alert(`에러 발생: ${error.message}`);
       })
   }
+
+ 
+  // const [floorExposure, setFloorExposure] = useState('노출');
+  // const [usage, setUsage] = useState('주거용');
+  // const [structure, setStructure] = useState('단층식');
+  // const [maintenance, setMaintenance] = useState('없음');
+  // const [transactionType, setTransactionType] = useState('매매');
+  // const [moveable_date, setMoveable_date] = useState('즉시입주');
+
+
+
+
+  // const [maintenanceCost, setMaintenanceCost] = useState(""); // 관리비 천단위 컴마
+  // const handleMaintenanceCostChange = (e) => {
+  //   const inputValue = e.target.value.replace(/[^0-9]/g, '');
+  //   if (inputValue !== null) {
+  //     const formattedValue = Number(inputValue).toLocaleString();
+  //     setMaintenanceCost(formattedValue);
+  //   } else {
+  //     // 값이 null인 경우 0으로 설정
+  //     setMaintenanceCost("0");
+  //   }
+  // };
+
+  // const [selectedFiles, setSelectedFiles] = useState([]);  // 이미지파일 첨부
+  // const handleFileChange = (e) => {
+  //   const files = e.target.files;
+  //   const filesArray = Array.from(files);
+  //   setSelectedFiles(filesArray);
+  // };
+  // const [val1, setVal1] = useState(""); //지역 state
+  // const [val2, setVal2] = useState("");
+  // const [val3, setVal3] = useState("");
+  // const { sido, sigugun, dong } = hangjungdong;
+
+  // const getSidoCodeNm = () => sido.find(el => el.sido === val1)?.codeNm || '';
+  // const getSigugunCodeNm = () => sigugun.find(el => el.sido === val1 && el.sigugun === val2)?.codeNm || '';
+  // const getDongCodeNm = () => dong.find(el => el.sido === val1 && el.sigugun === val2 && el.dong === val3)?.codeNm || '';
+  // const sidoCodeNm = getSidoCodeNm();
+  // const sigugunCodeNm = getSigugunCodeNm();
+  // const dongCodeNm = getDongCodeNm();
+  // const location = sidoCodeNm + ' ' + sigugunCodeNm + ' ' + dongCodeNm
+  // console.log('주소=' + location);
+  // console.log('용도=' + usage);
+  // console.log('매물종류=' + transactionType);
+
+  // const now = new Date();
+  // const nowYear = now.getFullYear();
+  // // 건축물 날짜선택 셀렉트
+  // const [form, setForm] = useState({
+  //   year: nowYear,
+  //   month: "01",
+  //   day: "01",
+  // });
+
+  // let years = [];
+  // for (let y = now.getFullYear(); y >= 1930; y -= 1) {
+  //   years.push(y);
+  // }
+
+  // let months = [];
+  // for (let m = 1; m <= 12; m += 1) {
+  //   if (m < 10) {
+  //     // 날짜가 2자리로 나타나야 했기 때문에 1자리 월에 0을 붙혀준다
+  //     months.push("0" + m.toString());
+  //   } else {
+  //     months.push(m.toString());
+  //   }
+  // }
+  // let days = [];
+  // let date = new Date(form.year, form.month, 0).getDate();
+  // for (let d = 1; d <= date; d += 1) {
+  //   if (d < 10) {
+  //     // 날짜가 2자리로 나타나야 했기 때문에 1자리 일에 0을 붙혀준다
+  //     days.push("0" + d.toString());
+  //   } else {
+  //     days.push(d.toString());
+  //   }
+  // }
+  // let year = form.years;
+  // let month = form.months;
+  // let day = form.day;
+
+  // let building_date = year + '-' + month + '-' + day;
+  // console.log(building_date);
+
+  // // 입주가능일 선택 셀렉트
+  // const [selectedDateForm, setSelectedDateForm] = useState({
+  //   year: nowYear,
+  //   month: '01',
+  //   day: '01',
+  // });
+  // let availableYears = [];
+  // for (let y = now.getFullYear(); y <= now.getFullYear() + 7; y += 1) {
+  //   availableYears.push(y);
+  // }
+
+  // let availableMonths = [];
+  // for (let m = 1; m <= 12; m += 1) {
+  //   if (m < 10) {
+  //     availableMonths.push('0' + m.toString());
+  //   } else {
+  //     availableMonths.push(m.toString());
+  //   }
+  // }
+  // let availableDays = [];
+  // let maxDay = new Date(
+  //   selectedDateForm.year,
+  //   selectedDateForm.month,
+  //   0
+  // ).getDate();
+  // for (let d = 1; d <= maxDay; d += 1) {
+  //   if (d < 10) {
+  //     availableDays.push('0' + d.toString());
+  //   } else {
+  //     availableDays.push(d.toString());
+  //   }
+  // }
+  // const enterableDate = selectedDateForm.year + '-' + selectedDateForm.month + '-' + selectedDateForm.day;
+  // useEffect(() => {
+  //   setMoveable_date(enterableDate);
+  // }, [enterableDate]);
+  // console.log('Selected Value:', moveable_date);
+  // console.log('Selected Date Form:', enterableDate);
+
+
+  // function upload() {
+  //   const product_type = document.getElementById('product_type').value;
+  //   const building_name = document.getElementById('building_name').value;
+  //   const building_use = document.getElementById('building_use').value;
+  //   const extent = document.getElementById('extent').value;
+  //   const address = document.getElementById('address').value + ' ' + document.getElementById('address_input').value;
+  //   const floor = document.getElementById('floor').value;
+  //   const direction_criteria = document.getElementById('direction_criteria').value;
+  //   const direction = document.getElementById('direction').value;
+  //   const entrance = document.getElementById('entrance').value;
+  //   const rooms = document.getElementById('rooms').value;
+  //   const bathroom = document.getElementById('bathroom').value;
+
+  //   const managementCost_includ = Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => checkbox.value);
+  //   const building_dateType = document.getElementById('building_dateType').value;
+  //   const desiredAmount = document.getElementById('desiredAmount').value;
+  //   if (desiredAmount == null) {
+  //     desiredAmount = document.getElementById('newDeposit').value + '/' + document.getElementById('newMonthlyRent').value;
+  //   }
+  //   const loan = document.getElementById('loan').value;
+  //   const existingTenant_deposit = document.getElementById('existingTenant_deposit').value;
+  //   const existingTenant_monthlyRent = document.getElementById('existingTenant_monthlyRent').value;
+  //   const total_parking = document.getElementById('total_parking').value;
+  //   const parking_per_room = document.getElementById('parking_per_room').value;
+  //   const heating_method = document.getElementById('heating_method').value;
+  //   const heating_fuel = document.getElementById('heating_fuel').value;
+  //   const airCondition = Array.from(document.querySelectorAll('#airCondition .input_check:checked')).map(checkbox => checkbox.value);
+  //   const living_facilities = Array.from(document.querySelectorAll('#living_facilities .input_check:checked')).map(checkbox => checkbox.value);
+  //   const security_facilities = Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => checkbox.value);
+  //   const other_facilities = Array.from(document.querySelectorAll('#other_facilities .input_check:checked')).map(checkbox => checkbox.value);
+  //   const balcony = Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => checkbox.value);
+  //   const product_title = document.getElementById('product_title').value;
+  //   const product_content = document.getElementById('product_content').value;
+
+  //   console.log('타입=' + product_type);
+
+  //   axios({
+  //     method: 'post',
+  //     url: '/api/officetel_Insert',
+  //     data: {
+  //       product_type: product_type,
+  //       location: location,
+  //       building_name: building_name,
+  //       building_use: building_use,
+  //       extent: extent,
+  //       address: address,
+  //       floor: floor,
+  //       floor_open: floorExposure,
+  //       direction_criteria: direction_criteria,
+  //       direction: direction,
+  //       entrance: entrance,
+  //       rooms: rooms,
+  //       bathroom: bathroom,
+  //       roomuse: usage,
+  //       inner_structure: structure,
+  //       administration_cost: maintenanceCost,
+  //       maintenance: maintenance,
+  //       managementCost_includ: managementCost_includ,
+  //       building_dateType: building_dateType,
+  //       building_date: building_date,
+  //       transactionType: transactionType,
+  //       desiredAmount: desiredAmount,
+  //       loan: loan,
+  //       existingTenant_deposit: existingTenant_deposit,
+  //       existingTenant_monthlyRent: existingTenant_monthlyRent,
+  //       total_parking: total_parking,
+  //       parking_per_room: parking_per_room,
+  //       heating_method: heating_method,
+  //       heating_fuel: heating_fuel,
+  //       airCondition: airCondition,
+  //       living_facilities: living_facilities,
+  //       security_facilities: security_facilities,
+  //       other_facilities: other_facilities,
+  //       balcony: balcony,
+  //       moveable_date: moveable_date,
+  //       product_title: product_title,
+  //       product_content: product_content
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (res.data == 'success') {
+  //         alert('매물등록을 성공하였습니다');
+  //         window.location.href = '/';  // 매물리스트로 수정
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error('매물등록실패: ', error);
+  //       console.error('서버응답:'+JSON.stringify(error.response));
+  //       alert(`에러 발생: ${error.message}`);
+  //     })
+  // }
 
   const onSubmit = (e) => {
     e.preventDefault();
