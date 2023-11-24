@@ -6,220 +6,74 @@ import { hangjungdong } from '../Home/hangjungdong.js';
 import './officetelInsert.css';
 
 export default function OfficetelInsert() {
-  // const [floorExposure, setFloorExposure] = useState('노출');
-  // const [usage, setUsage] = useState('주거용');
-  // const [structure, setStructure] = useState('단층식');
-  // const [maintenance, setMaintenance] = useState('없음');
-  // const [transactionType, setTransactionType] = useState('매매');
-  // const [moveable_date, setMoveable_date] = useState('즉시입주');
 
-  // const [maintenanceCost, setMaintenanceCost] = useState("");
-  // const handleMaintenanceCostChange = (e) => {
-  //   const inputValue = e.target.value.replace(/[^0-9]/g, '');
-  //   if (inputValue !== null) {
-  //     const formattedValue = Number(inputValue).toLocaleString();
-  //     setMaintenanceCost(formattedValue);
-  //   } else {
-  //     setMaintenanceCost("0");
-  //   }
-  // };
-
-  // const [selectedFiles, setSelectedFiles] = useState([]);
-  // const handleFileChange = (e) => {
-  //   const files = e.target.files;
-  //   const filesArray = Array.from(files);
-  //   setSelectedFiles(filesArray);
-  // };
-
-  // const [val1, setVal1] = useState("");
-  // const [val2, setVal2] = useState("");
-  // const [val3, setVal3] = useState("");
-  // const { sido, sigugun, dong } = hangjungdong;
-
-  // const getSidoCodeNm = () => sido.find(el => el.sido === val1)?.codeNm || '';
-  // const getSigugunCodeNm = () => sigugun.find(el => el.sido === val1 && el.sigugun === val2)?.codeNm || '';
-  // const getDongCodeNm = () => dong.find(el => el.sido === val1 && el.sigugun === val2 && el.dong === val3)?.codeNm || '';
-  // const sidoCodeNm = getSidoCodeNm();
-  // const sigugunCodeNm = getSigugunCodeNm();
-  // const dongCodeNm = getDongCodeNm();
-  // const location = sidoCodeNm + ' ' + sigugunCodeNm + ' ' + dongCodeNm;
-
-  // const now = new Date();
-  // const nowYear = now.getFullYear();
-
-  // const [form, setForm] = useState({
-  //   year: nowYear,
-  //   month: "01",
-  //   day: "01",
-  // });
-
-  // let years = [];
-  // for (let y = now.getFullYear(); y >= 1930; y -= 1) {
-  //   years.push(y);
-  // }
-
-  // let months = [];
-  // for (let m = 1; m <= 12; m += 1) {
-  //   if (m < 10) {
-  //     months.push("0" + m.toString());
-  //   } else {
-  //     months.push(m.toString());
-  //   }
-  // }
-
-  // let days = [];
-  // let date = new Date(form.year, form.month, 0).getDate();
-  // for (let d = 1; d <= date; d += 1) {
-  //   if (d < 10) {
-  //     days.push("0" + d.toString());
-  //   } else {
-  //     days.push(d.toString());
-  //   }
-  // }
-
-  // let year = form.year;
-  // let month = form.month;
-  // let day = form.day;
-  // let building_date = year + '-' + month + '-' + day;
-
-  // const [selectedDateForm, setSelectedDateForm] = useState({
-  //   year: nowYear,
-  //   month: '01',
-  //   day: '01',
-  // });
-
-  // let availableYears = [];
-  // for (let y = now.getFullYear(); y <= now.getFullYear() + 7; y += 1) {
-  //   availableYears.push(y);
-  // }
-
-  // let availableMonths = [];
-  // for (let m = 1; m <= 12; m += 1) {
-  //   if (m < 10) {
-  //     availableMonths.push('0' + m.toString());
-  //   } else {
-  //     availableMonths.push(m.toString());
-  //   }
-  // }
-
-  // let availableDays = [];
-  // let maxDay = new Date(selectedDateForm.year, selectedDateForm.month, 0).getDate();
-  // for (let d = 1; d <= maxDay; d += 1) {
-  //   if (d < 10) {
-  //     availableDays.push('0' + d.toString());
-  //   } else {
-  //     availableDays.push(d.toString());
-  //   }
-  // }
-
-  // const enterableDate = selectedDateForm.year + '-' + selectedDateForm.month + '-' + selectedDateForm.day;
-  // useEffect(() => {
-  //   setMoveable_date(enterableDate);
-  // }, [enterableDate]);
-
-  // function upload() {
-  //   const product_type = encodeURIComponent(document.getElementById('product_type').value);
-  //   const building_name = encodeURIComponent(document.getElementById('building_name').value);
-  //   const building_use = encodeURIComponent(document.getElementById('building_use').value);
-  //   const extent = encodeURIComponent(document.getElementById('extent').value);
-  //   const address = encodeURIComponent(document.getElementById('address').value + ' ' + document.getElementById('address_input').value);
-  //   const floor = encodeURIComponent(document.getElementById('floor').value);
-  //   const direction_criteria = encodeURIComponent(document.getElementById('direction_criteria').value);
-  //   const direction = encodeURIComponent(document.getElementById('direction').value);
-  //   const entrance = encodeURIComponent(document.getElementById('entrance').value);
-  //   const rooms = encodeURIComponent(document.getElementById('rooms').value);
-  //   const bathroom = encodeURIComponent(document.getElementById('bathroom').value);
-
-  //   const managementCost_includ = Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
-  //   const building_dateType = encodeURIComponent(document.getElementById('building_dateType').value);
-  //   let desiredAmount = encodeURIComponent(document.getElementById('desiredAmount').value);
-  //   if (desiredAmount == null) {
-  //     desiredAmount = encodeURIComponent(document.getElementById('newDeposit').value + '/' + document.getElementById('newMonthlyRent').value);
-  //   }
-  //   const loan = encodeURIComponent(document.getElementById('loan').value);
-  //   const existingTenant_deposit = encodeURIComponent(document.getElementById('existingTenant_deposit').value);
-  //   const existingTenant_monthlyRent = encodeURIComponent(document.getElementById('existingTenant_monthlyRent').value);
-  //   const total_parking = encodeURIComponent(document.getElementById('total_parking').value);
-  //   const parking_per_room = encodeURIComponent(document.getElementById('parking_per_room').value);
-  //   const heating_method = encodeURIComponent(document.getElementById('heating_method').value);
-  //   const heating_fuel = encodeURIComponent(document.getElementById('heating_fuel').value);
-  //   const airCondition = Array.from(document.querySelectorAll('#airCondition .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
-  //   const living_facilities = Array.from(document.querySelectorAll('#living_facilities .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
-  //   const security_facilities = Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
-  //   const other_facilities = Array.from(document.querySelectorAll('#other_facilities .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
-  //   const balcony = Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => encodeURIComponent(checkbox.value));
-  //   const product_title = encodeURIComponent(document.getElementById('product_title').value);
-  //   const product_content = encodeURIComponent(document.getElementById('product_content').value);
-
-  //   const data = {
-  //     product_type,
-  //     building_name,
-  //     building_use,
-  //     extent,
-  //     address,
-  //     floor,
-  //     direction_criteria,
-  //     direction,
-  //     entrance,
-  //     rooms,
-  //     bathroom,
-  //     managementCost_includ,
-  //     building_dateType,
-  //     desiredAmount,
-  //     loan,
-  //     existingTenant_deposit,
-  //     existingTenant_monthlyRent,
-  //     total_parking,
-  //     parking_per_room,
-  //     heating_method,
-  //     heating_fuel,
-  //     airCondition,
-  //     living_facilities,
-  //     security_facilities,
-  //     other_facilities,
-  //     balcony,
-  //     moveable_date,
-  //     product_title,
-  //     product_content,
-  //   };
-
-  //   axios.post('/api/officetel_Insert', data)
-  //     .then((res) => {
-  //       if (res.data == 'success') {
-  //         alert('매물등록을 성공하였습니다');
-  //         window.location.href = '/';  // 매물리스트로 수정
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error('매물등록실패: ', error);
-  //       console.error('서버응답:' + JSON.stringify(error.response));
-  //       alert(`에러 발생: ${error.message}`);
-  //     })
-  // }
-
- 
   const [floorExposure, setFloorExposure] = useState('노출');
   const [usage, setUsage] = useState('주거용');
   const [structure, setStructure] = useState('단층식');
   const [maintenance, setMaintenance] = useState('없음');
   const [transactionType, setTransactionType] = useState('매매');
+  useEffect(()=> {
+    setDesiredAmount('');
+    setNewDeposit('');
+    setNewMonthlyRent('');
+  }, [transactionType]);
   const [moveable_date, setMoveable_date] = useState('즉시입주');
 
-
-
-
-  const [maintenanceCost, setMaintenanceCost] = useState(""); // 관리비 천단위 컴마
-  const handleMaintenanceCostChange = (e) => {
+  // 관리비 스크립트
+  const [maintenanceCost, setMaintenanceCost] = useState("0");
+  const handleMaintenanceCostChange = (e) => {  // 관리비 천단위 컴마
     const inputValue = e.target.value.replace(/[^0-9]/g, '');
-    if (inputValue !== null) {
-      const formattedValue = Number(inputValue).toLocaleString();
-      setMaintenanceCost(formattedValue);
-    } else {
-      // 값이 null인 경우 0으로 설정
-      setMaintenanceCost("0");
-    }
+    const formattedValue = Number(inputValue).toLocaleString();
+    setMaintenanceCost(formattedValue);
   };
+  // 매매가 스크립트
+  const [desiredAmount, setDesiredAmount] = useState("")
+  const handledesiredAmountChange = (e) => {  // 매매가 천단위 컴마
+    const inputValue = e.target.value.replace(/[^0-9]/g, '');
+    const formattedValue = Number(inputValue).toLocaleString();
+    setDesiredAmount(formattedValue);
+  };
+  // 보증금, 월세스크립트
+  const [newDeposit, setNewDeposit] = useState("");
+  const [newMonthlyRent, setNewMonthlyRent] = useState("");
+  const handleDepositChange = (e) => {
+    const inputValue = e.target.value.replace(/[^0-9]/g, '');
+    const formattedValue = Number(inputValue).toLocaleString();
+    setNewDeposit(formattedValue);
+  };
+  const handleMonthlyRentChange = (e) => {
+    const inputValue = e.target.value.replace(/[^0-9]/g, '');
+    const formattedValue = Number(inputValue).toLocaleString();
+    setNewMonthlyRent(formattedValue);
+  };
+  useEffect(() => {
+    if (newDeposit || newMonthlyRent) {
+      setDesiredAmount(`${newDeposit}/${newMonthlyRent}`);
+    }
+  }, [newDeposit, newMonthlyRent]);
+  console.log("가격="+desiredAmount);
+  // 융자금 스크립트
+  const [loan,setLoan] = useState('0');
+  const handleLoan = (e) => {
+    const inputValue = e.target.value.replace(/[^0-9]/g, '');
+    const formattedValue = Number(inputValue).toLocaleString();
+    setLoan(formattedValue);
+  }
+  // 기존 보증금/월세 스크립트
+  const [existingTenant_deposit, setExistingTenant_deposit] = useState("0");
+  const handleexistingTenant_deposit = (e) => {
+    const inputValue = e.target.value.replace(/[^0-9]/g, '');
+    const formattedValue = Number(inputValue).toLocaleString();
+    setExistingTenant_deposit(formattedValue);
+  }
+  const [existingTenant_monthlyRent, setExistingTenant_monthlyRent] = useState("0");
+  const handleexistingTenant_monthlyRent = (e) => {
+    const inputValue = e.target.value.replace(/[^0-9]/g, '');
+    const formattedValue = Number(inputValue).toLocaleString();
+    setExistingTenant_monthlyRent(formattedValue);
+  }
 
+  // 이미지 스크립트
   const [selectedFiles, setSelectedFiles] = useState([]);  // 이미지파일 첨부
   const handleFileChange = (e) => {
     const files = e.target.files;
@@ -293,7 +147,6 @@ export default function OfficetelInsert() {
   for (let y = now.getFullYear(); y <= now.getFullYear() + 7; y += 1) {
     availableYears.push(y);
   }
-
   let availableMonths = [];
   for (let m = 1; m <= 12; m += 1) {
     if (m < 10) {
@@ -324,12 +177,10 @@ export default function OfficetelInsert() {
 
 
   function upload() {
-    // const product_type = encodeURIComponent(document.getElementById('product_type').value);
     const product_type = document.getElementById('product_type').value;
     const building_name = document.getElementById('building_name').value;
     const building_use = document.getElementById('building_use').value;
     const extent = document.getElementById('extent').value;
-    // const address = encodeURIComponent(document.getElementById('address').value + ' ' + document.getElementById('address_input').value);
     const address = document.getElementById('address').value + ' ' + document.getElementById('address_input').value;
     const floor = document.getElementById('floor').value;
     const direction_criteria = document.getElementById('direction_criteria').value;
@@ -337,16 +188,8 @@ export default function OfficetelInsert() {
     const entrance = document.getElementById('entrance').value;
     const rooms = document.getElementById('rooms').value;
     const bathroom = document.getElementById('bathroom').value;
-
     const managementCost_includ = encodeURIComponent(Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => checkbox.value));
-    const building_dateType = encodeURIComponent(document.getElementById('building_dateType').value);
-    const desiredAmount = encodeURIComponent(document.getElementById('desiredAmount').value);
-    if (desiredAmount == null) {
-      desiredAmount = encodeURIComponent(document.getElementById('newDeposit').value + '/' + document.getElementById('newMonthlyRent').value);
-    }
-    const loan = document.getElementById('loan').value;
-    const existingTenant_deposit = document.getElementById('existingTenant_deposit').value;
-    const existingTenant_monthlyRent = document.getElementById('existingTenant_monthlyRent').value;
+    const building_dateType = document.getElementById('building_dateType').value;
     const total_parking = document.getElementById('total_parking').value;
     const parking_per_room = document.getElementById('parking_per_room').value;
     const heating_method = document.getElementById('heating_method').value;
@@ -354,18 +197,16 @@ export default function OfficetelInsert() {
     const airCondition = encodeURIComponent(Array.from(document.querySelectorAll('#airCondition .input_check:checked')).map(checkbox => checkbox.value));
     const living_facilities = encodeURIComponent(Array.from(document.querySelectorAll('#living_facilities .input_check:checked')).map(checkbox => checkbox.value));
     const security_facilities = encodeURIComponent(Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => checkbox.value));
-    // const security_facilities = Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => checkbox.value);
     const other_facilities = encodeURIComponent(Array.from(document.querySelectorAll('#other_facilities .input_check:checked')).map(checkbox => checkbox.value));
     const balcony = encodeURIComponent(Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => checkbox.value));
     const product_title = encodeURIComponent(document.getElementById('product_title').value);
     const product_content = encodeURIComponent(document.getElementById('product_content').value);
 
-    axios({method: 'post',
-      url : '/api/officetel/insert',
-      params : {
+    axios({
+      method: 'post',
+      url: '/api/officetel/insert',
+      params: {
         product_type: product_type,
-        // product_type: decodeURIComponent(product_type),
-        // location: location,
         location: location,
         building_name: building_name,
         building_use: building_use,
@@ -382,7 +223,7 @@ export default function OfficetelInsert() {
         inner_structure: structure,
         administration_cost: maintenanceCost,
         maintenance: maintenance,
-        managementCost_includ: managementCost_includ,
+        managementCost_includ: decodeURIComponent(managementCost_includ),
         building_dateType: building_dateType,
         building_date: building_date,
         transactionType: transactionType,
@@ -394,25 +235,23 @@ export default function OfficetelInsert() {
         parking_per_room: parking_per_room,
         heating_method: heating_method,
         heating_fuel: heating_fuel,
-        airCondition: airCondition,
-        // living_facilities: living_facilities,
+        airCondition: decodeURIComponent(airCondition),
         living_facilities: decodeURIComponent(living_facilities),
-        // security_facilities: security_facilities,
         security_facilities: decodeURIComponent(security_facilities),
-        other_facilities: other_facilities,
-        balcony: balcony,
-        moveable_date: moveable_date,
-        product_title: product_title,
-        product_content: product_content
+        other_facilities: decodeURIComponent(other_facilities),
+        balcony: decodeURIComponent(balcony),
+        moveable_date: decodeURIComponent(moveable_date),
+        product_title: decodeURIComponent(product_title),
+        product_content: decodeURIComponent(product_content)
       },
     })
       .then((res) => {
-          alert(res.data);
-          window.location.href = '/';  // 매물리스트로 수정
+        alert("매물등록에 성공하였습니다");
+        window.location.href = '/admin';  // 매물리스트로 수정
       })
       .catch((error) => {
         console.error('매물등록실패: ', error);
-        console.error('서버응답:'+ JSON.stringify(error.response));
+        console.error('서버응답:' + JSON.stringify(error.response));
         alert(`에러 발생: ${error.message}`);
       })
   }
@@ -432,7 +271,7 @@ export default function OfficetelInsert() {
               <tr>
                 <td>매물등록</td>
                 <td colSpan={3}>
-                  <select className='styled-select' id='product_type' style={{width : "20%"}}>
+                  <select className='styled-select' id='product_type' style={{ width: "20%" }}>
                     <option value='오피스텔'>오피스텔</option>
                     <option value='아파트'>아파트</option>
                     <option value='상가'>상가</option>
@@ -443,9 +282,9 @@ export default function OfficetelInsert() {
                 </td>
               </tr>
               <tr>
-              <td>소재지</td>
+                <td>소재지</td>
                 <td colSpan={3}>
-                  <select className='styled-select' style={{width : "20%"}} onChange={(e) => setVal1(e.target.value)}>
+                  <select className='styled-select' style={{ width: "20%" }} onChange={(e) => setVal1(e.target.value)}>
                     <option value="">선택</option>
                     {sido.map((el) => (
                       <option key={el.sido} value={el.sido}>
@@ -453,7 +292,7 @@ export default function OfficetelInsert() {
                       </option>
                     ))}
                   </select>
-                  <select className='styled-select' style={{width : "20%"}} onChange={(e) => setVal2(e.target.value)}>
+                  <select className='styled-select' style={{ width: "20%" }} onChange={(e) => setVal2(e.target.value)}>
                     <option value="">선택</option>
                     {sigugun
                       .filter((el) => el.sido === val1)
@@ -463,7 +302,7 @@ export default function OfficetelInsert() {
                         </option>
                       ))}
                   </select>
-                  <select className='styled-select' style={{width : "20%"}} onChange={(e) => setVal3(e.target.value)}>
+                  <select className='styled-select' style={{ width: "20%" }} onChange={(e) => setVal3(e.target.value)}>
                     <option value="">선택</option>
                     {dong
                       .filter((el) => el.sido === val1 && el.sigugun === val2)
@@ -477,17 +316,17 @@ export default function OfficetelInsert() {
               </tr>
               <tr>
                 <td>단지명</td>
-                  <td colSpan={3}>
-                    <select className='styled-select' style={{width : "30%"}} id='building_name'>
-                      <option value='단지1'>단지1</option>
-                      <option value='단지2'>단지2</option>
+                <td colSpan={3}>
+                  <select className='styled-select' style={{ width: "30%" }} id='building_name'>
+                    <option value='단지1'>단지1</option>
+                    <option value='단지2'>단지2</option>
                   </select>
                 </td>
               </tr>
               <tr>
                 <td>건축물용도</td>
                 <td colSpan={3}>
-                  <select className='styled-select' id='building_use' style={{width : "20%"}}>
+                  <select className='styled-select' id='building_use' style={{ width: "20%" }}>
                     <option value='단독주택'>단독주택</option>
                     <option value='공동주택'>공동주택</option>
                     <option value='제1종 근린생활시설'>제1종 근린생활시설</option>
@@ -523,23 +362,23 @@ export default function OfficetelInsert() {
                 </td>
               </tr>
               <tr>
-              <td>면적</td>
+                <td>면적</td>
                 <td colSpan={3}>
-                  계약면적<select className='styled-select' style={{width : "20%"}} id='extent'>
+                  계약면적<select className='styled-select' style={{ width: "20%" }} id='extent'>
                     <option value='44A'>44A(44.59㎡ // 18.56㎡)</option>
                     {/* 디비에서 가져와야. 건물정보들에 타입 업데이트인서트 */}
                   </select>㎡
                 </td>
               </tr>
               <tr>
-              <td>주소</td>
+                <td>주소</td>
                 <td colSpan={3}>
-                  <select className='styled-select' id='address' style={{width : "20%"}}>
+                  <select className='styled-select' id='address' style={{ width: "20%" }}>
                     <option value='A동'>A동</option>
                     <option value='B동'>B동</option>
                     {/* 건축물대장에서 가져오기 */}
                   </select>
-                  <input type='text' id='address_input' className='styled-input' style={{width : "20%"}} />호
+                  <input type='text' id='address_input' className='styled-input' style={{ width: "20%" }} />호
                 </td>
               </tr>
               <tr>
@@ -553,12 +392,12 @@ export default function OfficetelInsert() {
               <tr>
                 <td>방향</td>
                 <td>
-                  <select id='direction_criteria' className='styled-select' style={{width : "20%"}}>
+                  <select id='direction_criteria' className='styled-select' style={{ width: "20%" }}>
                     <option value='거실'>거실</option>
                     <option value='안방'>안방</option>
                     {/* 아파트.오피스텔만 거실안방, 다른매물은 주된출입구 등 */}
                   </select>
-                  <select id='direction' className='styled-select' style={{width : "20%"}}>
+                  <select id='direction' className='styled-select' style={{ width: "20%" }}>
                     <option value='' disabled selected>선택</option>
                     <option value='동'>동</option>
                     <option value='서'>서</option>
@@ -572,7 +411,7 @@ export default function OfficetelInsert() {
                 </td>
                 <td>현관구조</td>
                 <td>
-                  <select id='entrance' className='styled-select' style={{width : "20%"}}>
+                  <select id='entrance' className='styled-select' style={{ width: "20%" }}>
                     <option value="" disabled selected>선택</option>
                     <option value="계단식">계단식</option>
                     <option value="복도식">복도식</option>
@@ -587,7 +426,7 @@ export default function OfficetelInsert() {
                 <td><input type='number' className='styled-input' id='bathroom' />개</td>
               </tr>
               <tr>
-              <td>용도</td>
+                <td>용도</td>
                 <td>
                   <input type='radio' value={'주거용'} checked={usage == '주거용'} onChange={() => setUsage('주거용')} />주거용
                   <input type='radio' value={'업무용'} checked={usage == '업무용'} onChange={() => setUsage('업무용')} />업무용
@@ -620,15 +459,15 @@ export default function OfficetelInsert() {
                 </td>
               </tr>
               <tr>
-              <td>건축물일자</td>
+                <td>건축물일자</td>
                 <td colSpan={3}>
-                  <select id='building_dateType' className='styled-select' style={{width : "20%"}}>
+                  <select id='building_dateType' className='styled-select' style={{ width: "20%" }}>
                     <option value='' disabled selected>유형선택</option>
                     <option value='사용승인'>사용승인</option>
                     <option value='사용검사'>사용검사</option>
                     <option value='준공일자'>준공일자</option>
                   </select>
-                  <select id='year' className='styled-select' style={{width : "20%"}}
+                  <select id='year' className='styled-select' style={{ width: "20%" }}
                     value={form.years}
                     onChange={(e) =>
                       setForm({ ...form, years: e.target.value })
@@ -641,7 +480,7 @@ export default function OfficetelInsert() {
                       </option>
                     ))}
                   </select>년
-                  <select id='month' className='styled-select' style={{width : "20%"}}
+                  <select id='month' className='styled-select' style={{ width: "20%" }}
                     value={form.months}
                     onChange={(e) =>
                       setForm({ ...form, months: e.target.value })
@@ -654,7 +493,7 @@ export default function OfficetelInsert() {
                       </option>
                     ))}
                   </select>월
-                  <select id='day' className='styled-select' style={{width : "20%"}}
+                  <select id='day' className='styled-select' style={{ width: "20%" }}
                     value={form.day}
                     onChange={(e) =>
                       setForm({ ...form, day: e.target.value })
@@ -676,7 +515,7 @@ export default function OfficetelInsert() {
           </div>
         </div>
 
-          <table className='content_insert'>
+        {/* <table className='content_insert'>
             <tbody>
               <tr>
                 <td>매물종류</td>
@@ -729,9 +568,9 @@ export default function OfficetelInsert() {
                 <td colSpan={3}>
                   <select id='building_name'>
                     <option value='단지1'>단지1</option>
-                    <option value='단지2'>단지2</option>
-                    {/* 디비에서 가져와야함 */}
-                  </select>
+                    <option value='단지2'>단지2</option> */}
+        {/* 디비에서 가져와야함 */}
+        {/* </select>
                 </td>
               </tr>
               <tr>
@@ -776,9 +615,9 @@ export default function OfficetelInsert() {
                 <td>면적</td>
                 <td colSpan={3}>
                   계약면적<select id='extent'>
-                    <option value='44A'>44A(44.59㎡ // 18.56㎡)</option>
-                    {/* 디비에서 가져와야. 건물정보들에 타입 업데이트인서트 */}
-                  </select>㎡
+                    <option value='44A'>44A(44.59㎡ // 18.56㎡)</option> */}
+        {/* 디비에서 가져와야. 건물정보들에 타입 업데이트인서트 */}
+        {/* </select>㎡
                 </td>
               </tr>
               <tr>
@@ -786,17 +625,17 @@ export default function OfficetelInsert() {
                 <td colSpan={3}>
                   <select id='address'>
                     <option value='A동'>A동</option>
-                    <option value='B동'>B동</option>
-                    {/* 건축물대장에서 가져오기 */}
-                  </select>
+                    <option value='B동'>B동</option> */}
+        {/* 건축물대장에서 가져오기 */}
+        {/* </select>
                   <input type='text' id='address_input' className='ho' />호
                 </td>
               </tr>
               <tr>
                 <td>층</td>
                 <td colSpan={3}>
-                  <input type='number' id='floor' className='floor' placeholder='해당층' />층[저/-층] {/* 저/-층 에 건축물대장에서 최고층 가져와야함 */}
-                  <input type='radio' value={'노출'} checked={floorExposure == '노출'} onChange={() => setFloorExposure('노출')} />층수노출
+                  <input type='number' id='floor' className='floor' placeholder='해당층' />층[저/-층] 저/-층 에 건축물대장에서 최고층 가져와야함 */}
+        {/* <input type='radio' value={'노출'} checked={floorExposure == '노출'} onChange={() => setFloorExposure('노출')} />층수노출
                   <input type='radio' value={'노출안함'} checked={floorExposure == '노출안함'} onChange={() => setFloorExposure('노출안함')} />고/중/저
                 </td>
               </tr>
@@ -805,9 +644,9 @@ export default function OfficetelInsert() {
                 <td>
                   <select id='direction_criteria'>
                     <option value='거실'>거실</option>
-                    <option value='안방'>안방</option>
-                    {/* 아파트.오피스텔만 거실안방, 다른매물은 주된출입구 등 */}
-                  </select>
+                    <option value='안방'>안방</option> */}
+        {/* 아파트.오피스텔만 거실안방, 다른매물은 주된출입구 등 */}
+        {/* </select>
                   <select id='direction'>
                     <option value='' disabled selected>선택</option>
                     <option value='동'>동</option>
@@ -921,6 +760,7 @@ export default function OfficetelInsert() {
               </tr>
             </tbody>
           </table>
+ */}
 
 
 
@@ -935,222 +775,221 @@ export default function OfficetelInsert() {
 
 
 
-          
-          <h5>가격</h5>
-          <table className='price_insert'>
-            <tbody>
-              <tr>
-                <td>거래종류</td>
-                <td>
-                  <input type='radio' value={'매매'} checked={transactionType == '매매'} onChange={() => setTransactionType('매매')} />매매
-                  <input type='radio' value={'전세'} checked={transactionType == '전세'} onChange={() => setTransactionType('전세')} />전세
-                  <input type='radio' value={'웰세'} checked={transactionType == '월세'} onChange={() => setTransactionType('월세')} />월세
-                </td>
-              </tr>
-              <tr>
-                <td>{transactionType}가</td>
-                <td>
-                  {transactionType == '월세' ? (
-                    <>
-                      보증금<input id='newDeposit' type='text' />만원 / 월세가<input id='newMonthlyRent' type='text' />만원
-                      {/* 이거 전송폼에 없음 */}
-                    </>
-                  ) : (
-                    <>
-                      <input id='desiredAmount' type='text' />만원 (컴마찍기)
-                    </>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td>융자금</td><td><input id='loan' type='text' />만원</td>
-              </tr>
-              <tr>
-                <td>기전세금(월세금)</td><td>전세(보증금)<input id='existingTenant_monthlyRent' type='text' />만원 / 월세가<input id='existingTenant_deposit' type='text' />만원</td>
-              </tr>
-            </tbody>
-          </table>
-          <h5>주차정보</h5>
-          <table>
-            <tbody>
-              <tr>
-                <td>총 주차대수</td>
-                <td><input id='total_parking' type='text' />대 총 세대수: (DB)대</td>
-                <td>세대당 주차대수</td>
-                <td><input id='parking_per_room' type='text' />대 (총 주차대수 입력하면 자동계산되도록)</td>
-                {/* 자동계산되도록 */}
-              </tr>
-            </tbody>
-          </table>
-          <h5>시설정보</h5>
-          <table>
+        <h5>가격</h5>
+        <table className='price_insert'>
+          <tbody>
             <tr>
-              <td>난방방식</td>
+              <td>거래종류</td>
               <td>
-                <select id='heating_method'>
-                  <option value='' disabled selected>선택</option>
-                  <option value='개별난방'>개별난방</option>
-                  <option value='중앙난방'>중앙난방</option>
-                  <option value='지역난방'>지역난방</option>
-                  <option value='미노출'>미노출</option>
-                </select>
+                <input type='radio' value={'매매'} checked={transactionType == '매매'} onChange={() => setTransactionType('매매')} />매매
+                <input type='radio' value={'전세'} checked={transactionType == '전세'} onChange={() => setTransactionType('전세')} />전세
+                <input type='radio' value={'웰세'} checked={transactionType == '월세'} onChange={() => setTransactionType('월세')} />월세
               </td>
-              <td>난방연료</td>
+            </tr>
+            <tr>
+              <td>{transactionType}가</td>
               <td>
-                <select id='heating_fuel'>
-                  <option value='' disabled selected>선택</option>
-                  <option value='도시가스'>도시가스</option>
-                  <option value='열병합'>열병합</option>
-                  <option value='기름'>기름</option>
-                  <option value='전기'>전기</option>
-                  <option value='심야전기'>심야전기</option>
-                  <option value='태양열'>태양열</option>
-                  <option value='LPG'>LPG</option>
-                  <option value='미노출'>미노출</option>
+                {transactionType == '월세' ? (
+                  <>
+                    <input id="newDeposit" type="text" value={newDeposit} onChange={handleDepositChange} />만원 / 월세가<input id="newMonthlyRent" type="text" value={newMonthlyRent} onChange={handleMonthlyRentChange} />만원
+                    {/* 이거 전송폼에 없음 */}
+                  </>
+                ) : (
+                  <>
+                    <input id='desiredAmount' type='text' value={desiredAmount} onChange={handledesiredAmountChange} />만원
+                  </>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td>융자금</td><td><input id='loan' type='text' value={loan} onChange={handleLoan}/>만원</td>
+            </tr>
+            <tr>
+              <td>기전세금(월세금)</td><td>전세(보증금)<input id='existingTenant_deposit' value={existingTenant_deposit} onChange={handleexistingTenant_deposit}/>만원 / 월세가<input id='existingTenant_monthlyRent' type='text' value={existingTenant_monthlyRent} onChange={handleexistingTenant_monthlyRent} />만원</td>
+            </tr>
+          </tbody>
+        </table>
+        <h5>주차정보</h5>
+        <table>
+          <tbody>
+            <tr>
+              <td>총 주차대수</td>
+              <td><input id='total_parking' type='text' />대 총 세대수: (DB)대</td>
+              <td>세대당 주차대수</td>
+              <td><input id='parking_per_room' type='text' />대 (총 주차대수 입력하면 자동계산되도록)</td>
+              {/* 자동계산되도록 */}
+            </tr>
+          </tbody>
+        </table>
+        <h5>시설정보</h5>
+        <table>
+          <tr>
+            <td>난방방식</td>
+            <td>
+              <select id='heating_method'>
+                <option value='' disabled selected>선택</option>
+                <option value='개별난방'>개별난방</option>
+                <option value='중앙난방'>중앙난방</option>
+                <option value='지역난방'>지역난방</option>
+                <option value='미노출'>미노출</option>
+              </select>
+            </td>
+            <td>난방연료</td>
+            <td>
+              <select id='heating_fuel'>
+                <option value='' disabled selected>선택</option>
+                <option value='도시가스'>도시가스</option>
+                <option value='열병합'>열병합</option>
+                <option value='기름'>기름</option>
+                <option value='전기'>전기</option>
+                <option value='심야전기'>심야전기</option>
+                <option value='태양열'>태양열</option>
+                <option value='LPG'>LPG</option>
+                <option value='미노출'>미노출</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>냉방시설</td>
+            <td colspan="3" id='airCondition'>
+              <ul class="optionList">
+                <li><input value="벽걸이에어컨" type="checkbox" class="input_check" /><label>벽걸이에어컨</label></li>
+                <li><input value="스탠드에어컨" type="checkbox" class="input_check" /><label>스탠드에어컨</label></li>
+                <li><input value="천장에어컨" type="checkbox" class="input_check" /><label>천장에어컨</label></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>생활시설</td>
+            <td colSpan="3" id='living_facilities'>
+              <ul class="optionList">
+                <li><input value="침대" type="checkbox" class="input_check" /> <label>침대</label></li>
+                <li><input value="책상" type="checkbox" class="input_check" /> <label>책상</label></li>
+                <li><input value="옷장" type="checkbox" class="input_check" /> <label>옷장</label></li>
+                <li><input value="붙박이장" type="checkbox" class="input_check" /> <label>붙박이장</label></li>
+                <li><input value="식탁" type="checkbox" class="input_check" /> <label>식탁</label></li>
+                <li><input value="소파" type="checkbox" class="input_check" /> <label>소파</label></li>
+                <li><input value="신발장" type="checkbox" class="input_check" /> <label>신발장</label></li>
+                <li><input value="냉장고" type="checkbox" class="input_check" /> <label>냉장고</label></li>
+                <li><input value="세탁기" type="checkbox" class="input_check" /> <label>세탁기</label></li>
+                <li><input value="건조기" type="checkbox" class="input_check" /> <label>건조기</label></li>
+                <li><input value="샤워부스" type="checkbox" class="input_check" /> <label>샤워부스</label></li>
+                <li><input value="욕조" type="checkbox" class="input_check" /> <label>욕조</label></li>
+                <li><input value="비데" type="checkbox" class="input_check" /> <label >비데</label></li>
+                <li><input value="싱크대" type="checkbox" class="input_check" /> <label>싱크대</label></li>
+                <li><input value="식기세척기" type="checkbox" class="input_check" /> <label>식기세척기</label></li>
+                <li><input value="가스레인지" type="checkbox" class="input_check" /> <label>가스레인지</label></li>
+                <li><input value="인덕션레인지" type="checkbox" class="input_check" /> <label>인덕션레인지</label></li>
+                <li><input value="전자레인지" type="checkbox" class="input_check" /> <label>전자레인지</label></li>
+                <li><input value="가스오븐" type="checkbox" class="input_check" /> <label>가스오븐</label></li>
+                <li><input value="TV" type="checkbox" class="input_check" /> <label>TV</label></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>보안시설</td>
+            <td colspan="3" id='security_facilities'>
+              <ul class="optionList">
+                <li><input value="경비원" type="checkbox" class="input_check" /> <label>경비원</label></li>
+                <li><input value="비디오폰" type="checkbox" class="input_check" /> <label>비디오폰</label></li>
+                <li><input value="인터폰" type="checkbox" class="input_check" /> <label>인터폰</label></li>
+                <li><input value="카드키" type="checkbox" class="input_check" /> <label>카드키</label></li>
+                <li><input value="CCTV" type="checkbox" class="input_check" /> <label>CCTV</label></li>
+                <li><input value="사설경비" type="checkbox" class="input_check" /> <label>사설경비</label></li>
+                <li><input value="현관보안" type="checkbox" class="input_check" /> <label>현관보안</label></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>기타시설</td>
+            <td colspan="3" id="other_facilities">
+              <ul class="optionList">
+                <li><input value="엘레베이터" type="checkbox" class="input_check" /> <label>엘리베이터</label></li>
+                <li><input value="화재경보기" type="checkbox" class="input_check" /> <label>화재경보기</label></li>
+                <li><input value="무인택배함" type="checkbox" class="input_check" /> <label>무인택배함</label></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>방범창/베란다</td>
+            <td colspan="3" id="balcony">
+              <ul class="optionList">
+                <li><input value="방범창" type="checkbox" class="input_check" /> <label>방범창</label></li>
+                <li><input value="베란다" type="checkbox" class="input_check" /> <label>베란다</label></li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+        <h5>입주일</h5>
+        <table>
+          <tbody>
+            <tr>
+              <td>입주가능일</td>
+              <td>
+                <input type='radio' value={'즉시입주'} checked={moveable_date == '즉시입주'} onChange={() => setMoveable_date('즉시입주')} />즉시입주<br />
+                <input type='radio' value={enterableDate} checked={moveable_date === enterableDate} onChange={() => setMoveable_date(enterableDate)} />
+                {/* 연/월/일 선택 */}
+                <select
+                  id='year'
+                  value={selectedDateForm.year}
+                  onChange={(e) =>
+                    setSelectedDateForm({ ...selectedDateForm, year: e.target.value })
+                  }
+                >
+                  {availableYears.map((item) => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
                 </select>
+                년
+                <select
+                  id='month'
+                  value={selectedDateForm.month}
+                  onChange={(e) =>
+                    setSelectedDateForm({ ...selectedDateForm, month: e.target.value })
+                  }
+                >
+                  {availableMonths.map((item) => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+                월
+                <select
+                  id='day'
+                  value={selectedDateForm.day}
+                  onChange={(e) =>
+                    setSelectedDateForm({ ...selectedDateForm, day: e.target.value })
+                  }
+                >
+                  {availableDays.map((item) => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+                일 이후
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h5>상세정보</h5>
+        <table>
+          <tbody>
+            <tr>
+              <td>매물특징</td>
+              <td><input id='product_title' type='text' placeholder='리스트에 노출되는 문구' /></td>
+            </tr>
+            <tr>
+              <td>상세설명</td>
+              <td>
+                <textarea id='product_content' placeholder='매물 상세 페이지에 노출되는 문구입니다.'></textarea>
               </td>
             </tr>
             <tr>
-              <td>냉방시설</td>
-              <td colspan="3" id='airCondition'>
-                <ul class="optionList">
-                  <li><input value="벽걸이에어컨" type="checkbox" class="input_check" /><label>벽걸이에어컨</label></li>
-                  <li><input value="스탠드에어컨" type="checkbox" class="input_check" /><label>스탠드에어컨</label></li>
-                  <li><input value="천장에어컨" type="checkbox" class="input_check" /><label>천장에어컨</label></li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td>생활시설</td>
-              <td colSpan="3" id='living_facilities'>
-                <ul class="optionList">
-                  <li><input value="침대" type="checkbox" class="input_check" /> <label>침대</label></li>
-                  <li><input value="책상" type="checkbox" class="input_check" /> <label>책상</label></li>
-                  <li><input value="옷장" type="checkbox" class="input_check" /> <label>옷장</label></li>
-                  <li><input value="붙박이장" type="checkbox" class="input_check" /> <label>붙박이장</label></li>
-                  <li><input value="식탁" type="checkbox" class="input_check" /> <label>식탁</label></li>
-                  <li><input value="소파" type="checkbox" class="input_check" /> <label>소파</label></li>
-                  <li><input value="신발장" type="checkbox" class="input_check" /> <label>신발장</label></li>
-                  <li><input value="냉장고" type="checkbox" class="input_check" /> <label>냉장고</label></li>
-                  <li><input value="세탁기" type="checkbox" class="input_check" /> <label>세탁기</label></li>
-                  <li><input value="건조기" type="checkbox" class="input_check" /> <label>건조기</label></li>
-                  <li><input value="샤워부스" type="checkbox" class="input_check" /> <label>샤워부스</label></li>
-                  <li><input value="욕조" type="checkbox" class="input_check" /> <label>욕조</label></li>
-                  <li><input value="비데" type="checkbox" class="input_check" /> <label >비데</label></li>
-                  <li><input value="싱크대" type="checkbox" class="input_check" /> <label>싱크대</label></li>
-                  <li><input value="식기세척기" type="checkbox" class="input_check" /> <label>식기세척기</label></li>
-                  <li><input value="가스레인지" type="checkbox" class="input_check" /> <label>가스레인지</label></li>
-                  <li><input value="인덕션레인지" type="checkbox" class="input_check" /> <label>인덕션레인지</label></li>
-                  <li><input value="전자레인지" type="checkbox" class="input_check" /> <label>전자레인지</label></li>
-                  <li><input value="가스오븐" type="checkbox" class="input_check" /> <label>가스오븐</label></li>
-                  <li><input value="TV" type="checkbox" class="input_check" /> <label>TV</label></li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td>보안시설</td>
-              <td colspan="3" id='security_facilities'>
-                <ul class="optionList">
-                  <li><input value="경비원" type="checkbox" class="input_check" /> <label>경비원</label></li>
-                  <li><input value="비디오폰" type="checkbox" class="input_check" /> <label>비디오폰</label></li>
-                  <li><input value="인터폰" type="checkbox" class="input_check" /> <label>인터폰</label></li>
-                  <li><input value="카드키" type="checkbox" class="input_check" /> <label>카드키</label></li>
-                  <li><input value="CCTV" type="checkbox" class="input_check" /> <label>CCTV</label></li>
-                  <li><input value="사설경비" type="checkbox" class="input_check" /> <label>사설경비</label></li>
-                  <li><input value="현관보안" type="checkbox" class="input_check" /> <label>현관보안</label></li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td>기타시설</td>
-              <td colspan="3" id="other_facilities">
-                <ul class="optionList">
-                  <li><input value="엘레베이터" type="checkbox" class="input_check" /> <label>엘리베이터</label></li>
-                  <li><input value="화재경보기" type="checkbox" class="input_check" /> <label>화재경보기</label></li>
-                  <li><input value="무인택배함" type="checkbox" class="input_check" /> <label>무인택배함</label></li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td>방범창/베란다</td>
-              <td colspan="3" id="balcony">
-                <ul class="optionList">
-                  <li><input value="방범창" type="checkbox" class="input_check" /> <label>방범창</label></li>
-                  <li><input value="베란다" type="checkbox" class="input_check" /> <label>베란다</label></li>
-                </ul>
-              </td>
-            </tr>
-          </table>
-          <h5>입주일</h5>
-          <table>
-            <tbody>
-              <tr>
-                <td>입주가능일</td>
-                <td>
-                  <input type='radio' value={'즉시입주'} checked={moveable_date == '즉시입주'} onChange={() => setMoveable_date('즉시입주')} />즉시입주<br />
-                  <input type='radio' value={enterableDate} checked={moveable_date === enterableDate} onChange={() => setMoveable_date(enterableDate)} />
-                  {/* 연/월/일 선택 */}
-                  <select
-                    id='year'
-                    value={selectedDateForm.year}
-                    onChange={(e) =>
-                      setSelectedDateForm({ ...selectedDateForm, year: e.target.value })
-                    }
-                  >
-                    {availableYears.map((item) => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                  년
-                  <select
-                    id='month'
-                    value={selectedDateForm.month}
-                    onChange={(e) =>
-                      setSelectedDateForm({ ...selectedDateForm, month: e.target.value })
-                    }
-                  >
-                    {availableMonths.map((item) => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                  월
-                  <select
-                    id='day'
-                    value={selectedDateForm.day}
-                    onChange={(e) =>
-                      setSelectedDateForm({ ...selectedDateForm, day: e.target.value })
-                    }
-                  >
-                    {availableDays.map((item) => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                  일 이후
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <h5>상세정보</h5>
-          <table>
-            <tbody>
-              <tr>
-                <td>매물특징</td>
-                <td><input id='product_title' type='text' placeholder='리스트에 노출되는 문구' /></td>
-              </tr>
-              <tr>
-                <td>상세설명</td>
-                <td>
-                  <textarea id='product_content' placeholder='매물 상세 페이지에 노출되는 문구입니다.'></textarea>
-                </td>
-              </tr>
-              <tr>
-                {/* <td>매물사진</td>
+              {/* <td>매물사진</td>
                 <td>
                   <input type='file' multiple onChange={handleFileChange} /><br />
                   <div>
@@ -1159,11 +998,11 @@ export default function OfficetelInsert() {
                     ))}
                   </div>
                 </td> */}
-              </tr>
-            </tbody>
-          </table>
-          <button type='button' onClick={upload} className='upload'>등록하기</button>
-          <button type='button' className='back' onClick={() => { window.location.href = '/' }}>홈으로</button>
+            </tr>
+          </tbody>
+        </table>
+        <button type='button' onClick={upload} className='upload'>등록하기</button>
+        <button type='button' className='back' onClick={() => { window.location.href = '/' }}>홈으로</button>
       </div>
       <Bottom />
     </div>
