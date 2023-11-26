@@ -980,7 +980,7 @@ export default function OfficetelInsert() {
           <tbody>
             <tr>
               <td>매물특징</td>
-              <td><input id='product_title' type='text' placeholder='리스트에 노출되는 문구' /></td>
+              <td><input id='product_title' type='text' placeholder='리스트에 노출되는 문구' /></td> 
             </tr>
             <tr>
               <td>상세설명</td>
