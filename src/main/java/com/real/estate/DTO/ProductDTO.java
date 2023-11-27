@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ProductDTO {
-  private int productId;
+  private int product_id;
   private String productType;
   private String location;
   private String buildingName;
@@ -43,4 +43,8 @@ public class ProductDTO {
   private String productTitle;
   private String productContent;
   private String productState;
+
+  private int img_no;
+  private int img_productID;
+  private String img_title;
 }
