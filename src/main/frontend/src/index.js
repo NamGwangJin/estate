@@ -16,6 +16,7 @@ import TourApliy from './Component/Tour/TourApliy.js'
 import Admin from './Component/Admin/Admin.js'
 import EstateDetail from './Component/Estate/EstateDetail.js';
 import OfficetelInsert from './Component/Product/officetelInsert.js'
+import AdminEstateDetail from './Component/Estate/AdminEstateDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -33,12 +34,13 @@ root.render(
       <Route path={"/tour/apliy"} exact element={<TourApliy />}></Route>
       <Route path={"/admin"} exact element={<Admin />}></Route>
       <Route path={"/estate/detail"} exact element={<EstateDetail />}></Route>
+      <Route path={"admin/estate/detail"} exact element={<AdminEstateDetail />}></Route>
       <Route path={"/product/officetelInsert"} exact element={<OfficetelInsert />}></Route>
     </Routes>
   </BrowserRouter>
 );
 
-// If you want to start measuring performance in your app, pass a function
+// If you want to start measuring performance in your app, pass a function 
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

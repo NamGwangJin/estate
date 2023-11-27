@@ -25,6 +25,15 @@
   margin-top: 10px;
 }
 
+.info .link {
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .tour {
   text-align: left;
   float: left;
@@ -112,13 +121,12 @@
   color: black;
 }
 
-/* .tblBoard th,td {
+.tblBoard th,td {
   padding: 12px;
   text-align: center;
-  
-  border: none;  세로 줄 없애기 
-  border-bottom: 1px solid #ddd;  가로 줄만 남기기 
-} */
+  border: none; /* 세로 줄 없애기 */
+  border-bottom: 1px solid #ddd; /* 가로 줄만 남기기 */
+}
 
 .tblBoard tbody tr {
   margin-bottom: 10px;
@@ -176,7 +184,7 @@
   margin: 0 auto;
   padding-bottom: 60px;
   padding-top: 200px;
-  min-height: 1750px;
+  min-height: 1500px;
 }
 
 .container1 div {
@@ -274,10 +282,18 @@
 .detail_head .info_price span {
   font-family: 'Dotum';
   font-size: 11px;
-  color: #727272;
+  color: hsl(0, 0%, 45%);
 }
 
 .detail_head .info_price > p > span {
+  padding-left: 3px;
+  vertical-align: bottom;
+}
+
+.sub {
+  font-family: 'Dotum';
+  font-size: 11px;
+  color: hsl(0, 0%, 45%);
   padding-left: 3px;
   vertical-align: bottom;
 }
@@ -329,11 +345,11 @@
 
 .detail_head .info02 > ul > li > span:first-child {
   display: inline-block;
-  width: 110px;
+  width: 150px;
   color: #757575;
 }
 
-.detail_head .info_02 > ul > li .tel {
+.detail_head .info02 > ul > li .tel {
   color: #5696dc;
 }
 
@@ -413,6 +429,19 @@
   font-weight: bold;
 }
 
+.detail_body h3 {
+  padding-bottom: 12px;
+  font-family: 'Dotum';
+  font-size: 15px;
+  display: block;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
 .info03_inr ul {
   position: relative;
   padding: 5px 0;
@@ -444,7 +473,7 @@
 
 .info04 {
   clear: both;
-  padding-top: 12px;
+  padding-top: 10px;
 }
 
 .info04 p {

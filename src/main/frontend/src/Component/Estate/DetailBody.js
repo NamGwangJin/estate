@@ -4,7 +4,7 @@ export default function () {
     
     useEffect(() => {
         if (window.kakao && window.kakao.maps) {
-            // JavaScript 코드를 이곳에 삽입합니다.
+            // JavaScript 코드를 이곳에 삽입합니다 .
         
             // 지도를 표시할 div 엘리먼트를 찾습니다.
             var mapContainer = document.getElementById('mm_map_id');
@@ -198,13 +198,13 @@ export default function () {
                         </li>
                     </ul>
                 </div>
+            </div>
 
-                <div className='info04'>
-                    <h4>매물설명</h4>
-                    <p id="DTL_DESC_id" style={{minHeight: '150px', lineHeight: '19px'}}>
-                        DB에 저장된 매물 설명 꺼내서 불러오기
-                    </p>
-                </div>
+            <div className='info04'>
+                <h4>매물설명</h4>
+                <p id="DTL_DESC_id" style={{minHeight: '150px', lineHeight: '19px'}}>
+                    DB에 저장된 매물 설명 꺼내서 불러오기
+                </p>
             </div>
         </div>
     </div>
