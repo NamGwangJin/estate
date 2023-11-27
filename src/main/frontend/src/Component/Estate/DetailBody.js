@@ -198,13 +198,13 @@ export default function () {
                         </li>
                     </ul>
                 </div>
+            </div>
 
-                <div className='info04'>
-                    <h4>매물설명</h4>
-                    <p id="DTL_DESC_id" style={{minHeight: '150px', lineHeight: '19px'}}>
-                        DB에 저장된 매물 설명 꺼내서 불러오기
-                    </p>
-                </div>
+            <div className='info04'>
+                <h4>매물설명</h4>
+                <p id="DTL_DESC_id" style={{minHeight: '150px', lineHeight: '19px'}}>
+                    DB에 저장된 매물 설명 꺼내서 불러오기
+                </p>
             </div>
         </div>
     </div>
