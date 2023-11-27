@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.real.estate.DAO.ProductDAO">
-<insert id='product_insert'>
+<insert id='product_insert' useGeneratedKeys="true" keyProperty="product_id" parameterType="com.real.estate.DTO.ProductDTO">
 insert into products set product_type=#{param1}, 
         location=#{param2}, 
         building_name=#{param3}, 
@@ -40,5 +40,8 @@ insert into products set product_type=#{param1},
         moveable_date=#{param35}, 
         product_title=#{param36}, 
         product_content=#{param37};
+</insert>
+<insert id='image_insert'>
+    insert into products_img set img_productID=#{product_id}, img_title=#{param1};
 </insert>
 </mapper>
