@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.real.estate.DAO.MainDAO;
 import com.real.estate.DAO.ProductDAO;
 import com.real.estate.DTO.NewsDTO;
+import com.real.estate.DTO.ProductDTO;
 
 @RestController
 public class KimController {
@@ -76,6 +77,7 @@ public class KimController {
         pDAO.product_insert(product_type, location, building_name, building_use, extent, address, floor, floor_open, direction_criteria, direction, entrance, rooms, bathroom, roomuse, inner_structure, administration_cost, maintenance, managementCost_includ,
                         building_dateType, building_date, transactionType, desiredAmount, loan, existingTenant_deposit, existingTenant_monthlyRent, total_parking, parking_per_room, heating_method, heating_fuel, airCondition, living_facilities, security_facilities, other_facilities, balcony, moveable_date, product_title, product_content);
 
+                        
                         for (MultipartFile image : images) {
                             try {
                                 // 이미지 파일의 실제 이름
@@ -83,6 +85,7 @@ public class KimController {
                 
                                 // 이미지 파일을 저장할 경로
                                 String filePath = imageUploadDirectory + File.separator + img_title;
+
                 
                                 // 이미지 파일을 서버에 저장
                                 image.transferTo(new File(filePath));

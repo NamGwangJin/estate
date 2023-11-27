@@ -74,38 +74,6 @@ export default function OfficetelInsert() {
     setExistingTenant_monthlyRent(formattedValue);
   }
 
-  // 이미지 스크립트
-  const [selectedFiles, setSelectedFiles] = useState([]);  // 이미지파일 첨부
-
-  const handleFileChange = (e) => {
-    const files = e.target.files;
-    const filesArray = Array.from(files);
-    setSelectedFiles((prevFiles) => [...prevFiles, ...filesArray]);
-  };
-
-  const handleRemoveImage = (index) => {
-    setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-  };
-
-  const imgUpload = async () => {
-    try {
-      // 이미지 데이터를 FormData로 생성
-      const formData = new FormData();
-
-      // 모든 이미지를 FormData에 추가
-      selectedFiles.forEach((file, index) => {
-        const uniqueFilename = `${uuidv4()}_${file.name}`;
-        formData.append(`image${index + 1}`, file, uniqueFilename);
-      });
-
-      // 이미지 업로드 요청
-      const response = await axios.post('/api/officetel/insert', formData);
-
-      console.log('Image Upload Response:', response.data);
-    } catch (error) {
-      console.error('Image Upload Error:', error);
-    }
-  };
 
   const [val1, setVal1] = useState(""); //지역 state
   const [val2, setVal2] = useState("");
@@ -202,6 +170,21 @@ export default function OfficetelInsert() {
   console.log('Selected Value:', moveable_date);
   console.log('Selected Date Form:', enterableDate);
 
+  // 이미지 스크립트
+  const [selectedFiles, setSelectedFiles] = useState([]);  // 이미지파일 첨부
+
+  const handleFileChange = (e) => {
+    const files = e.target.files;
+    const filesArray = Array.from(files);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...filesArray]);
+  };
+
+  const handleRemoveImage = (index) => {
+    setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  };
+
+
+
 
   function upload() {
     const product_type = document.getElementById('product_type').value;
@@ -229,48 +212,54 @@ export default function OfficetelInsert() {
     const product_title = encodeURIComponent(document.getElementById('product_title').value);
     const product_content = encodeURIComponent(document.getElementById('product_content').value);
 
+    const formData = new FormData();
+    formData.append('product_type', product_type);
+    formData.append('location', location);
+    formData.append('building_name', building_name);
+    formData.append('building_use', building_use);
+    formData.append('extent', extent);
+    formData.append('address', address);
+    formData.append('floor', floor);
+    formData.append('floor_open', floorExposure);
+    formData.append('direction_criteria', direction_criteria);
+    formData.append('direction', direction);
+    formData.append('entrance', entrance);
+    formData.append('rooms', rooms);
+    formData.append('bathroom', bathroom);
+    formData.append('roomuse', usage);
+    formData.append('inner_structure', structure);
+    formData.append('administration_cost', maintenanceCost);
+    formData.append('maintenance', maintenance);
+    formData.append('managementCost_includ', managementCost_includ);  // 수정된 부분
+    formData.append('building_dateType', building_dateType);
+    formData.append('building_date', building_date);
+    formData.append('transactionType', transactionType);
+    formData.append('desiredAmount', desiredAmount);
+    formData.append('loan', loan);
+    formData.append('existingTenant_deposit', existingTenant_deposit);
+    formData.append('existingTenant_monthlyRent', existingTenant_monthlyRent);
+    formData.append('total_parking', total_parking);
+    formData.append('parking_per_room', parking_per_room);
+    formData.append('heating_method', heating_method);
+    formData.append('heating_fuel', heating_fuel);
+    formData.append('airCondition', airCondition);  // 수정된 부분
+    formData.append('living_facilities', living_facilities);  // 수정된 부분
+    formData.append('security_facilities', security_facilities);  // 수정된 부분
+    formData.append('other_facilities', other_facilities);  // 수정된 부분
+    formData.append('balcony', balcony);  // 수정된 부분
+    formData.append('moveable_date', moveable_date);  // 수정된 부분
+    formData.append('product_title', product_title);
+    formData.append('product_content', product_content);
+
+    // 이미지 파일 추가
+    selectedFiles.forEach((file, index) => {
+      formData.append('images', file);
+    });
+
     axios({
       method: 'post',
       url: '/api/officetel/insert',
-      params: {
-        product_type: product_type,
-        location: location,
-        building_name: building_name,
-        building_use: building_use,
-        extent: extent,
-        address: address,
-        floor: floor,
-        floor_open: floorExposure,
-        direction_criteria: direction_criteria,
-        direction: direction,
-        entrance: entrance,
-        rooms: rooms,
-        bathroom: bathroom,
-        roomuse: usage,
-        inner_structure: structure,
-        administration_cost: maintenanceCost,
-        maintenance: maintenance,
-        managementCost_includ: decodeURIComponent(managementCost_includ),
-        building_dateType: building_dateType,
-        building_date: building_date,
-        transactionType: transactionType,
-        desiredAmount: desiredAmount,
-        loan: loan,
-        existingTenant_deposit: existingTenant_deposit,
-        existingTenant_monthlyRent: existingTenant_monthlyRent,
-        total_parking: total_parking,
-        parking_per_room: parking_per_room,
-        heating_method: heating_method,
-        heating_fuel: heating_fuel,
-        airCondition: decodeURIComponent(airCondition),
-        living_facilities: decodeURIComponent(living_facilities),
-        security_facilities: decodeURIComponent(security_facilities),
-        other_facilities: decodeURIComponent(other_facilities),
-        balcony: decodeURIComponent(balcony),
-        moveable_date: decodeURIComponent(moveable_date),
-        product_title: decodeURIComponent(product_title),
-        product_content: decodeURIComponent(product_content)
-      },
+      data: formData
     })
       .then((res) => {
         alert("매물등록에 성공하였습니다");
@@ -287,11 +276,6 @@ export default function OfficetelInsert() {
     e.preventDefault();
 
     upload();
-    if (selectedFiles.length > 0) {
-      await imgUpload();
-    } else {
-      console.error('No image selected for upload.');
-    }
   }
   return (
     <div className='kkk'>
@@ -562,12 +546,11 @@ export default function OfficetelInsert() {
                     <td>
                       {transactionType == '월세' ? (
                         <>
-                          보증금<input id='newDeposit' type='text' className='styled-input' />만원 / 월세가<input id='newMonthlyRent' type='text' />만원
-                          {/* 이거 전송폼에 없음 */}
+                          <input id="newDeposit" type="text" value={newDeposit} onChange={handleDepositChange} />만원 / 월세가<input id="newMonthlyRent" type="text" value={newMonthlyRent} onChange={handleMonthlyRentChange} />만원
                         </>
                       ) : (
                         <>
-                          <input id='desiredAmount' type='text' className='styled-input' />만원 (컴마찍기)
+                          <input id='desiredAmount' type='text' value={desiredAmount} onChange={handledesiredAmountChange} />만원
                         </>
                       )}
                     </td>
@@ -575,17 +558,13 @@ export default function OfficetelInsert() {
                   <tr>
                     <td>융자금</td>
                     <td>
-                      <input id='loan' type='text' className='styled-input' />만원
+                      <input id='loan' type='text' value={loan} onChange={handleLoan} />만원
                     </td>
                   </tr>
                   <tr>
                     <td>기전세금(월세금)</td>
-                    <td>
-                      전세(보증금)
-                      <input id='existingTenant_monthlyRent' type='text' className='styled-input' />
-                      만원 / 월세가
-                      <input id='existingTenant_deposit' type='text' className='styled-input' />
-                      만원
+                    <td>전세(보증금)<input id='existingTenant_deposit' value={existingTenant_deposit} onChange={handleexistingTenant_deposit} />만원 / 월세가
+                      <input id='existingTenant_monthlyRent' type='text' value={existingTenant_monthlyRent} onChange={handleexistingTenant_monthlyRent} />만원
                     </td>
                   </tr>
                 </tbody>
@@ -596,6 +575,7 @@ export default function OfficetelInsert() {
               <table className='styled-table leftA'>
                 <tbody>
                   <tr>
+                    <td>총 주차대수</td>
                     <td>
                       <input id='total_parking' type='text' />대 총 세대수: (DB)대
                     </td>
@@ -805,7 +785,7 @@ export default function OfficetelInsert() {
                 </tbody>
               </table>
             </div>
-            <button type='button' onClick={upload} className='upload'>등록하기</button>
+            <button type='button' onClick={onSubmit} className='upload'>등록하기</button>
             <button type='button' className='back' onClick={() => { window.location.href = '/' }}>홈으로</button>
           </div>
         </form>
