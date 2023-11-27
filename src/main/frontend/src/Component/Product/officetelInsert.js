@@ -4,6 +4,7 @@ import Bottom from '../bottom.js';
 import axios from 'axios';
 import { hangjungdong } from '../Home/hangjungdong.js';
 import './officetelInsert.css';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function OfficetelInsert() {
 
@@ -12,7 +13,7 @@ export default function OfficetelInsert() {
   const [structure, setStructure] = useState('단층식');
   const [maintenance, setMaintenance] = useState('없음');
   const [transactionType, setTransactionType] = useState('매매');
-  useEffect(()=> {
+  useEffect(() => {
     setDesiredAmount('');
     setNewDeposit('');
     setNewMonthlyRent('');
@@ -51,9 +52,9 @@ export default function OfficetelInsert() {
       setDesiredAmount(`${newDeposit}/${newMonthlyRent}`);
     }
   }, [newDeposit, newMonthlyRent]);
-  console.log("가격="+desiredAmount);
+  console.log("가격=" + desiredAmount);
   // 융자금 스크립트
-  const [loan,setLoan] = useState('0');
+  const [loan, setLoan] = useState('0');
   const handleLoan = (e) => {
     const inputValue = e.target.value.replace(/[^0-9]/g, '');
     const formattedValue = Number(inputValue).toLocaleString();
@@ -75,11 +76,37 @@ export default function OfficetelInsert() {
 
   // 이미지 스크립트
   const [selectedFiles, setSelectedFiles] = useState([]);  // 이미지파일 첨부
+
   const handleFileChange = (e) => {
     const files = e.target.files;
     const filesArray = Array.from(files);
-    setSelectedFiles(filesArray);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...filesArray]);
   };
+
+  const handleRemoveImage = (index) => {
+    setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  };
+
+  const imgUpload = async () => {
+    try {
+      // 이미지 데이터를 FormData로 생성
+      const formData = new FormData();
+
+      // 모든 이미지를 FormData에 추가
+      selectedFiles.forEach((file, index) => {
+        const uniqueFilename = `${uuidv4()}_${file.name}`;
+        formData.append(`image${index + 1}`, file, uniqueFilename);
+      });
+
+      // 이미지 업로드 요청
+      const response = await axios.post('/api/officetel/insert', formData);
+
+      console.log('Image Upload Response:', response.data);
+    } catch (error) {
+      console.error('Image Upload Error:', error);
+    }
+  };
+
   const [val1, setVal1] = useState(""); //지역 state
   const [val2, setVal2] = useState("");
   const [val3, setVal3] = useState("");
@@ -256,15 +283,21 @@ export default function OfficetelInsert() {
       })
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     upload();
+    if (selectedFiles.length > 0) {
+      await imgUpload();
+    } else {
+      console.error('No image selected for upload.');
+    }
   }
   return (
     <div className='kkk'>
       <Header />
       <div className='mainSection'>
+      <form action="/api/officetel/insert" method="post" enctype="multipart/form-data">
         <div className='매물등록'>
           <table className='styled-table leftA' >
             <tbody>
@@ -802,10 +835,10 @@ export default function OfficetelInsert() {
               </td>
             </tr>
             <tr>
-              <td>융자금</td><td><input id='loan' type='text' value={loan} onChange={handleLoan}/>만원</td>
+              <td>융자금</td><td><input id='loan' type='text' value={loan} onChange={handleLoan} />만원</td>
             </tr>
             <tr>
-              <td>기전세금(월세금)</td><td>전세(보증금)<input id='existingTenant_deposit' value={existingTenant_deposit} onChange={handleexistingTenant_deposit}/>만원 / 월세가<input id='existingTenant_monthlyRent' type='text' value={existingTenant_monthlyRent} onChange={handleexistingTenant_monthlyRent} />만원</td>
+              <td>기전세금(월세금)</td><td>전세(보증금)<input id='existingTenant_deposit' value={existingTenant_deposit} onChange={handleexistingTenant_deposit} />만원 / 월세가<input id='existingTenant_monthlyRent' type='text' value={existingTenant_monthlyRent} onChange={handleexistingTenant_monthlyRent} />만원</td>
             </tr>
           </tbody>
         </table>
@@ -980,7 +1013,7 @@ export default function OfficetelInsert() {
           <tbody>
             <tr>
               <td>매물특징</td>
-              <td><input id='product_title' type='text' placeholder='리스트에 노출되는 문구' /></td> 
+              <td><input id='product_title' type='text' placeholder='리스트에 노출되는 문구' /></td>
             </tr>
             <tr>
               <td>상세설명</td>
@@ -989,19 +1022,25 @@ export default function OfficetelInsert() {
               </td>
             </tr>
             <tr>
-              {/* <td>매물사진</td>
-                <td>
-                  <input type='file' multiple onChange={handleFileChange} /><br />
-                  <div>
-                    {selectedFiles.map((file, index) => (
-                      <img key={index} src={URL.createObjectURL(file)} alt={`Preview ${index}`} style={{ width: '100px', height: '100px', marginRight: '10px' }} />
-                    ))}
-                  </div>
-                </td> */}
+              <td>매물사진</td>
+              <td>
+                <input type='file' multiple onChange={handleFileChange} /><br />
+                <div>
+                  {selectedFiles.map((file, index) => (
+                    <div key={index} className="image-container">
+                      <img src={URL.createObjectURL(file)} alt={`Preview ${index}`} />
+                      <button onClick={() => handleRemoveImage(index)} className="remove-button">
+                        X
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
         <button type='button' onClick={upload} className='upload'>등록하기</button>
+        </form>
         <button type='button' className='back' onClick={() => { window.location.href = '/' }}>홈으로</button>
       </div>
       <Bottom />

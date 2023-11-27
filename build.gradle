@@ -24,6 +24,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.22'
 	annotationProcessor 'org.projectlombok:lombok:1.18.22'
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.26'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+implementation 'commons-fileupload:commons-fileupload:1.4'
 }
 
 tasks.named('test') {
@@ -70,3 +72,4 @@ task copyReactBuildFiles(type: Copy) {
 	from "$frontendDir/build"
 	into "$projectDir/src/main/resources/static"
 }
+
