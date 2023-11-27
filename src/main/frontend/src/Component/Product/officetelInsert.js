@@ -543,9 +543,266 @@ export default function OfficetelInsert() {
               </tr>
             </tbody>
           </table>
-          <div className='가격'>
+          
 
+          <div className='가격'>
+          <h4>가격  </h4>
+          <table className='styled-table leftA'>
+            <tbody>
+              <tr>
+                <td>거래종류</td>
+                <td> 
+                  <input type='radio' value={'매매'} checked={transactionType == '매매'} onChange={() => setTransactionType('매매')} />매매
+                  <input type='radio' value={'전세'} checked={transactionType == '전세'} onChange={() => setTransactionType('전세')} />전세
+                  <input type='radio' value={'웰세'} checked={transactionType == '월세'} onChange={() => setTransactionType('월세')} />월세
+                </td>
+              </tr>
+              <tr>
+                <td>{transactionType}가</td>
+                <td>
+                  {transactionType == '월세' ? (
+                    <>
+                      보증금<input id='newDeposit' type='text' className='styled-input'/>만원 / 월세가<input id='newMonthlyRent' type='text' />만원
+                      {/* 이거 전송폼에 없음 */}
+                    </>
+                  ) : (
+                    <>
+                      <input id='desiredAmount' type='text' className='styled-input'/>만원 (컴마찍기)
+                    </>
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td>융자금</td>
+                <td>
+                  <input id='loan' type='text' className='styled-input'/>만원
+                </td>
+              </tr>
+              <tr>
+              <td>기전세금(월세금)</td>
+                <td>
+                  전세(보증금)
+                  <input id='existingTenant_monthlyRent' type='text' className='styled-input'/>
+                  만원 / 월세가
+                  <input id='existingTenant_deposit' type='text' className='styled-input'/>
+                  만원
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+          <div className='주차정보'>
+            <table className='styled-table leftA'>
+              <tbody>
+                <tr>
+                <td>
+                  <input id='total_parking' type='text' />대 총 세대수: (DB)대
+                </td>
+                <td>
+                  세대당 주차대수
+                </td>
+                <td>
+                  <input id='parking_per_room' type='text' />대 (총 주차대수 입력하면 자동계산되도록)
+                </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+
+          <div className='시설정보'>
+            <table className='styled-table leftA'>
+              <tbody>
+                <tr>
+                  <td>난방방식</td>
+                  <td>
+                    <select id='heating_method'>
+                      <option value='' disabled selected>선택</option>
+                      <option value='개별난방'>개별난방</option>
+                      <option value='중앙난방'>중앙난방</option>
+                      <option value='지역난방'>지역난방</option>
+                      <option value='미노출'>미노출</option>
+                    </select>
+                  </td>
+                  <td>난방연료</td>
+                  <td>
+                    <select id='heating_fuel'>
+                      <option value='' disabled selected>선택</option>
+                      <option value='도시가스'>도시가스</option>
+                      <option value='열병합'>열병합</option>
+                      <option value='기름'>기름</option>
+                      <option value='전기'>전기</option>
+                      <option value='심야전기'>심야전기</option>
+                      <option value='태양열'>태양열</option>
+                      <option value='LPG'>LPG</option>
+                      <option value='미노출'>미노출</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>냉방시설</td>
+                  <td colspan="3" id='airCondition'>
+                    <ul class="optionList">
+                      <li><input value="벽걸이에어컨" type="checkbox" class="input_check" /><label>벽걸이에어컨</label></li>
+                      <li><input value="스탠드에어컨" type="checkbox" class="input_check" /><label>스탠드에어컨</label></li>
+                      <li><input value="천장에어컨" type="checkbox" class="input_check" /><label>천장에어컨</label></li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>생활시설</td>
+                  <td colSpan="3" id='living_facilities'>
+                    <ul class="optionList">
+                      <li><input value="침대" type="checkbox" class="input_check" /> <label>침대</label></li>
+                      <li><input value="책상" type="checkbox" class="input_check" /> <label>책상</label></li>
+                      <li><input value="옷장" type="checkbox" class="input_check" /> <label>옷장</label></li>
+                      <li><input value="붙박이장" type="checkbox" class="input_check" /> <label>붙박이장</label></li>
+                      <li><input value="식탁" type="checkbox" class="input_check" /> <label>식탁</label></li>
+                      <li><input value="소파" type="checkbox" class="input_check" /> <label>소파</label></li>
+                      <li><input value="신발장" type="checkbox" class="input_check" /> <label>신발장</label></li>
+                      <li><input value="냉장고" type="checkbox" class="input_check" /> <label>냉장고</label></li>
+                      <li><input value="세탁기" type="checkbox" class="input_check" /> <label>세탁기</label></li>
+                      <li><input value="건조기" type="checkbox" class="input_check" /> <label>건조기</label></li>
+                      <li><input value="샤워부스" type="checkbox" class="input_check" /> <label>샤워부스</label></li>
+                      <li><input value="욕조" type="checkbox" class="input_check" /> <label>욕조</label></li>
+                      <li><input value="비데" type="checkbox" class="input_check" /> <label >비데</label></li>
+                      <li><input value="싱크대" type="checkbox" class="input_check" /> <label>싱크대</label></li>
+                      <li><input value="식기세척기" type="checkbox" class="input_check" /> <label>식기세척기</label></li>
+                      <li><input value="가스레인지" type="checkbox" class="input_check" /> <label>가스레인지</label></li>
+                      <li><input value="인덕션레인지" type="checkbox" class="input_check" /> <label>인덕션레인지</label></li>
+                      <li><input value="전자레인지" type="checkbox" class="input_check" /> <label>전자레인지</label></li>
+                      <li><input value="가스오븐" type="checkbox" class="input_check" /> <label>가스오븐</label></li>
+                      <li><input value="TV" type="checkbox" class="input_check" /> <label>TV</label></li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>보안시설</td>
+                  <td colspan="3" id='security_facilities'>
+                    <ul class="optionList">
+                      <li><input value="경비원" type="checkbox" class="input_check" /> <label>경비원</label></li>
+                      <li><input value="비디오폰" type="checkbox" class="input_check" /> <label>비디오폰</label></li>
+                      <li><input value="인터폰" type="checkbox" class="input_check" /> <label>인터폰</label></li>
+                      <li><input value="카드키" type="checkbox" class="input_check" /> <label>카드키</label></li>
+                      <li><input value="CCTV" type="checkbox" class="input_check" /> <label>CCTV</label></li>
+                      <li><input value="사설경비" type="checkbox" class="input_check" /> <label>사설경비</label></li>
+                      <li><input value="현관보안" type="checkbox" class="input_check" /> <label>현관보안</label></li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>기타시설</td>
+                  <td colspan="3" id="other_facilities">
+                    <ul class="optionList">
+                     <li><input value="엘레베이터" type="checkbox" class="input_check" /> <label>엘리베이터</label></li>
+                      <li><input value="화재경보기" type="checkbox" class="input_check" /> <label>화재경보기</label></li>
+                      <li><input value="무인택배함" type="checkbox" class="input_check" /> <label>무인택배함</label></li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>방범창/베란다</td>
+                  <td colspan="3" id="balcony">
+                    <ul class="optionList">
+                      <li><input value="방범창" type="checkbox" class="input_check" /> <label>방범창</label></li>
+                      <li><input value="베란다" type="checkbox" class="input_check" /> <label>베란다</label></li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className='입주일'>
+            <table className='styled-table leftA'>
+              <tbody>
+                <tr>
+                  <td>입주가능일</td>
+                  <td>
+                    <input type='radio' value={'즉시입주'} checked={moveable_date == '즉시입주'} onChange={() => setMoveable_date('즉시입주')} />즉시입주<br />
+                    <input type='radio' value={enterableDate} checked={moveable_date === enterableDate} onChange={() => setMoveable_date(enterableDate)} />
+                    {/* 연/월/일 선택 */}
+                    <select
+                      id='year'
+                      value={selectedDateForm.year}
+                      onChange={(e) =>
+                        setSelectedDateForm({ ...selectedDateForm, year: e.target.value })
+                      }
+                    >
+                      {availableYears.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                    년
+                    <select
+                      id='month'
+                      value={selectedDateForm.month}
+                      onChange={(e) =>
+                        setSelectedDateForm({ ...selectedDateForm, month: e.target.value })
+                      }
+                    >
+                      {availableMonths.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                    월
+                    <select
+                      id='day'
+                      value={selectedDateForm.day}
+                      onChange={(e) =>
+                        setSelectedDateForm({ ...selectedDateForm, day: e.target.value })
+                      }
+                    >
+                      {availableDays.map((item) => (
+                        <option value={item} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                    일 이후
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className='상세정보'>
+            <table className='styled-table leftA'>
+              <tbody>
+                <tr>
+                  <td>매물특징</td>
+                  <td>
+                    <input id='product_title' type='text' placeholder='리스트에 노출되는 문구' />
+                  </td>
+                </tr>
+                <tr>
+                <td>상세설명</td>
+                <td>
+                  <textarea id='product_content' placeholder='매물 상세 페이지에 노출되는 문구입니다.'></textarea>
+                </td>
+              </tr>
+              <tr>
+                {/* <td>매물사진</td>
+                  <td>
+                    <input type='file' multiple onChange={handleFileChange} /><br />
+                    <div>
+                      {selectedFiles.map((file, index) => (
+                        <img key={index} src={URL.createObjectURL(file)} alt={`Preview ${index}`} style={{ width: '100px', height: '100px', marginRight: '10px' }} />
+                      ))}
+                    </div>
+                  </td> */}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <button type='button' onClick={upload} className='upload'>등록하기</button>
+          <button type='button' className='back' onClick={() => { window.location.href = '/' }}>홈으로</button>
+
         </div>
 
         {/* <table className='content_insert'>
