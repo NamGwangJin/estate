@@ -4,7 +4,7 @@ export default function () {
     
     useEffect(() => {
         if (window.kakao && window.kakao.maps) {
-            // JavaScript 코드를 이곳에 삽입합니다.
+            // JavaScript 코드를 이곳에 삽입합니다 .
         
             // 지도를 표시할 div 엘리먼트를 찾습니다.
             var mapContainer = document.getElementById('mm_map_id');

@@ -125,7 +125,7 @@
   padding: 12px;
   text-align: center;
   
-  border: none; /* 세로 줄 없애기 */
+  border: none; /* 세로 줄 없애기  */
   border-bottom: 1px solid #ddd; /* 가로 줄만 남기기 */
 }
 

@@ -160,7 +160,7 @@ export default function AdminEstateDetail() {
                     </li>
                     <li style={{width: '500px'}}>
                         <span></span>
-                        {/* 선 크기를 위해 비워둠 */}
+                        {/* 선 크기를 위해 비워둠 */ }
                     </li>
                     <li style={{width: '500px'}}>
                         <span>검증 참고란</span>
