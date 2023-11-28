@@ -39,6 +39,11 @@ insert into products set product_type=#{param1},
         balcony=#{param34}, 
         moveable_date=#{param35}, 
         product_title=#{param36}, 
-        product_content=#{param37};
+        product_content=#{param37},
+        created=#{param38};
 </insert>
+
+<select id="getEstateDetail">
+select * from products where product_id=#{param1};
+</select>
 </mapper>

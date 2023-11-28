@@ -1,6 +1,8 @@
 package com.real.estate.Controller;
 
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,13 @@ import com.real.estate.DTO.NewsDTO;
 
 @RestController
 public class KimController {
+
+    // 현재 시간 가져오기
+    LocalDateTime currentTime = LocalDateTime.now();
+
+    // 원하는 형식으로 포맷팅하기
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    String now = currentTime.format(formatter);
 
     @Autowired
     private MainDAO mDAO;
@@ -62,7 +71,7 @@ public class KimController {
 
 
         pDAO.product_insert(product_type, location, building_name, building_use, extent, address, floor, floor_open, direction_criteria, direction, entrance, rooms, bathroom, roomuse, inner_structure, administration_cost, maintenance, managementCost_includ,
-                        building_dateType, transactionType, desiredAmount, loan, existingTenant_deposit, existingTenant_monthlyRent, product_content, total_parking, parking_per_room, heating_method, heating_fuel, airCondition, living_facilities, security_facilities, other_facilities, balcony, moveable_date, product_title, product_content);
+                        building_dateType, transactionType, desiredAmount, loan, existingTenant_deposit, existingTenant_monthlyRent, product_content, total_parking, parking_per_room, heating_method, heating_fuel, airCondition, living_facilities, security_facilities, other_facilities, balcony, moveable_date, product_title, product_content, now);
         return "success";
     }
 

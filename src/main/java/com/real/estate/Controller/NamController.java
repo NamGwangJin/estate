@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.real.estate.DAO.ProductDAO;
 import com.real.estate.DAO.qnaDAO;
 import com.real.estate.DAO.userDAO;
+import com.real.estate.DTO.ProductDTO;
 import com.real.estate.DTO.QuestionDTO;
 import com.real.estate.DTO.TourDTO;
 import com.real.estate.DTO.UserDTO;
@@ -28,6 +30,9 @@ public class NamController {
     
     @Autowired
     private userDAO userDAO;
+
+    @Autowired
+    private ProductDAO pDAO;
 
     // 현재 시간 가져오기
     LocalDateTime currentTime = LocalDateTime.now();
@@ -126,6 +131,14 @@ public class NamController {
         ArrayList<TourDTO> TourList = qnaDAO.getTourList();
 
         return TourList;
+    }
+
+    // 매물 상세 페이지 불러오는 코드
+    @GetMapping("/api/estate/detail")
+    public ProductDTO getEstateDetail(@RequestParam int no){
+        ProductDTO estateDetail = pDAO.getEstateDetail(no);
+
+        return estateDetail;
     }
 
 }
