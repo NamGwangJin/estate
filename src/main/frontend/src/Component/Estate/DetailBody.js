@@ -1,6 +1,27 @@
-import React, {useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function () {
+
+    const query = window.location.search;
+    const params = new URLSearchParams(query);
+    const no = params.get("no"); // 현재 매물의 번호를 쿼리스트링을 통해 가져옴
+  
+    const [detail, setDetail] = useState([]);
+    
+    useEffect(() => {
+        axios({
+          method: "get",
+          url: '/api/estate/detail',
+          params: { no: no }
+        })
+          .then((res) => {
+            setDetail(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, [no]);
     
     useEffect(() => {
         if (window.kakao && window.kakao.maps) {
@@ -91,57 +112,57 @@ export default function () {
                     <ul id="mm_detail_info_id">
                         <li>
                             <span>건축물용도</span>
-                            공동주택 (DB)
+                            {detail.product_type}
                         </li>
                         <li>
                             <span>해당동</span>
-                            1동 (DB)
+                            {detail.address}
                         </li>
                         <li>
                             <span>용도</span>
-                            주거용 (DB)
+                            {detail.building_use}
                         </li>
                         <li>
                             <span>방향기준</span>
-                            거실 (DB)
+                            {detail.direction_criteria}
                         </li>
                         <li>
                             <span>방향</span>
-                            북동 (DB)
+                            {detail.direction}
                         </li>
                         <li>
                             <span>현관구조</span>
-                            계단식 (DB)
+                            {detail.entrance}
                         </li>
                         <li>
                             <span>내부구조</span>
-                            복층식 (DB)
+                            {detail.inner_structure}
                         </li>
                         <li>
                             <div>
                                 <span style={{display: 'table-cell', float: 'left'}}>방범창 / 베란다</span>
-                                <div style={{display: 'table-cell', width: '200px'}}> - (DB)</div>
+                                <div style={{display: 'table-cell', width: '200px'}}><span>{detail.balcony}</span></div>
                             </div>
                         </li>
                         <li>
                             <div>
                                 <span style={{display: 'table-cell', float: 'left'}}>냉방시설</span>
-                                <div style={{display: 'table-cell', width: '200px'}}> - (DB)</div>
+                                <div style={{display: 'table-cell', width: '200px'}}>{detail.airCondition}</div>
                             </div>
                         </li>
                         <li>
                             <div>
                                 <span style={{display: 'table-cell', float: 'left'}}>생활시설</span>
-                                <div style={{display: 'table-cell', width: '200px'}}> - (DB)</div>
+                                <div style={{display: 'table-cell', width: '200px'}}>{detail.living_facilities}</div>
                             </div>
                         </li>
                         <li>
                             <span>매물번호</span>
-                            3183647 (DB)
+                            {detail.product_id}
                         </li>
                         <li>
                             <span>관리비포함내역</span>
-                            - (DB)
+                            -
                         </li>
                     </ul>
                 </div>
@@ -203,7 +224,7 @@ export default function () {
             <div className='info04'>
                 <h4>매물설명</h4>
                 <p id="DTL_DESC_id" style={{minHeight: '150px', lineHeight: '19px'}}>
-                    DB에 저장된 매물 설명 꺼내서 불러오기
+                    {detail.product_content}
                 </p>
             </div>
         </div>

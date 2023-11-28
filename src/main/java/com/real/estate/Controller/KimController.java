@@ -2,6 +2,8 @@ package com.real.estate.Controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Value;
 import java.io.IOException;
 
@@ -21,6 +23,13 @@ import com.real.estate.DTO.ProductDTO;
 
 @RestController
 public class KimController {
+
+    // 현재 시간 가져오기
+    LocalDateTime currentTime = LocalDateTime.now();
+
+    // 원하는 형식으로 포맷팅하기
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    String now = currentTime.format(formatter);
 
     @Autowired
     private MainDAO mDAO;
@@ -77,7 +86,7 @@ public class KimController {
 
 
         pDAO.product_insert(product_type, location, building_name, building_use, extent, address, floor, floor_open, direction_criteria, direction, entrance, rooms, bathroom, roomuse, inner_structure, administration_cost, maintenance, managementCost_includ,
-                        building_dateType, building_date, transactionType, desiredAmount, loan, existingTenant_deposit, existingTenant_monthlyRent, total_parking, parking_per_room, heating_method, heating_fuel, airCondition, living_facilities, security_facilities, other_facilities, balcony, moveable_date, product_title, product_content);
+                        building_dateType, building_date, transactionType, desiredAmount, loan, existingTenant_deposit, existingTenant_monthlyRent, total_parking, parking_per_room, heating_method, heating_fuel, airCondition, living_facilities, security_facilities, other_facilities, balcony, moveable_date, product_title, product_content, now);
 
         int product_id = pDAO.getLastInsertedProductId();
         System.out.println("product_id=" + product_id);
