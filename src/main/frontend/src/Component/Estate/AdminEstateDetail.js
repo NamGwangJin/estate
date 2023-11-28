@@ -26,6 +26,8 @@ export default function AdminEstateDetail() {
           });
       }, [no]);
 
+      console.log(detail);
+
 
   return (
     <div>

@@ -75,23 +75,23 @@ export default function DetailHead() {
                     </li>
                     <li style={{width: '350px'}}>
                         <span>융자금</span>
-                        - 만원 (DB)
+                        {detail.loan} <span className='sub'>만원</span>
                     </li>
                     <li style={{width: '368px'}}>
                         <span>입주 가능일</span>
-                        즉시입주 (DB)
+                        {detail.moveable_date}
                     </li>
                     <li style={{width: '350px'}}>
                         <span>월 관리비</span>
-                        - 원 (DB)
+                        {detail.administration_cost} <span className='sub'>원</span>
                     </li>
                     <li style={{width: '350px'}}>
                         <span>기보증금 / 월세</span>
-                        0 / 0 만원 (DB) 
+                        {detail.existingTenant_deposit} / {detail.existingTenant_monthlyRent} <span className='sub'>만원</span>
                     </li>
                     <li>
-                        <span>특징</span>
-                        청담동 하이엔드 오피스텔 2룸 월세매물 (DB) 
+                        <span>용도</span>
+                        {detail.roomuse}
                     </li>
                     <li>
                         <span>중개업소</span>

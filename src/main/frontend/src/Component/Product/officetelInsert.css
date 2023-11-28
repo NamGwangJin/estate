@@ -1,3 +1,42 @@
 .optionList li{
   float: left;
 }
+.kkk {
+  text-align: center;
+  width: 100%;
+}
+
+.leftA {
+  text-align: left;
+}
+
+.styled-table td select {
+  margin-right: 10px;
+}
+
+/* Adjust the last select element to remove the margin-right */
+.styled-table td select:last-child {
+  margin-right: 0;
+}
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.image-container img {
+  width: 100px;
+  height: 100px;
+}
+
+.image-container .remove-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px; /* 넓이 조정 */
+  height: 20px; /* 높이 조정 */
+  background-color: rgb(98, 97, 97); /* 예시: 배경색 추가 */
+  border: none; /* 예시: 테두리 제거 */
+  color: white; /* 예시: 텍스트 색상 설정 */
+  cursor: pointer;
+}

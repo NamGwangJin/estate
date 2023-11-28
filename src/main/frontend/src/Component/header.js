@@ -76,7 +76,7 @@ export default function Header() {
               <i className='fas fa-phone-rotary'></i>
               문의전화
             </span>
-            <span className='content'>041-579-6100</span>
+            <span className='content'>031-982-3535</span>
           </div>
         </div>
         <div className='header_top_right'>
@@ -108,7 +108,7 @@ export default function Header() {
     <div className='header_center'>
       <ul className='header_menu_etc_box'>
         <li className='header_list'>
-        <a onClick={() => handleNavigate('/request')}>매물 의뢰하기</a>
+        <a onClick={() => handleNavigate('/requestWrite')}>매물 의뢰하기</a>
         </li>
         <li className='header_list'>
         <a onClick={() => handleNavigate('/tour')}>매물투어 신청</a>

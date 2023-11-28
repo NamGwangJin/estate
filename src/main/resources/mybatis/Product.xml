@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.real.estate.DAO.ProductDAO">
-<insert id='product_insert'>
-insert into products set product_type=#{param1}, 
+    <insert id='product_insert' useGeneratedKeys="true" keyColumn="product_id" keyProperty="product_id" parameterType="com.real.estate.DTO.ProductDTO">
+        <!-- 기존의 product_insert 쿼리 -->
+        insert into products set 
+        product_type=#{param1}, 
         location=#{param2}, 
         building_name=#{param3}, 
         building_use=#{param4}, 
@@ -39,8 +41,19 @@ insert into products set product_type=#{param1},
         balcony=#{param34}, 
         moveable_date=#{param35}, 
         product_title=#{param36}, 
-        product_content=#{param37},
+        product_content=#{param37};
         created=#{param38};
+
+        <!-- product_id를 즉시 가져오기 위해 selectKey를 사용 -->
+        <selectKey keyProperty="product_id" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID() as product_id;
+        </selectKey>
+    </insert>
+
+<!-- product_id를 사용하여 image_insert 쿼리 수행 -->
+<insert id='image_insert' parameterType="com.real.estate.DTO.ProductDTO">
+    INSERT INTO products_img (img_productID, img_title) 
+    VALUES (#{product_id}, #{img_title});
 </insert>
 
 <select id="getEstateDetail">
