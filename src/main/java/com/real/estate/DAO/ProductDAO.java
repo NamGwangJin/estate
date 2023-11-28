@@ -1,6 +1,7 @@
 package com.real.estate.DAO;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.real.estate.DTO.ProductDTO;
 
@@ -10,8 +11,10 @@ public interface ProductDAO {
                     String administration_cost, String maintenance, String managementCost_includ, String building_dateType, String building_date, String transactionType, String desiredAmount, String loan, String existingTenant_deposit, String existingTenant_monthlyRent,
                     int total_parking, String parking_per_room, String heating_method, String heating_fuel, String airCondition, String living_facilities, String security_facilities, String other_facilities, String balcony, String moveable_date, String product_title, String product_content, String now);
 
-  void image_insert(String img_title);
-
   ProductDTO getEstateDetail(int no);
+
+  int getLastInsertedProductId();
+
+  void image_insert(@Param("product_id") int product_id, @Param("img_title") String img_title);
 }
 

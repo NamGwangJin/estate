@@ -49,6 +49,9 @@
             SELECT LAST_INSERT_ID() as product_id;
         </selectKey>
     </insert>
+    <select id="getLastInsertedProductId" resultType="int">
+        SELECT LAST_INSERT_ID() as product_id
+    </select>
 
 <!-- product_id를 사용하여 image_insert 쿼리 수행 -->
 <insert id='image_insert' parameterType="com.real.estate.DTO.ProductDTO">
