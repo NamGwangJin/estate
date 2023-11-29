@@ -41,8 +41,8 @@
         balcony=#{param34}, 
         moveable_date=#{param35}, 
         product_title=#{param36}, 
-        product_content=#{param37};
-        created=#{param38};
+        product_content=#{param37},
+        created=now();
 
         <!-- product_id를 즉시 가져오기 위해 selectKey를 사용 -->
         <selectKey keyProperty="product_id" order="AFTER" resultType="int">
