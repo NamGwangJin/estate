@@ -85,7 +85,8 @@ export default function OfficetelInsert() {
   const sidoCodeNm = getSidoCodeNm();
   const sigugunCodeNm = getSigugunCodeNm();
   const dongCodeNm = getDongCodeNm();
-  const location = sidoCodeNm + ' ' + sigugunCodeNm + ' ' + dongCodeNm
+  const location = sidoCodeNm + ' ' + sigugunCodeNm + ' ' + dongCodeNm;
+
   console.log('주소=' + location);
   console.log('용도=' + usage);
   console.log('매물종류=' + transactionType);
@@ -183,8 +184,6 @@ export default function OfficetelInsert() {
   };
 
 
-
-
   function upload() {
     const product_type = document.getElementById('product_type').value;
     const building_name = document.getElementById('building_name').value;
@@ -210,7 +209,8 @@ export default function OfficetelInsert() {
     const balcony = Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => decodeURIComponent(checkbox.value));
     const product_title = decodeURIComponent(document.getElementById('product_title').value);
     const product_content = decodeURIComponent(document.getElementById('product_content').value);
-        
+
+
 
     const formData = new FormData();
     formData.append('product_type', product_type);
@@ -230,7 +230,7 @@ export default function OfficetelInsert() {
     formData.append('inner_structure', structure);
     formData.append('administration_cost', maintenanceCost);
     formData.append('maintenance', maintenance);
-    formData.append('managementCost_includ', managementCost_includ); 
+    formData.append('managementCost_includ', managementCost_includ);
     formData.append('building_dateType', building_dateType);
     formData.append('building_date', building_date);
     formData.append('transactionType', transactionType);
@@ -242,19 +242,23 @@ export default function OfficetelInsert() {
     formData.append('parking_per_room', parking_per_room);
     formData.append('heating_method', heating_method);
     formData.append('heating_fuel', heating_fuel);
-    formData.append('airCondition', airCondition);  
-    formData.append('living_facilities', living_facilities);  
-    formData.append('security_facilities', security_facilities);  
-    formData.append('other_facilities', other_facilities);  
-    formData.append('balcony', balcony);  
-    formData.append('moveable_date', moveable_date);  
+    formData.append('airCondition', airCondition);
+    formData.append('living_facilities', living_facilities);
+    formData.append('security_facilities', security_facilities);
+    formData.append('other_facilities', other_facilities);
+    formData.append('balcony', balcony);
+    formData.append('moveable_date', moveable_date);
     formData.append('product_title', product_title);
     formData.append('product_content', product_content);
 
-    // 이미지 파일 추가
-    selectedFiles.forEach((file, index) => {
-      formData.append('images', file);
-    });
+    // 이미지가 선택되었을 때만 이미지 업로드 처리
+    if (selectedFiles.length > 0) {
+      selectedFiles.forEach((file, index) => {
+        formData.append('images', file);  // 'images' 파트에 이미지 추가
+      });
+    } else {
+      formData.append('images', new Blob(), 'empty-file');  // 이미지가 없을 경우 빈 파일 추가
+    }
 
     axios({
       method: 'post',
@@ -274,8 +278,13 @@ export default function OfficetelInsert() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    upload();
+    if (!sidoCodeNm || !sigugunCodeNm || !dongCodeNm) {
+      alert("지역을 선택해주세요");
+    } else if (document.getElementById('address_input').value == "") {
+      alert("상세 주소를 입력해주세요");
+    } else {
+      upload();
+    }
   }
   return (
     <div className='kkk'>
@@ -401,7 +410,7 @@ export default function OfficetelInsert() {
                 <tr>
                   <td>층</td>
                   <td colSpan={3}>
-                    <input type='number' id='floor' className='styled-input' placeholder='해당층' />층[저/-층] {/* 저/-층 에 건축물대장에서 최고층 가져와야함 */}
+                    <input type='number' id='floor' className='styled-input' placeholder='해당층' value={1} />층[저/DB층] {/* 저/-층 에 건축물대장에서 최고층 가져와야함 */}
                     <input type='radio' value={'노출'} checked={floorExposure == '노출'} onChange={() => setFloorExposure('노출')} />층수노출
                     <input type='radio' value={'노출안함'} checked={floorExposure == '노출안함'} onChange={() => setFloorExposure('노출안함')} />고/중/저
                   </td>
@@ -438,9 +447,9 @@ export default function OfficetelInsert() {
                 </tr>
                 <tr>
                   <td>방수</td>
-                  <td><input type='number' className='styled-input' id='rooms' value={1}/>개</td>
+                  <td><input type='number' className='styled-input' id='rooms' value={1} />개</td>
                   <td>욕실수</td>
-                  <td><input type='number' className='styled-input' id='bathroom' value={1}/>개</td>
+                  <td><input type='number' className='styled-input' id='bathroom' value={1} />개</td>
                 </tr>
                 <tr>
                   <td>용도</td>
@@ -768,7 +777,7 @@ export default function OfficetelInsert() {
                   <tr>
                     <td>매물사진</td>
                     <td>
-                      <input type='file' multiple onChange={handleFileChange} /><br />
+                      <input type='file' multiple onChange={handleFileChange} accept='image/*'/><br />
                       <div>
                         {selectedFiles.map((file, index) => (
                           <div key={index} className="image-container">
