@@ -4,7 +4,6 @@ import Bottom from '../bottom.js';
 import axios from 'axios';
 import { hangjungdong } from '../Home/hangjungdong.js';
 import './officetelInsert.css';
-import { v4 as uuidv4 } from 'uuid';
 
 export default function OfficetelInsert() {
 
@@ -198,19 +197,20 @@ export default function OfficetelInsert() {
     const entrance = document.getElementById('entrance').value;
     const rooms = document.getElementById('rooms').value;
     const bathroom = document.getElementById('bathroom').value;
-    const managementCost_includ = encodeURIComponent(Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => checkbox.value));
+    const managementCost_includ = Array.from(document.querySelectorAll('#managementCost_includ .input_check:checked')).map(checkbox => decodeURIComponent(checkbox.value));
     const building_dateType = document.getElementById('building_dateType').value;
     const total_parking = document.getElementById('total_parking').value;
     const parking_per_room = document.getElementById('parking_per_room').value;
     const heating_method = document.getElementById('heating_method').value;
     const heating_fuel = document.getElementById('heating_fuel').value;
-    const airCondition = encodeURIComponent(Array.from(document.querySelectorAll('#airCondition .input_check:checked')).map(checkbox => checkbox.value));
-    const living_facilities = encodeURIComponent(Array.from(document.querySelectorAll('#living_facilities .input_check:checked')).map(checkbox => checkbox.value));
-    const security_facilities = encodeURIComponent(Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => checkbox.value));
-    const other_facilities = encodeURIComponent(Array.from(document.querySelectorAll('#other_facilities .input_check:checked')).map(checkbox => checkbox.value));
-    const balcony = encodeURIComponent(Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => checkbox.value));
-    const product_title = encodeURIComponent(document.getElementById('product_title').value);
-    const product_content = encodeURIComponent(document.getElementById('product_content').value);
+    const airCondition = Array.from(document.querySelectorAll('#airCondition .input_check:checked')).map(checkbox => decodeURIComponent(checkbox.value));
+    const living_facilities = Array.from(document.querySelectorAll('#living_facilities .input_check:checked')).map(checkbox => decodeURIComponent(checkbox.value));
+    const security_facilities = Array.from(document.querySelectorAll('#security_facilities .input_check:checked')).map(checkbox => decodeURIComponent(checkbox.value));
+    const other_facilities = Array.from(document.querySelectorAll('#other_facilities .input_check:checked')).map(checkbox => decodeURIComponent(checkbox.value));
+    const balcony = Array.from(document.querySelectorAll('#balcony .input_check:checked')).map(checkbox => decodeURIComponent(checkbox.value));
+    const product_title = decodeURIComponent(document.getElementById('product_title').value);
+    const product_content = decodeURIComponent(document.getElementById('product_content').value);
+        
 
     const formData = new FormData();
     formData.append('product_type', product_type);
@@ -230,7 +230,7 @@ export default function OfficetelInsert() {
     formData.append('inner_structure', structure);
     formData.append('administration_cost', maintenanceCost);
     formData.append('maintenance', maintenance);
-    formData.append('managementCost_includ', managementCost_includ);  // 수정된 부분
+    formData.append('managementCost_includ', managementCost_includ); 
     formData.append('building_dateType', building_dateType);
     formData.append('building_date', building_date);
     formData.append('transactionType', transactionType);
@@ -242,12 +242,12 @@ export default function OfficetelInsert() {
     formData.append('parking_per_room', parking_per_room);
     formData.append('heating_method', heating_method);
     formData.append('heating_fuel', heating_fuel);
-    formData.append('airCondition', airCondition);  // 수정된 부분
-    formData.append('living_facilities', living_facilities);  // 수정된 부분
-    formData.append('security_facilities', security_facilities);  // 수정된 부분
-    formData.append('other_facilities', other_facilities);  // 수정된 부분
-    formData.append('balcony', balcony);  // 수정된 부분
-    formData.append('moveable_date', moveable_date);  // 수정된 부분
+    formData.append('airCondition', airCondition);  
+    formData.append('living_facilities', living_facilities);  
+    formData.append('security_facilities', security_facilities);  
+    formData.append('other_facilities', other_facilities);  
+    formData.append('balcony', balcony);  
+    formData.append('moveable_date', moveable_date);  
     formData.append('product_title', product_title);
     formData.append('product_content', product_content);
 
@@ -438,9 +438,9 @@ export default function OfficetelInsert() {
                 </tr>
                 <tr>
                   <td>방수</td>
-                  <td><input type='number' className='styled-input' id='rooms' />개</td>
+                  <td><input type='number' className='styled-input' id='rooms' value={1}/>개</td>
                   <td>욕실수</td>
-                  <td><input type='number' className='styled-input' id='bathroom' />개</td>
+                  <td><input type='number' className='styled-input' id='bathroom' value={1}/>개</td>
                 </tr>
                 <tr>
                   <td>용도</td>
