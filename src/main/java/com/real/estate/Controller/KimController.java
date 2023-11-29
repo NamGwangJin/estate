@@ -86,7 +86,7 @@ public class KimController {
 
 
         pDAO.product_insert(product_type, location, building_name, building_use, extent, address, floor, floor_open, direction_criteria, direction, entrance, rooms, bathroom, roomuse, inner_structure, administration_cost, maintenance, managementCost_includ,
-                        building_dateType, building_date, transactionType, desiredAmount, loan, existingTenant_deposit, existingTenant_monthlyRent, total_parking, parking_per_room, heating_method, heating_fuel, airCondition, living_facilities, security_facilities, other_facilities, balcony, moveable_date, product_title, product_content, now);
+                        building_dateType, building_date, transactionType, desiredAmount, loan, existingTenant_deposit, existingTenant_monthlyRent, total_parking, parking_per_room, heating_method, heating_fuel, airCondition, living_facilities, security_facilities, other_facilities, balcony, moveable_date, product_title, product_content);
 
         int product_id = pDAO.getLastInsertedProductId();
         System.out.println("product_id=" + product_id);
