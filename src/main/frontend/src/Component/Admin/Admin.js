@@ -10,6 +10,7 @@ export default function admin() {
         <Header />
         <div className='mainSection'>
           <Search_list />
+          
           <Admin_list />
         </div>
         <Bottom />

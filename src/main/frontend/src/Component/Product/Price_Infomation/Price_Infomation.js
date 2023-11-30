@@ -82,7 +82,7 @@ export default function Price_Infomation() {
                     <tr>
                         <td>거래종류</td>
                         <td>
-                            <input type='radio' value={'매매'} checked={transactionType == 'ㄹㄹ매매'} onChange={() => setTransactionType('매매')} />매매
+                            <input type='radio' value={'매매'} checked={transactionType == '매매'} onChange={() => setTransactionType('매매')} />매매
                             <input type='radio' value={'전세'} checked={transactionType == '전세'} onChange={() => setTransactionType('전세')} />전세
                             <input type='radio' value={'웰세'} checked={transactionType == '월세'} onChange={() => setTransactionType('월세')} />월세
                         </td>

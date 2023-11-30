@@ -12,7 +12,7 @@ import Apartment from './Product_Type/Apartment/Apartment.js'
 export default function Product() {
   return (
     <div className='App'>
-      <Header />
+      <Header /> 
       <div className='mainSection'>
         <div className='매물타입'>
           <table className='styled-table leftA' >
@@ -34,7 +34,9 @@ export default function Product() {
           </table>
         </div>  
         <Officete />
+        
         <Apartment />
+          
         <Price_Infomation />
         <Parking_Infomation />
         <Facility_infomation />

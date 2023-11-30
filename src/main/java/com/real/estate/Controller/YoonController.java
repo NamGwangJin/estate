@@ -24,4 +24,16 @@ public class YoonController {
         
         return propertyList;
     }
+
+    // 매물리스트를 매물타입에 따라 불러오는 코드
+    @GetMapping("/api/mamul_propertyList")
+    public ArrayList<PropertyListingDTO> get_mamul_Products() {
+        
+        // PropertyListingDTO를 사용하여 수정
+        ArrayList<PropertyListingDTO> propertyList = listDAO.get_mamul_Products();
+        
+        return propertyList;
+    }
+
+    
 }

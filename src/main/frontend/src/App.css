@@ -191,7 +191,7 @@
   display: block;
 }
 
-.container1 div, p, span, a, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, table, th, td, fieldset, legend, input, button, select, textarea {
+.container1 div, p, span, a, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, table, th, fieldset, legend, input, button, select, textarea {
   margin: 0;
   padding: 0;
   box-sizing: border-box;

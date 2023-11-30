@@ -39,12 +39,7 @@
   .radio-group {
     display: flex;
     flex-wrap: wrap;
-    
-  }
-  
-  .radio-group div {
-    margin-right: 20px;
-    margin-bottom: 8px;
+    align-items: center;
   }
 
   .button-container {
@@ -55,6 +50,20 @@
     margin-right: 5px; /* 원하는 간격 크기로 조절하세요 */
   }
   
+  .input_right_text {
+    font-size: 16px;
+    vertical-align: middle;
+    margin-right: 15px;
+    margin-left: 5px;
+  }
   
-  
-  
+  .input-button {
+    padding: 8px;
+    margin-right: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: ;
+    cursor: pointer;
+  }
