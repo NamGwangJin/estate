@@ -278,13 +278,44 @@ export default function OfficetelInsert() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    // 지역 선택 여부 확인
     if (!sidoCodeNm || !sigugunCodeNm || !dongCodeNm) {
       alert("지역을 선택해주세요");
-    } else if (document.getElementById('address_input').value == "") {
-      alert("상세 주소를 입력해주세요");
-    } else {
-      upload();
+      return;
     }
+    // 상세 주소 입력 여부 확인
+    const detailedAddressInput = document.getElementById('address_input').value;
+    if (!detailedAddressInput.trim()) {
+      alert("상세 주소를 입력해주세요");
+      return;
+    }
+    // 다른 필수 항목 확인
+    const desiredAmount = document.getElementById('desiredAmount').value;
+    const totalParking = document.getElementById('total_parking').value;
+    const parkingPerRoom = document.getElementById('parking_per_room').value;
+    const productTitle = document.getElementById('product_title').value;
+    const productContent = document.getElementById('product_content').value;
+
+    if (!desiredAmount.trim()) {
+      alert("희망금액을 입력해주세요.");
+      return;
+    }
+    if (!totalParking.trim() && !parkingPerRoom.trim()) {
+      alert("주차대수를 입력해주세요.");
+      return;
+    }
+    if (!productTitle.trim()) {
+      alert("상품 제목을 입력해주세요.");
+      return;
+    }
+    if (!productContent.trim()) {
+      alert("상품 설명을 입력해주세요.");
+      return;
+    }
+    // 모든 유효성 검사가 통과하면 폼 제출 로직 진행
+    upload();
+
   }
   return (
     <div className='kkk'>
@@ -777,12 +808,16 @@ export default function OfficetelInsert() {
                   <tr>
                     <td>매물사진</td>
                     <td>
-                      <input type='file' multiple onChange={handleFileChange} accept='image/*'/><br />
+                      <input type='file' multiple onChange={handleFileChange} accept='image/*' /><br />
+                      {/* 선택한 파일명 안나오게 하려면 라벨로 이미지등록 버튼 만들고, input file은 display:none 해놓고 클릭태그연결 */}
                       <div>
+                        {selectedFiles.length > 0 && (
+                          <p>{selectedFiles.length}개의 파일이 선택되었습니다.</p>
+                        )}
                         {selectedFiles.map((file, index) => (
                           <div key={index} className="image-container">
                             <img src={URL.createObjectURL(file)} alt={`Preview ${index}`} />
-                            <button onClick={() => handleRemoveImage(index)} className="remove-button">
+                            <button type='button' onClick={() => handleRemoveImage(index)} className="remove-button">
                               X
                             </button>
                           </div>
@@ -790,7 +825,6 @@ export default function OfficetelInsert() {
                       </div>
                     </td>
                   </tr>
-
                 </tbody>
               </table>
             </div>
