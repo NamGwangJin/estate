@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Search_list.css';
 
 export default function Search_list() {
@@ -11,6 +13,21 @@ export default function Search_list() {
         거래완료: false,
         종료예정: false,
       });
+
+      // const [propertyList, setPropertyList] = useState([]);
+
+      // useEffect(() => { // 질문 리스트 불러오는 함수
+      //   axios({
+      //     method: "get",
+      //     url: '/api/mamul_propertyList',
+      //   })
+      //     .then((res) => {
+      //       setPropertyList(res.data);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // }, []);
     
       // 클릭 이벤트 핸들러 정의
 
@@ -43,15 +60,25 @@ export default function Search_list() {
               <td rowSpan={2} className='header-cell'>조건조회</td>
               <td style={{textAlign:'left'}}>
                 <select id="propertyType1" name="propertyType" className='styled-select'>
-                  <option value="all">매물종류</option>
+                  <option value="">매물종류</option>
+                  <option value=''>오피스텔</option>
+                  <option value=''>아파트</option>
+                  <option value=''>상가</option>
+                  <option value=''>지식산업센터·사무실</option>
+                  <option value=''>토지</option>
+                  <option value=''>공장·창고</option>
                 </select>
                 <select id="propertyType2" name="propertyType" className='styled-select'>
                   <option value="all">거래종류</option>
+                  <option value="">매매</option>
+                  <option value="">전세</option>
+                  <option value="">월세</option>
                 </select>
-                <select id="propertyType3" name="propertyType" className='styled-select'>
+                {/* <select id="propertyType3" name="propertyType" className='styled-select'>
                   <option value="all">홍보방식</option>
-                </select>
+                </select> */}
                 <input type='text' placeholder='매물번호조회' className='styled-input'></input>
+                {/*  버튼을 넣을까?????????????? */}
               </td>
             </tr>
 
@@ -60,9 +87,9 @@ export default function Search_list() {
                 <select id="propertyType4" name="propertyType" className='styled-select'>
                   <option value="all">전체</option>
                 </select>
-                <input type='text' className='styled-input'></input>동
-                <input type='text' className='styled-input' style={{marginLeft: "1px"}}></input>호
-                <input type='text' className='styled-input'></input>번지
+                <input type='text' className='styled-input'></input><span className='input_right_text'>동</span>
+                <input type='text' className='styled-input' style={{marginLeft: "1px"}}></input><span className='input_right_text'>호</span>
+                <input type='text' className='styled-input'></input><span className='input_right_text'>번지</span>
               </td>
             </tr>
 
@@ -74,29 +101,29 @@ export default function Search_list() {
                 textAlign: 'left'
                 }}>
                 <div>
-                  <input type="radio" id="all" name="inputDate" value="all" />
-                  <label htmlFor="all">전체</label>
+                  <input type="radio" id="all" name="inputDate" value="all" style={{verticalAlign: 'middle'}}/>
+                  <span className='input_right_text'>전체</span>
                 </div>
                 <div>
-                  <input type="radio" id="1week" name="inputDate" value="1week" />
-                  <label htmlFor="1week">1주</label>
+                  <input type="radio" id="1week" name="inputDate" value="1week" style={{verticalAlign: 'middle'}} />
+                  <span className='input_right_text' >1주</span>
                 </div>
                 <div>
-                  <input type="radio" id="1month" name="inputDate" value="1month" />
-                  <label htmlFor="1month">1개월</label>
+                  <input type="radio" id="1month" name="inputDate" value="1month" style={{verticalAlign: 'middle'}} />
+                  <span className='input_right_text'>1개월</span>
                 </div>
                 <div>
-                  <input type="radio" id="3months" name="inputDate" value="3months" />
-                  <label htmlFor="3months">3개월</label>
+                  <input type="radio" id="3months" name="inputDate" value="3months" style={{verticalAlign: 'middle'}} />
+                  <span className='input_right_text'>3개월</span>
                 </div>
                 <div>
-                  <input type="radio" id="6months" name="inputDate" value="6months" />
-                  <label htmlFor="6months">6개월</label>
+                  <input type="radio" id="6months" name="inputDate" value="6months" style={{verticalAlign: 'middle'}} />
+                  <span className='input_right_text'>6개월</span>
                 </div>
-                <div>
-                  <input type="radio" id="custom" name="inputDate" value="custom" />
-                  <label htmlFor="custom">기간입력</label>
-                </div>
+                {/* <div> */}
+                  <input type="text" id="custom" name="inputDate" style={{verticalAlign: 'middle', width: '120px'}}  className='styled-input' placeholder='20xx-xx-xx' />
+                  <button type='button' className='input-button'>날짜입력</button>
+                {/* </div> */}
               </td>
             </tr>
 

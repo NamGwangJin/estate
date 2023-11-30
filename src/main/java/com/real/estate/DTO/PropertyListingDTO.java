@@ -39,4 +39,5 @@ public class PropertyListingDTO {
     String moveable_date;
     String product_title;
     String product_content;
+    String product_state;
 }
