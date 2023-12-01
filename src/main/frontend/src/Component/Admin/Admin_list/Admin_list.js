@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Admin_list.css';
 
-export default function Admin_list() {
+export default function Admin_list({propertyType}) {
   
+  console.log("유형="+propertyType);
       const [propertyList, setPropertyList] = useState([]);
 
     useEffect(() => { // 매물 리스트 불러오는 함수

@@ -3,7 +3,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Search_list.css';
 
-export default function Search_list() {
+export default function Search_list({propertyType, setPropertyType}) {  // 파라미터추가 *수헌
+
+  const handlePropertyTypeChange = (event) => {   // 추가 *수헌
+    setPropertyType(event.target.value);
+  };
 
   const [buttonStates, setButtonStates] = useState({
       전체: false,
@@ -60,7 +64,8 @@ export default function Search_list() {
               <tr>
                 <td rowSpan={2} className='header-cell'>조건조회</td>
                 <td style={{ textAlign: 'left' }}>
-                  <select id="propertyType1" name="propertyType" className='styled-select'>
+                  {/* <select id="propertyType1" name="propertyType" className='styled-select'> */}
+                  <select id="propertyType1" name="propertyType" className='styled-select' value={propertyType} onChange={handlePropertyTypeChange}>
                     <option value="">매물종류</option>
                     <option value='오피'>오피스텔</option>
                     <option value='아파트'>아파트</option>
