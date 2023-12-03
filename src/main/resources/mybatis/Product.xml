@@ -62,4 +62,9 @@
 <select id="getEstateDetail">
 select * from products where product_id=#{param1};
 </select>
+
+<!-- 법정동 코드 SELECT -->
+<select id="getBjdCode">
+select bjd_code from bjd where bjd_name=#{param1};
+</select>
 </mapper>

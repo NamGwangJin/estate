@@ -1,5 +1,6 @@
 package com.real.estate.Controller;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -139,6 +140,14 @@ public class NamController {
         ProductDTO estateDetail = pDAO.getEstateDetail(no);
 
         return estateDetail;
+    }
+
+    // 매물 등록 주소를 이용하여 법정동 코드 SELECT
+    @PostMapping("/api/get/bjd_code")
+    public String getBjdCode(@RequestParam String location){
+        BigInteger bjd_code = pDAO.getBjdCode(location);
+
+        return String.valueOf(bjd_code);
     }
 
 }

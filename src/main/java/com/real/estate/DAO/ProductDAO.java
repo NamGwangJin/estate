@@ -1,5 +1,7 @@
 package com.real.estate.DAO;
 
+import java.math.BigInteger;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,5 +18,7 @@ public interface ProductDAO {
   int getLastInsertedProductId();
 
   void image_insert(@Param("product_id") int product_id, @Param("img_title") String img_title);
+
+  BigInteger getBjdCode(String location);
 }
 
