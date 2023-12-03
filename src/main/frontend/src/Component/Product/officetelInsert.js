@@ -73,11 +73,93 @@ export default function OfficetelInsert() {
     setExistingTenant_monthlyRent(formattedValue);
   }
 
+  // 건축물대장 api 사용 코드 시작
 
   const [val1, setVal1] = useState(""); //지역 state
   const [val2, setVal2] = useState("");
   const [val3, setVal3] = useState("");
   const { sido, sigugun, dong } = hangjungdong;
+
+  const [category, setCategory] = useState('업무시설');
+
+  const changeCategory = (e) => {
+    const selectedCategory = e.target.value;
+    setCategory(selectedCategory);
+  };
+
+  const handleVal3Change = (e) => {
+    const selectedVal3 = e.target.value;
+    setVal3(selectedVal3);
+  };
+  
+  let bjd_code = '';
+
+  const [buildingNames, setBuildingNames] = useState([]);
+
+
+  useEffect(() => {
+  // useEffect 내에서 getDongCodeNm 호출
+  const sidoCodeNm = getSidoCodeNm();
+  const sigugunCodeNm = getSigugunCodeNm();
+  const dongCodeNm = getDongCodeNm();
+  const location = sidoCodeNm + ' ' + sigugunCodeNm + ' ' + dongCodeNm;
+
+  if (dongCodeNm !== '') {
+
+    axios({
+      method: 'post',
+      url: '/api/get/bjd_code',
+      params: {location: location}
+    })
+    .then((res) => {
+      bjd_code = String(res.data);
+        var xhr = new XMLHttpRequest();
+        var url = 'http://apis.data.go.kr/1613000/BldRgstService_v2/getBrTitleInfo'; /*URL*/
+        var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'awBBm0hyTWbKIRKVbFl85MND2xq0q9rJJsqUONeQoaX0ThS%2Bc4R31pxCy4H67wC443%2F2mAkFDnfHrpWXXCalyQ%3D%3D'; /*Service Key*/
+        queryParams += '&' + encodeURIComponent('sigunguCd') + '=' + encodeURIComponent(bjd_code.substring(0, 5)); /**/
+        queryParams += '&' + encodeURIComponent('bjdongCd') + '=' + encodeURIComponent(bjd_code.substring(5)); /**/
+        queryParams += '&' + encodeURIComponent('platGbCd') + '=' + encodeURIComponent('0'); /**/
+        queryParams += '&' + encodeURIComponent('bun') + '=' + encodeURIComponent(''); /**/
+        queryParams += '&' + encodeURIComponent('ji') + '=' + encodeURIComponent(''); /**/
+        queryParams += '&' + encodeURIComponent('startDate') + '=' + encodeURIComponent(''); /**/
+        queryParams += '&' + encodeURIComponent('endDate') + '=' + encodeURIComponent(''); /**/
+        queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('999'); /**/
+        queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('3'); /**/
+        xhr.open('GET', url + queryParams);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                // XML 데이터 파싱
+                var xmlDoc = this.responseXML;
+
+                // 원하는 데이터 추출
+                var items = xmlDoc.getElementsByTagName('item'); // 'item' 태그에 있는 데이터 추출
+                const names = [];
+                
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    var name = item.getElementsByTagName('bldNm')[0].textContent;
+                    var main = item.getElementsByTagName('mainPurpsCdNm')[0].textContent;
+
+                    if ( main !== category ) continue;
+
+                    // 필요한 데이터를 추출하여 사용
+                    names.push(name);
+                    console.log(name, main);
+                }
+
+                setBuildingNames(names); // 추출된 건물 이름을 상태에 설정
+            }
+        };
+      
+        xhr.send('');
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+}, [val1, val2, val3]);
+
+  // 건축물대장 사용코드 끝
 
   const getSidoCodeNm = () => sido.find(el => el.sido === val1)?.codeNm || '';
   const getSigugunCodeNm = () => sigugun.find(el => el.sido === val1 && el.sigugun === val2)?.codeNm || '';
@@ -328,8 +410,8 @@ export default function OfficetelInsert() {
                 <tr>
                   <td>매물등록</td>
                   <td colSpan={3}>
-                    <select className='styled-select' id='product_type' style={{ width: "20%" }}>
-                      <option value='오피스텔'>오피스텔</option>
+                    <select className='styled-select' id='product_type' style={{ width: "20%" }} onChange={changeCategory}>
+                      <option value='업무시설'>오피스텔</option>
                       <option value='아파트'>아파트</option>
                       <option value='상가'>상가</option>
                       <option value='지식산업센터/사무실'>지식산업센터·사무실</option>
@@ -359,7 +441,7 @@ export default function OfficetelInsert() {
                           </option>
                         ))}
                     </select>
-                    <select className='styled-select' style={{ width: "20%" }} onChange={(e) => setVal3(e.target.value)}>
+                    <select className='styled-select' style={{ width: "20%" }} onChange={handleVal3Change}>
                       <option value="">선택</option>
                       {dong
                         .filter((el) => el.sido === val1 && el.sigugun === val2)
@@ -375,8 +457,11 @@ export default function OfficetelInsert() {
                   <td>단지명</td>
                   <td colSpan={3}>
                     <select className='styled-select' style={{ width: "30%" }} id='building_name'>
-                      <option value='단지1'>단지1</option>
-                      <option value='단지2'>단지2</option>
+                      {buildingNames.map((name, index) => (
+                        <option key={index} value={name}>
+                          {name}
+                        </option>
+                      ))}
                     </select>
                   </td>
                 </tr>
