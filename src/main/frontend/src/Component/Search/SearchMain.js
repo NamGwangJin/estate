@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../header.js';
 import './SearchMain.css';
 
@@ -24,7 +24,7 @@ export default function SearchMain() {
       <Header />
       <div className='SearchSection'>
         <div className='SearchMap' id='SearchMap'>
-          
+          {/* 지도나옴 */}
         </div>
         <div className='SearchList'>
           asd
