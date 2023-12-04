@@ -141,7 +141,7 @@
   margin-right: 10px; /* 버튼 간격을 조절합니다. */
 }
 
-.styled-input {
+/* .styled-input {
   width: calc(33.33% - 6px);
   padding: 8px;
   margin-right: 6px;
@@ -149,7 +149,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
-}
+} */
 
 .styled-select2 {
   padding: 8px;

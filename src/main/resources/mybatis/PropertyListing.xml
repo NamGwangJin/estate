@@ -7,8 +7,38 @@
     select * from products;
 </select>
 
-<select id="get_mamul_Products" resultType="com.real.estate.DTO.PropertyListingDTO">
-    select *  from products where product_type = #{param1}
+<!-- 
+<select id="getProductsByType" resultType="com.real.estate.DTO.PropertyListingDTO">
+    select * from products where product_type = #{param1}
 </select>
+
+<select id="getProductsByState" resultType="com.real.estate.DTO.PropertyListingDTO">
+    select * from products where product_state = #{param1}
+</select>
+
+<select id="getProductsByTransactionType" resultType="com.real.estate.DTO.PropertyListingDTO">
+    select * from products where transactionType = #{param1}
+</select> -->
+
+<select id="getProductsDynamic" resultType="com.real.estate.DTO.PropertyListingDTO">
+    SELECT * FROM products
+    <where>
+        <if test="propertyType != null and propertyType != ''">
+            AND product_type = #{propertyType}
+        </if>
+        <if test="propertyState != null and propertyState != ''">
+            AND product_state = #{propertyState}
+        </if>
+        <if test="transactionType != null and transactionType != ''">
+            AND transactionType = #{transactionType}
+        </if>
+        <if test="inputDate != null and inputDate != ''">
+            AND created BETWEEN #{inputDate} AND CURRENT_DATE
+        </if>
+    </where>
+</select>
+
+
+
 
 </mapper>
