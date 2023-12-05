@@ -7,19 +7,6 @@
     select * from products;
 </select>
 
-<!-- 
-<select id="getProductsByType" resultType="com.real.estate.DTO.PropertyListingDTO">
-    select * from products where product_type = #{param1}
-</select>
-
-<select id="getProductsByState" resultType="com.real.estate.DTO.PropertyListingDTO">
-    select * from products where product_state = #{param1}
-</select>
-
-<select id="getProductsByTransactionType" resultType="com.real.estate.DTO.PropertyListingDTO">
-    select * from products where transactionType = #{param1}
-</select> -->
-
 <select id="getProductsDynamic" resultType="com.real.estate.DTO.PropertyListingDTO">
     SELECT * FROM products
     <where>

@@ -38,7 +38,7 @@ public class YoonController {
             queryParams.put("inputDate", "전체".equals(inputDate) ? null : inputDate);
 
             propertyList = propertyListingDAO.getProductsDynamic(queryParams);
-    
+     
             return new ResponseEntity<>(propertyList, HttpStatus.OK);
         } catch (Exception e) {
             System.err.println("매물 목록 요청 처리 중 오류 발생: " + e.getMessage());

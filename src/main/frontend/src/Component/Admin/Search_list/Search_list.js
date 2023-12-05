@@ -265,6 +265,7 @@ export default function Search_list({ propertyType, setPropertyType }) {  // 파
             </td>
           </tr>
 
+          {/* 입력일 */}
           <tr>
             <td className='header-cell'>입력일</td>
             <td className='radio-group' style={{
@@ -272,10 +273,7 @@ export default function Search_list({ propertyType, setPropertyType }) {  // 파
               borderTopWidth: '0px',
               textAlign: 'left'
             }}>
-
               {renderRadios('입력일')}
-
-
               <input
                 type="text"
                 id="custom"
@@ -294,10 +292,9 @@ export default function Search_list({ propertyType, setPropertyType }) {  // 파
               >
                 날짜입력
               </button> */}
-
             </td>
           </tr>
-
+          {/* 조건조회 */}
           <tr>
             <td className='header-cell'>조건조회</td>
             <td style={{ textAlign: 'left', borderTopWidth: '0px' }}>

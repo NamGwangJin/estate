@@ -12,6 +12,5 @@ import com.real.estate.DTO.QuestionDTO;
 @Mapper
 public interface PropertyListingDAO {
     ArrayList<PropertyListingDTO> getProductsDynamic(Map<String, Object> queryParams);
-    // ArrayList<PropertyListingDTO> getProductsPaged(Map<String, Object> queryParams);
     int countProducts(Map<String, Object> queryParams);
 }

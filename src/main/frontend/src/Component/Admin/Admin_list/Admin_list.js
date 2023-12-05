@@ -28,9 +28,6 @@ export default function Admin_list({ propertyType }) {
                 <td data-th="Property_number" style={{ textAlign: 'left' }}>
                   {elem.product_id}
                   {elem.product_id}
-                  {/* <button class="copy">복사</button>
-              <button class="edit">수정</button>
-              <button class="print">인쇄</button> */}
                 </td>
                 <td data-th="Property_type">
                   {elem.product_type}
