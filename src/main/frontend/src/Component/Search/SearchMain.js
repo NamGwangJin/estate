@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../header.js';
+import axios from 'axios';
 import './SearchMain.css';
 
 export default function SearchMain() {
@@ -22,32 +23,45 @@ export default function SearchMain() {
     const map = new window.kakao.maps.Map(mapContainer, mapOption);
   }, []); // useEffect를 빈 배열로 전달하여 컴포넌트가 마운트될 때 한 번만 실행
 
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: 'api/getProducts',
+    })
+      .then((res) => {
+        console.log('받아온데이터=' + res.data);  // 나중에 삭제
+        setSearchList(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <div className='SearchMain'>
       <Header />
       <div className='SearchSection'>
-        <div>하이</div>
+        <div>필터만들기</div>
         <div className='MapandList'>
           <div className='SearchMap' id='SearchMap'>
             {/* 지도나옴 */}
           </div>
           <div className='SearchList'>
-            {searchList.map((list)=> (
+            {searchList.map((list) => (
               <div className='productBox'>
-                <div className='productIMG'>{list.productIMG}</div>
+                <div className='productIMG'><img className="ImgOne" src={`/img/${list.img_title}`} alt={list.img_title} /></div>
                 <div className='productWord'>
-                  <div>{list.product_id}</div>
-                  <p>{list.desiredAmount}</p>
-                  <h5>{list.product_content}</h5>
+                  <div>매물번호{list.product_id}</div>
+                  <p>{list.transactionType} {list.desiredAmount} 원</p>
+                  <h5>{list.product_title}</h5>
                   <p>{list.location}</p>
-                  <hr/>
+                  <hr />
                   <div className='product_type'>
-                    {/* <span>{list.product_type}</span><hr/><span>{list.building_name}</span><span>{list.extend}</span> */}
-                    {list.product_type == "오피스텔" || list.product_type == "아파트" ? (
-                      <><span>{list.product_type}</span><hr/><span>{list.building_name}</span><hr/><span>{list.extend}</span></> 
-                    ) :  list.product_type == "상가" ? (
-                      <><span>{list.product_type}</span><hr/><span>{list.extend}</span><hr/><span>{list.building_use}</span></>
-                    ) : null }
+                    {list.product_type === "오피스텔" || list.product_type === "아파트" ? (   // 인서트될때 업무시설로 되어있음. 광진 확인
+                      <><span>{list.product_type}</span><hr /><span>{list.building_name}</span><hr /><span>{list.extent}</span></>
+                    ) : list.product_type === "토지" ? (
+                      <><span>{list.product_type}</span><hr/><span>{list.extent}</span><hr/><span>{list.location}</span></>
+                    ) : <><span>{list.product_type}</span><hr/><span>{list.extent}</span></>
+                    }
                   </div>
                 </div>
               </div>

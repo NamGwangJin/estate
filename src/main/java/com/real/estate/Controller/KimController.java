@@ -131,4 +131,10 @@ public class KimController {
         return "success";
     }
 
+    @GetMapping("/api/getProducts")
+    public ArrayList<ProductDTO> getProducts() {
+        ArrayList<ProductDTO> searchList = pDAO.getProducts();
+
+        return searchList;
+    }
 }
