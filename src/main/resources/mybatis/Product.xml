@@ -67,4 +67,30 @@ select * from products where product_id=#{param1};
 <select id="getBjdCode">
 select bjd_code from bjd where bjd_name=#{param1};
 </select>
+
+<select id="getProducts" resultType="com.real.estate.DTO.ProductDTO">
+SELECT
+  p.*,
+  pi.img_no,
+  pi.img_title
+  FROM
+  products p
+LEFT JOIN
+  (
+    SELECT
+      img_productID,
+      MIN(img_no) AS min_img_no
+    FROM
+      products_img
+    GROUP BY
+      img_productID
+  ) AS min_img
+ON
+  p.product_id = min_img.img_productID
+LEFT JOIN
+  products_img pi
+ON
+  min_img.img_productID = pi.img_productID
+  AND min_img.min_img_no = pi.img_no;
+</select>
 </mapper>
