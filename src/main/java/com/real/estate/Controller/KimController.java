@@ -94,7 +94,7 @@ public class KimController {
             @RequestParam String airCondition, @RequestParam String living_facilities,
             @RequestParam String security_facilities, @RequestParam String other_facilities,
             @RequestParam String balcony, @RequestParam String moveable_date, @RequestParam String product_title,
-            @RequestParam String product_content, @RequestPart MultipartFile[] images,
+            @RequestParam String product_content, @RequestPart(required = false) MultipartFile[] images,
             @ModelAttribute ProductDTO productDTO) {
 
         pDAO.product_insert(product_type, location, building_name, building_use, extent, address, floor, floor_open,
@@ -107,25 +107,28 @@ public class KimController {
 
         int product_id = pDAO.getLastInsertedProductId();
         System.out.println("product_id=" + product_id);
-        for (int i = 0; i < images.length; i++) {
-            MultipartFile image = images[i];
-            try {
-                // 중복된 파일명 처리
-                String img_title = product_id + "-image-" + (i+1) + ".jpg";
-        
-                String filePath = imageUploadDirectory + File.separator + img_title;
-                
-                // 이미지 파일을 서버에 저장
-                image.transferTo(new File(filePath));
-        
-                // 여기에 다른 이미지 파일에 대한 처리 로직을 추가할 수 있습니다.
-        
-                // 이미지에 대한 메타데이터를 데이터베이스에 삽입
-                pDAO.image_insert(product_id, img_title);
-            } catch (IOException e) {
-                e.printStackTrace();
-                // 이미지 파일 저장 중 오류 발생 시 처리 로직
-                return "error";
+
+        if (images != null) {
+            for (int i = 0; i < images.length; i++) {
+                MultipartFile image = images[i];
+                try {
+                    // 중복된 파일명 처리
+                    String img_title = product_id + "-image-" + (i + 1) + ".jpg";
+
+                    String filePath = imageUploadDirectory + File.separator + img_title;
+
+                    // 이미지 파일을 서버에 저장
+                    image.transferTo(new File(filePath));
+
+                    // 여기에 다른 이미지 파일에 대한 처리 로직을 추가할 수 있습니다.
+
+                    // 이미지에 대한 메타데이터를 데이터베이스에 삽입
+                    pDAO.image_insert(product_id, img_title);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // 이미지 파일 저장 중 오류 발생 시 처리 로직
+                    return "error";
+                }
             }
         }
         return "success";

@@ -48,11 +48,14 @@ export default function SearchMain() {
           <div className='SearchList'>
             {searchList.map((list) => (
               <div className='productBox'>
-                <div className='productIMG'><img className="ImgOne" src={`/img/${list.img_title}`} alt={list.img_title} /></div>
+                <div className='productIMG'>
+                  {/* <img className="ImgOne" src={`/img/${list.img_title}`} alt={list.img_title} /> */}
+                  <img className="ImgOne" src={`/img/${list.img_title || '이미지준비중.png'}`} alt={list.img_title} />
+                </div>
                 <div className='productWord'>
-                  <div>매물번호{list.product_id}</div>
+                  <div className='product_id_box'>매물번호 {list.product_id}</div>
                   <p>{list.transactionType} {list.desiredAmount} 원</p>
-                  <h5>{list.product_title}</h5>
+                  <h4>{list.product_title}</h4>
                   <p>{list.location}</p>
                   <hr />
                   <div className='product_type'>

@@ -338,9 +338,10 @@ export default function OfficetelInsert() {
       selectedFiles.forEach((file, index) => {
         formData.append('images', file);  // 'images' 파트에 이미지 추가
       });
-    } else {
-      formData.append('images', new Blob(), 'empty-file');  // 이미지가 없을 경우 빈 파일 추가
     }
+    // } else {
+    //   formData.append('images', new Blob(), 'empty-file');  // 이미지가 없을 경우 빈 파일 추가
+    // }
 
     axios({
       method: 'post',
@@ -462,6 +463,8 @@ export default function OfficetelInsert() {
                           {name}
                         </option>
                       ))}
+                      <option value={"테스트"}>테스트</option> 
+                      {/* 나중에 지우기 */}
                     </select>
                   </td>
                 </tr>
