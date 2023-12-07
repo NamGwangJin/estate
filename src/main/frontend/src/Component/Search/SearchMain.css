@@ -66,3 +66,28 @@
   width: 200px;
   height: 150px;
 }
+.circleMonth, .circleCharter, .circleSale {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  font-size: 12px;
+  /* margin-right: 1px; */
+  margin-top: 2px;
+}
+.circleMonth{
+  background-color: #4da8e5; /* 원의 배경색을 적절히 조절하세요 */
+}
+.circleCharter{
+  background-color: rgb(209, 197, 30); /* 원의 배경색을 적절히 조절하세요 */
+}
+.circleSale{
+  background-color: #ef5b5b; /* 원의 배경색을 적절히 조절하세요 */
+}
+.transaction{
+  margin-top: 2px;
+}
