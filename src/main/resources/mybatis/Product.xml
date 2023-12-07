@@ -68,7 +68,7 @@ select * from products where product_id=#{param1};
 select bjd_code from bjd where bjd_name=#{param1};
 </select>
 
-<!-- <select id="getProducts" resultType="com.real.estate.DTO.ProductDTO">
+<select id="getAllProducts" resultType="com.real.estate.DTO.ProductDTO">
 SELECT
   p.*,
   pi.img_no,
@@ -92,7 +92,7 @@ LEFT JOIN
 ON
   min_img.img_productID = pi.img_productID
   AND min_img.min_img_no = pi.img_no;
-</select> -->
+</select>
 
 <select id="getProducts" resultType="com.real.estate.DTO.ProductDTO" parameterType="java.util.Map">
   SELECT

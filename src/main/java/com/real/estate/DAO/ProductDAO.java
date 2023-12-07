@@ -26,8 +26,8 @@ public interface ProductDAO {
 
   // ArrayList<ProductDTO> getProducts();
 
+  ArrayList<ProductDTO> getAllProducts();
+
   ArrayList<ProductDTO> getProducts(Map<String, String> filterParams);
-
-
 
 }
