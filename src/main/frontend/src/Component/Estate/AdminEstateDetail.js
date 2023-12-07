@@ -214,7 +214,7 @@ export default function AdminEstateDetail() {
             <div className='info' style={{marginTop: "100px", width: "1080px", display: "flex", justifyContent: "center", alignItems: "center", border: "0px"}}>
                 <span className='link' onClick={() => {window.location.href="/admin"}}>리스트로 이동</span> <p> | </p>
                 <span className='link' onClick={() => {window.location.href="/estate/detail?no="+detail.product_id}}>등록매물 보기</span> <p> | </p>
-                <span className='link'>매물정보 수정</span>
+                <span className='link' onClick={() => {window.location.href="/admin/estate/edit?no="+detail.product_id}}>매물정보 수정</span>
             </div>
         </div>
         <Bottom />

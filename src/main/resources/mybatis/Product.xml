@@ -22,7 +22,7 @@
         inner_structure=#{param15},
         administration_cost=#{param16}, 
         maintenance=#{param17}, 
-        managementCost_includ=#{param18}, 
+        managementCost_include=#{param18}, 
         building_dateType=#{param19}, 
         building_date=#{param20}, 
         transactionType=#{param21}, 
@@ -60,8 +60,49 @@
 </insert>
 
 <select id="getEstateDetail">
-select * from products where product_id=#{param1};
+select * from products where product_id = #{param1};
 </select>
+
+<select id="getEstateDetail_img">
+select b.img_no, b.img_productID, b.img_title
+from products a join products_img b on a.product_id = b.img_productID
+where product_id = #{param1};
+</select>
+
+<update id="product_update">
+update products set
+buliding_use=#{param1},
+floor_open=#{param2},
+direction_criteria=#{param3},
+direction=#{param4},
+entrance=#{param5},
+rooms=#{param6},
+bathroom=#{param7},
+roomuse=#{param8},
+inner_structure=#{param9},
+administration_cost=#{param10},
+maintenance=#{param11},
+managementCost_include=#{param12},
+building_dateType=#{param13},
+building_date=#{param14},
+transactionType=#{param15},
+desiredAmount=#{param16},
+loan=#{param17},
+existingTenant_deposit=#{param18},
+existingTenant_monthlyRent=#{param19},
+heating_method=#{param20},
+heating_fuel=#{param21},
+airCondition=#{param22},
+living_facilities=#{param23},
+security_facilities=#{param24},
+other_facilities=#{param25},
+balcony=#{param26},
+moveable_date=#{param27},
+product_title=#{param28},
+product_content=#{param29},
+updated=#{param30}
+where product_id = #{param31}
+</update>
 
 <!-- 법정동 코드 SELECT -->
 <select id="getBjdCode">

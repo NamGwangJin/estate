@@ -51,7 +51,7 @@ export default function OfficetelInsert() {
       setDesiredAmount(`${newDeposit}/${newMonthlyRent}`);
     }
   }, [newDeposit, newMonthlyRent]);
-  console.log("가격=" + desiredAmount);
+
   // 융자금 스크립트
   const [loan, setLoan] = useState('0');
   const handleLoan = (e) => {
@@ -113,6 +113,9 @@ export default function OfficetelInsert() {
     })
     .then((res) => {
       bjd_code = String(res.data);
+      let pageNo = 1;
+      let items = '';
+      while(true) {
         var xhr = new XMLHttpRequest();
         var url = 'http://apis.data.go.kr/1613000/BldRgstService_v2/getBrTitleInfo'; /*URL*/
         var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'awBBm0hyTWbKIRKVbFl85MND2xq0q9rJJsqUONeQoaX0ThS%2Bc4R31pxCy4H67wC443%2F2mAkFDnfHrpWXXCalyQ%3D%3D'; /*Service Key*/
@@ -123,8 +126,8 @@ export default function OfficetelInsert() {
         queryParams += '&' + encodeURIComponent('ji') + '=' + encodeURIComponent(''); /**/
         queryParams += '&' + encodeURIComponent('startDate') + '=' + encodeURIComponent(''); /**/
         queryParams += '&' + encodeURIComponent('endDate') + '=' + encodeURIComponent(''); /**/
-        queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('999'); /**/
-        queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('3'); /**/
+        queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('100'); /**/
+        queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent(String(pageNo)); /**/
         xhr.open('GET', url + queryParams);
         xhr.onreadystatechange = function () {
             if (this.readyState == 4) {
@@ -132,8 +135,10 @@ export default function OfficetelInsert() {
                 var xmlDoc = this.responseXML;
 
                 // 원하는 데이터 추출
-                var items = xmlDoc.getElementsByTagName('item'); // 'item' 태그에 있는 데이터 추출
+                items = xmlDoc.getElementsByTagName('item'); // 'item' 태그에 있는 데이터 추출
                 const names = [];
+
+                alert(items.length);
                 
                 for (var i = 0; i < items.length; i++) {
                     var item = items[i];
@@ -150,8 +155,16 @@ export default function OfficetelInsert() {
                 setBuildingNames(names); // 추출된 건물 이름을 상태에 설정
             }
         };
-      
+    
         xhr.send('');
+
+        if ( items.length < 100 ) {
+          alert("여기?");
+          break;
+        }
+
+        pageNo++;
+      }
     })
     .catch(error => {
       console.log(error);
@@ -168,10 +181,6 @@ export default function OfficetelInsert() {
   const sigugunCodeNm = getSigugunCodeNm();
   const dongCodeNm = getDongCodeNm();
   const location = sidoCodeNm + ' ' + sigugunCodeNm + ' ' + dongCodeNm;
-
-  console.log('주소=' + location);
-  console.log('용도=' + usage);
-  console.log('매물종류=' + transactionType);
 
   const now = new Date();
   const nowYear = now.getFullYear();
@@ -211,8 +220,6 @@ export default function OfficetelInsert() {
   let day = form.day;
 
   const building_date = year + '-' + month + '-' + day;
-  console.log(building_date);
-
 
   // 입주가능일 선택 셀렉트
   const [selectedDateForm, setSelectedDateForm] = useState({
@@ -249,8 +256,7 @@ export default function OfficetelInsert() {
   useEffect(() => {
     setMoveable_date(enterableDate);
   }, [enterableDate]);
-  console.log('Selected Value:', moveable_date);
-  console.log('Selected Date Form:', enterableDate);
+
 
   // 이미지 스크립트
   const [selectedFiles, setSelectedFiles] = useState([]);  // 이미지파일 첨부
