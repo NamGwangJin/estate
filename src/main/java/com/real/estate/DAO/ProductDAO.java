@@ -18,6 +18,12 @@ public interface ProductDAO {
 
   ProductDTO getEstateDetail(int no);
 
+  ArrayList<ProductDTO> getEstateDetail_img(int no);
+
+  void product_update(String building_use, String floor_open, String direction_criteria, String direction, String entrance, int rooms, int bathroom, String roomuse, String inner_structure,
+                  String administration_cost, String maintenance, String managementCost_includ, String building_dateType, String building_date, String transactionType, String desiredAmount, String loan, String existingTenant_deposit, String existingTenant_monthlyRent,
+                  String heating_method, String heating_fuel, String airCondition, String living_facilities, String security_facilities, String other_facilities, String balcony, String moveable_date, String product_title, String product_content, String updated, int no);
+
   int getLastInsertedProductId();
 
   void image_insert(@Param("product_id") int product_id, @Param("img_title") String img_title);
