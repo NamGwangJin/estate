@@ -6,21 +6,17 @@ import './SearchMain.css';
 export default function SearchMain() {
 
   const [searchList, setSearchList] = useState([]);
-
   const [transactionType, setTransactionType] = useState('');
   const [productType, setProductType] = useState('');
 
-
   useEffect(() => {
-    // JavaScript 코드를 이곳에 삽입합니다.
-
     // 지도를 표시할 div 엘리먼트를 찾습니다.
     const mapContainer = document.getElementById('SearchMap');
 
     // 지도 옵션 설정
     const mapOption = {
       center: new window.kakao.maps.LatLng(37.6438713, 126.624015), // 지도의 중심좌표
-      level: 9, // 지도의 확대 레벨
+      level: 8, // 지도의 확대 레벨
     };
 
     // 지도를 생성합니다
@@ -93,18 +89,28 @@ export default function SearchMain() {
           </div>
           <div className='SearchList'>
             {searchList.map((list) => (
-              // <div className='productBox'>
               <div className='productBox' key={list.product_id}>
                 <div className='productIMG'>
-                  {/* <img className="ImgOne" src={`/img/${list.img_title}`} alt={list.img_title} /> */}
                   <img className="ImgOne" src={`/img/${list.img_title || '이미지준비중.png'}`} alt={list.img_title} />
                 </div>
                 <div className='productWord'>
                   <div className='product_id_box'>매물번호 {list.product_id}</div>
-                  <p>{list.transactionType} {list.desiredAmount} 원</p>
-                  <h4>{list.product_title}</h4>
+                  {list.transactionType === "월세" ? (
+                    <p className='transaction'>
+                      <>
+                        <span className="circleMonth">보</span> {list.desiredAmount.split('/')[0]} 만원 &nbsp;&nbsp;
+                        <span className="circleMonth">월</span> {list.desiredAmount.split('/')[1]} 만원
+                      </>
+                    </p>
+                  ) : list.transactionType === "전세" ? (
+                    <><p className='transaction'><span className="circleCharter">전</span> {list.desiredAmount ? `${list.desiredAmount} 만원` : <span style={{ fontWeight: "700" }}>가격협의</span>}</p></>
+                  ) : list.transactionType === "매매" ? (
+                    <><p className='transaction'><span className="circleSale">매</span> {list.desiredAmount ? `${list.desiredAmount} 만원` : <span style={{ fontWeight: "700" }}>가격협의</span>}</p></>
+                  ) : null}
+                  {/* 글자수가 길어지면 ... 로 바뀌는 로직. 나중에 글자수 사이즈 체크해서 글자수 수정 */}
+                  <h4>{list.product_title.length > 20 ? `${list.product_title.slice(0, 20)}...` : list.product_title}</h4>
                   <p>{list.location}</p>
-                  <hr />
+                  <hr style={{ width: "200px" }} />
                   <div className='product_type'>
                     {list.product_type === "오피스텔" || list.product_type === "아파트" ? (   // 인서트될때 업무시설로 되어있음. 광진 확인
                       <><span>{list.product_type}</span><hr /><span>{list.building_name}</span><hr /><span>{list.extent}</span></>

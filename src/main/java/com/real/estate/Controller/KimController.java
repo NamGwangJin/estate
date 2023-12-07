@@ -117,12 +117,11 @@ public class KimController {
                     // 중복된 파일명 처리
                     String img_title = product_id + "-image-" + (i + 1) + ".jpg";
 
+                    // 클라우드에 올릴때는 imageUploadDirectory 수정
                     String filePath = imageUploadDirectory + File.separator + img_title;
 
                     // 이미지 파일을 서버에 저장
                     image.transferTo(new File(filePath));
-
-                    // 여기에 다른 이미지 파일에 대한 처리 로직을 추가할 수 있습니다.
 
                     // 이미지에 대한 메타데이터를 데이터베이스에 삽입
                     pDAO.image_insert(product_id, img_title);
