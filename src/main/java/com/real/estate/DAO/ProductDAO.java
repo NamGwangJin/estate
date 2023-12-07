@@ -2,6 +2,8 @@ package com.real.estate.DAO;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,5 +29,11 @@ public interface ProductDAO {
   void image_insert(@Param("product_id") int product_id, @Param("img_title") String img_title);
 
   BigInteger getBjdCode(String location);
-}
 
+  // ArrayList<ProductDTO> getProducts();
+
+  ArrayList<ProductDTO> getAllProducts();
+
+  ArrayList<ProductDTO> getProducts(Map<String, String> filterParams);
+
+}

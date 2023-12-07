@@ -344,9 +344,10 @@ export default function OfficetelInsert() {
       selectedFiles.forEach((file, index) => {
         formData.append('images', file);  // 'images' 파트에 이미지 추가
       });
-    } else {
-      formData.append('images', new Blob(), 'empty-file');  // 이미지가 없을 경우 빈 파일 추가
     }
+    // } else {
+    //   formData.append('images', new Blob(), 'empty-file');  // 이미지가 없을 경우 빈 파일 추가
+    // }
 
     axios({
       method: 'post',
@@ -385,7 +386,7 @@ export default function OfficetelInsert() {
     const productTitle = document.getElementById('product_title').value;
     const productContent = document.getElementById('product_content').value;
 
-    if (!desiredAmount.trim()) {
+    if (!desiredAmount.trim()) {  // 미입력시 "가격문의" 로 올라가도록 수정
       alert("희망금액을 입력해주세요.");
       return;
     }
@@ -468,6 +469,8 @@ export default function OfficetelInsert() {
                           {name}
                         </option>
                       ))}
+                      <option value={"테스트"}>테스트</option> 
+                      {/* 나중에 지우기 */}
                     </select>
                   </td>
                 </tr>
@@ -677,11 +680,13 @@ export default function OfficetelInsert() {
                     <td>
                       {transactionType == '월세' ? (
                         <>
-                          <input id="newDeposit" type="text" value={newDeposit} onChange={handleDepositChange} />만원 / 월세가<input id="newMonthlyRent" type="text" value={newMonthlyRent} onChange={handleMonthlyRentChange} />만원
+                          <input id="newDeposit" type="text" value={newDeposit} onChange={handleDepositChange} placeholder="만원 단위로 입력"/>만원 / 월세가<input id="newMonthlyRent" type="text" value={newMonthlyRent} onChange={handleMonthlyRentChange} placeholder="만원 단위로 입력" />만원
                         </>
                       ) : (
                         <>
-                          <input id='desiredAmount' type='text' value={desiredAmount} onChange={handledesiredAmountChange} />만원
+                          <input id='desiredAmount' type='text' value={desiredAmount} onChange={handledesiredAmountChange} placeholder="만원 단위로 입력"/>만원
+                          {/* 광진 작업 끝나고 업로드 가능하게 되면, 미입력해도 서버전송되도록 수정. 383라인도 수정*/}
+                          {/* 아마도 컨트롤러에서 required = false 하면 될듯 */}
                         </>
                       )}
                     </td>
