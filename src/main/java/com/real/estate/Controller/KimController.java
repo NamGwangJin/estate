@@ -136,20 +136,19 @@ public class KimController {
         return "success";
     }
 
-    // @GetMapping("/api/getProducts")
-    // public ArrayList<ProductDTO> getProducts() {
-    //     ArrayList<ProductDTO> searchList = pDAO.getProducts();
-
-    //     return searchList;
-    // }
     @GetMapping("/api/getProducts")
     public ArrayList<ProductDTO> getProducts(
-            @RequestParam(value = "transactionType", required = false) String transactionType,
-            @RequestParam(value = "productType", required = false) String productType
+        @RequestParam(value = "transactionType", required = false) String transactionType,
+        @RequestParam(value = "productType", required = false) String productType
     ) {
         Map<String, String> filterParams = new HashMap<>();
         filterParams.put("transactionType", transactionType);
         filterParams.put("productType", productType);
+
+        // 선택된 값이 없을 경우 전체 목록을 불러오도록 처리
+        if (transactionType == null && productType == null) {
+            return pDAO.getAllProducts();
+        }
 
         ArrayList<ProductDTO> searchList = pDAO.getProducts(filterParams);
         return searchList;
