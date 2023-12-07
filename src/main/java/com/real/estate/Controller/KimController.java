@@ -2,6 +2,8 @@ package com.real.estate.Controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Value;
@@ -134,10 +136,22 @@ public class KimController {
         return "success";
     }
 
-    @GetMapping("/api/getProducts")
-    public ArrayList<ProductDTO> getProducts() {
-        ArrayList<ProductDTO> searchList = pDAO.getProducts();
+    // @GetMapping("/api/getProducts")
+    // public ArrayList<ProductDTO> getProducts() {
+    //     ArrayList<ProductDTO> searchList = pDAO.getProducts();
 
+    //     return searchList;
+    // }
+    @GetMapping("/api/getProducts")
+    public ArrayList<ProductDTO> getProducts(
+            @RequestParam(value = "transactionType", required = false) String transactionType,
+            @RequestParam(value = "productType", required = false) String productType
+    ) {
+        Map<String, String> filterParams = new HashMap<>();
+        filterParams.put("transactionType", transactionType);
+        filterParams.put("productType", productType);
+
+        ArrayList<ProductDTO> searchList = pDAO.getProducts(filterParams);
         return searchList;
     }
 }
