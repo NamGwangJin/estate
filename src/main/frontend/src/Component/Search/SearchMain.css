@@ -1,6 +1,22 @@
 .SearchMain hr {
   border: 0.1px solid #c3c3c3;
 }
+.SearchSection select{
+  width: 200px;
+  height: 30px;
+  padding-left: 10px;
+  font-size: 18px;
+  color: #006fff;
+  border: 1px solid #006fff;
+  border-radius: 3px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+.SearchSection select::-ms-expand{
+  display: none;
+}
 
 .MapandList{
   display: flex;

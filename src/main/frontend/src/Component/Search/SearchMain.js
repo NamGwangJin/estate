@@ -7,6 +7,10 @@ export default function SearchMain() {
 
   const [searchList, setSearchList] = useState([]);
 
+  const [transactionType, setTransactionType] = useState('');
+  const [productType, setProductType] = useState('');
+
+
   useEffect(() => {
     // JavaScript 코드를 이곳에 삽입합니다.
 
@@ -23,31 +27,69 @@ export default function SearchMain() {
     const map = new window.kakao.maps.Map(mapContainer, mapOption);
   }, []); // useEffect를 빈 배열로 전달하여 컴포넌트가 마운트될 때 한 번만 실행
 
+  // useEffect(() => {
+  //   axios({
+  //     method: "get",
+  //     url: 'api/getProducts',
+  //   })
+  //     .then((res) => {
+  //       console.log('받아온데이터=' + res.data);  // 나중에 삭제
+  //       setSearchList(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
   useEffect(() => {
+    // 서버에서 데이터를 가져오는 코드
     axios({
       method: "get",
       url: 'api/getProducts',
+      params: {
+        transactionType: transactionType,
+        productType: productType
+      }
     })
       .then((res) => {
-        console.log('받아온데이터=' + res.data);  // 나중에 삭제
+        console.log(res.data);
         setSearchList(res.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [transactionType, productType]); // useEffect를 [transactionType, productType]로 설정하여 해당 상태가 변경될 때마다 실행
+  
   return (
     <div className='SearchMain'>
       <Header />
       <div className='SearchSection'>
-        <div>필터만들기</div>
+        <div>
+          {/* <select> */}
+          <select onChange={(e) => setTransactionType(e.target.value)}>
+            <option value='' disabled selected>거래유형</option>
+            <option value='매매'>매매</option>
+            <option value='전세'>전세</option>
+            <option value='월세'>월세</option>
+          </select>
+          {/* <select> */}
+          <select onChange={(e) => setProductType(e.target.value)}>
+            <option value='' disabled selected>매물유형</option>
+            <option value='오피스텔'>오피스텔</option>
+            <option value='아파트'>아파트</option>
+            <option value='상가'>상가</option>
+            <option value='지식산업센터/사무실'>지식산업센터·사무실</option>
+            <option value='토지'>토지</option>
+            <option value='공장/창고'>공장·창고</option>
+          </select>
+        </div>
         <div className='MapandList'>
           <div className='SearchMap' id='SearchMap'>
             {/* 지도나옴 */}
           </div>
           <div className='SearchList'>
             {searchList.map((list) => (
-              <div className='productBox'>
+              // <div className='productBox'>
+              <div className='productBox' key={list.product_id}>
                 <div className='productIMG'>
                   {/* <img className="ImgOne" src={`/img/${list.img_title}`} alt={list.img_title} /> */}
                   <img className="ImgOne" src={`/img/${list.img_title || '이미지준비중.png'}`} alt={list.img_title} />

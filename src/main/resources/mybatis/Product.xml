@@ -68,7 +68,7 @@ select * from products where product_id=#{param1};
 select bjd_code from bjd where bjd_name=#{param1};
 </select>
 
-<select id="getProducts" resultType="com.real.estate.DTO.ProductDTO">
+<!-- <select id="getProducts" resultType="com.real.estate.DTO.ProductDTO">
 SELECT
   p.*,
   pi.img_no,
@@ -92,5 +92,41 @@ LEFT JOIN
 ON
   min_img.img_productID = pi.img_productID
   AND min_img.min_img_no = pi.img_no;
+</select> -->
+
+<select id="getProducts" resultType="com.real.estate.DTO.ProductDTO" parameterType="java.util.Map">
+  SELECT
+    p.*,
+    pi.img_no,
+    pi.img_title
+  FROM
+    products p
+  LEFT JOIN
+    (
+      SELECT
+        img_productID,
+        MIN(img_no) AS min_img_no
+      FROM
+        products_img
+      GROUP BY
+        img_productID
+    ) AS min_img
+  ON
+    p.product_id = min_img.img_productID
+  LEFT JOIN
+    products_img pi
+  ON
+    min_img.img_productID = pi.img_productID
+    AND min_img.min_img_no = pi.img_no
+  WHERE
+    <!-- transactionType이 선택된 경우 -->
+    <if test="transactionType != null and transactionType != ''">
+      p.transactionType = #{transactionType}
+    </if>
+    <!-- productType이 선택된 경우 -->
+    <if test="productType != null and productType != ''">
+      <if test="transactionType != null and transactionType != ''">AND</if>
+      p.product_type = #{productType}
+    </if>
 </select>
 </mapper>
