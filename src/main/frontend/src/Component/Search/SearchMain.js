@@ -1,3 +1,4 @@
+/* global kakao */
 import React, { useEffect, useState } from 'react';
 import Header from '../header.js';
 import axios from 'axios';
@@ -21,6 +22,24 @@ export default function SearchMain() {
 
     // 지도를 생성합니다
     const map = new window.kakao.maps.Map(mapContainer, mapOption);
+
+    // var geocoder = new kakao.maps.services.Geocoder();
+    // geocoder.addressSearch('경기도 김포시 구래동 6872-2', function(result, status) {
+    //   if(status === kakao.maps.services.status.OK){
+    //     var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+    //     var marker = new kakao.maps.Marker({
+    //       map: map,
+    //       position: coords
+    //     });
+    //     var infowindow = new kakao.mps.InfoWindow({
+    //       content: <div style="width:150px;text-align:center;padding:6px 0;">우리집</div>
+    //     });
+    //     infowindow.open(map, marker);
+    //     map.setCenter(coords);
+    //   }
+    // })
+
   }, []); // useEffect를 빈 배열로 전달하여 컴포넌트가 마운트될 때 한 번만 실행
 
   useEffect(() => {
@@ -58,6 +77,8 @@ export default function SearchMain() {
     const productTypeSelect = document.getElementById('productTypeSelect');
     productTypeSelect.value = '';
   };
+
+
 
   return (
     <div className='SearchMain'>
