@@ -2,5 +2,8 @@
   "dependencies": {
     "react-kakao-maps": "^0.0.13",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
