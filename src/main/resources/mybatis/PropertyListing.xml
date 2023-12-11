@@ -7,8 +7,57 @@
     select * from products;
 </select>
 
-<select id="get_mamul_Products" resultType="com.real.estate.DTO.PropertyListingDTO">
-    select *  from products where product_type = #{param1}
+<!-- <select id="getProductsDynamic" resultType="com.real.estate.DTO.PropertyListingDTO">
+    SELECT * FROM products
+    <where>
+        <if test="propertyType != null and propertyType != ''">
+            AND product_type = #{propertyType}
+        </if>
+        <if test="propertyState != null and propertyState != ''">
+            AND product_state = #{propertyState}
+        </if>
+        <if test="transactionType != null and transactionType != ''">
+            AND transactionType = #{transactionType}
+        </if>
+        <if test="inputDate != null and inputDate != ''">
+            AND created BETWEEN #{inputDate} AND CURRENT_DATE
+        </if>
+    </where>
+</select> -->
+
+<select id="getProductsDynamic" resultType="com.real.estate.DTO.PropertyListingDTO">
+    SELECT * FROM products
+    <where>
+        <choose>
+            <when test="propertyNumber != null and propertyNumber != ''">
+                AND product_id = #{propertyNumber}
+            </when>
+            <otherwise>
+                <if test="propertyType != null and propertyType != ''">
+                    AND product_type = #{propertyType}
+                </if>
+                <if test="propertyState != null and propertyState != ''">
+                    AND product_state = #{propertyState}
+                </if>
+                <if test="transactionType != null and transactionType != ''">
+                    AND transactionType = #{transactionType}
+                </if>
+                <if test="customDate != null and customDate != ''">
+                    AND DATE(created) = #{customDate}
+                </if>
+                <if test="inputDate != null and inputDate != ''">
+                    AND DATE(created) BETWEEN #{inputDate} AND CURRENT_DATE
+                </if>
+                <if test="startPrice != null and startPrice != '' and endPrice != null and endPrice != ''">
+                    AND desiredAmount BETWEEN #{startPrice} AND #{endPrice}
+                </if>
+            </otherwise>
+        </choose>
+    </where>
 </select>
+
+
+
+
 
 </mapper>
