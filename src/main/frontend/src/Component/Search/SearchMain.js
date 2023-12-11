@@ -11,36 +11,91 @@ export default function SearchMain() {
   const [productType, setProductType] = useState('');
 
   useEffect(() => {
+    //   console.log('window.kakao:', window.kakao);
+
+    //   // 지도를 표시할 div 엘리먼트를 찾습니다.
+    //   const mapContainer = document.getElementById('SearchMap');
+
+    //   // 지도 옵션 설정
+    //   const mapOption = {
+    //     center: new window.kakao.maps.LatLng(37.6438713, 126.624015), // 지도의 중심좌표
+    //     level: 13, // 지도의 확대 레벨
+    //   };
+
+    //   // 지도를 생성합니다
+    //   const map = new window.kakao.maps.Map(mapContainer, mapOption);
+
+    //   const geocoder = new window.kakao.maps.services.Geocoder();
+    //   geocoder.addressSearch('경기도 김포시 구래동 6872-2', function(result, status) {
+    //     if(status === window.kakao.maps.services.Status.OK){
+    //       var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+
+    //       var marker = new window.kakao.maps.Marker({
+    //         map: map,
+    //         position: coords
+    //       });
+    //       // var infowindow = new window.kakao.maps.InfoWindow({
+    //       //   content: '<div style="width:150px;text-align:center;padding:6px 0;">우리집</div>'
+    //       // });
+    //       // infowindow.open(map, marker);
+    //       map.setCenter(coords);
+    //     }
+    //   })
+
+    // }, []); // useEffect를 빈 배열로 전달하여 컴포넌트가 마운트될 때 한 번만 실행
+    // Kakao 맵 스크립트 로드 여부 확인
+    if (!window.kakao) {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=73dfe3bf43bd31398ab2de67c59cad97&libraries=services,clusterer&autoload=false`;
+      document.head.appendChild(script);
+
+      script.onload = () => {
+        // 스크립트 로드 완료 후 실행
+        initializeMap();
+      };
+    } else {
+      // 이미 스크립트 로드되어 있을 때 바로 실행
+      initializeMap();
+    }
+  }, []); // useEffect를 빈 배열로 전달하여 컴포넌트가 마운트될 때 한 번만 실행
+
+  const initializeMap = () => {
+    console.log('window.kakao:', window.kakao);
+
     // 지도를 표시할 div 엘리먼트를 찾습니다.
     const mapContainer = document.getElementById('SearchMap');
 
-    // 지도 옵션 설정
-    const mapOption = {
-      center: new window.kakao.maps.LatLng(37.6438713, 126.624015), // 지도의 중심좌표
-      level: 8, // 지도의 확대 레벨
-    };
+    console.log('mapContainer:', mapContainer);
 
-    // 지도를 생성합니다
-    const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
-    // var geocoder = new kakao.maps.services.Geocoder();
-    // geocoder.addressSearch('경기도 김포시 구래동 6872-2', function(result, status) {
-    //   if(status === kakao.maps.services.status.OK){
-    //     var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+    if (mapContainer) {
+      // 지도 옵션 설정
+      const mapOption = {
+        center: new window.kakao.maps.LatLng(37.6438713, 126.624015), // 지도의 중심좌표
+        level: 8, // 지도의 확대 레벨
+      };
 
-    //     var marker = new kakao.maps.Marker({
-    //       map: map,
-    //       position: coords
-    //     });
-    //     var infowindow = new kakao.mps.InfoWindow({
-    //       content: <div style="width:150px;text-align:center;padding:6px 0;">우리집</div>
-    //     });
-    //     infowindow.open(map, marker);
-    //     map.setCenter(coords);
-    //   }
-    // })
+      // 지도를 생성합니다
+      const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
-  }, []); // useEffect를 빈 배열로 전달하여 컴포넌트가 마운트될 때 한 번만 실행
+      const geocoder = new window.kakao.maps.services.Geocoder();
+      geocoder.addressSearch('경기도 김포시 구래동 6872-2', function (result, status) {
+        if (status === window.kakao.maps.services.Status.OK) {
+          var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+          // var coords = new kakao.maps.Point(result[0].x, result[0].y); // x와 y 좌표를 반대로 사용
+
+
+          var marker = new window.kakao.maps.Marker({
+            map: map,
+            position: coords
+          });
+
+          map.setCenter(coords);
+        }
+      });
+    }
+  };
 
   useEffect(() => {
     // 서버에서 데이터를 가져오는 코드
