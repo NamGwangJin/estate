@@ -6,50 +6,88 @@ import './Search_list.css';
 
 
 export default function Search_list({ propertyType, setPropertyType }) {  // 파라미터추가 *수헌
+  
   const [customDate, setCustomDate] = useState('');
+  const [startPrice, setStartPrice] = useState('');
+  const [endPrice, setEndPrice] = useState('');
+  const [propertyNumber, setPropertyNumber] = useState('');
 
-  const handleCustomDateChange = (e) => {
-    const inputValue = e.target.value;
+  const handlePriceChange = (e, setterFunction) => {
+    const value = e.target.value.replace(/[^\d]/g, ''); // 숫자만 남기기
+  
+    // 값이 비어 있다면 빈 문자열로 설정
+    // 값이 있을 경우 parseInt 및 toLocaleString 적용
+    const formattedValue = value ? parseInt(value, 10).toLocaleString() : '';
+  
+    setterFunction(formattedValue);
+  };
 
+const priceSearch = () => {
+  // 여기에서 시작가격과 종료가격이 모두 입력되었는지 확인
+  if (!startPrice || !endPrice) {
+    alert('시작가격과 종료가격을 모두 입력하세요.');
+    return;
+  }
+
+  // 시작가격이 종료가격보다 작은지 확인
+  if (parseInt(startPrice.replace(/,/g, '')) >= parseInt(endPrice.replace(/,/g, ''))) {
+    alert('시작가격은 종료가격보다 작아야 합니다.');
+    return;
+  }
+
+  // 여기에서 조회 로직을 추가하세요.
+  console.log(`시작가격: ${startPrice}`);
+  console.log(`종료가격: ${endPrice}`);
+
+  axios
+    .get('/api/propertyList', {
+      params: {
+        startPrice: startPrice,
+        endPrice: endPrice,
+      },
+    })
+    .then((response) => {
+      console.log('Search Result:', response.data);
+      setPropertyType(response.data);
+    })
+    .catch((error) => {
+      console.error('Error during search:', error);
+    });
+};
+
+
+  const ProductIdChange = (e) => {
     // 숫자만 허용
-    const numericValue = inputValue.replace(/\D/g, '');
-
-    // 8자리 제한
-    const limitedValue = numericValue.slice(0, 8);
-
-    // yyyy-mm-dd 형식으로 포맷
-    const formattedDate = limitedValue.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
-
-    setCustomDate(formattedDate);
+    const numericValue = e.target.value.replace(/\D/g, '');
+    setPropertyNumber(numericValue);
   };
 
-  // const handleDateInput = () => {
-  //   // 커스텀 날짜 입력과 관련된 작업 수행
-  //   console.log('커스텀 날짜:', customDate);
-  // };
-
-  const getCurrentDateFormatted = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
+  const productIdSearch = () => {
+    // 검색 기능 추가
+    if (propertyNumber) {
+      // 여기에서 매물 번호에 대한 검색 로직을 구현
+      console.log(`매물 번호 조회: ${propertyNumber}`);
+      // axios 등을 사용하여 서버에 매물 번호에 대한 조회 요청을 보낼 수 있습니다.
+      axios
+      .get('/api/propertyList', {
+        params: {
+          propertyNumber: propertyNumber,
+        },
+      })
+      .then((response) => {
+        console.log('Search Result:', response.data);
+        setPropertyType(response.data);
+      })
+      .catch((error) => {
+        console.error('Error during search:', error);
+      });
+      
+    } else {
+      alert('매물 번호를 입력하세요.');
+    }
   };
-
-  const getPastDateFormatted = (daysAgo) => {
-    const today = new Date();
-    const pastDate = new Date(today);
-    pastDate.setDate(today.getDate() - daysAgo);
-
-    const year = pastDate.getFullYear();
-    const month = String(pastDate.getMonth() + 1).padStart(2, '0');
-    const day = String(pastDate.getDate()).padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
-  };
-
-  const [buttonStates, setButtonStates] = useState({
+  
+  const [buttonStates, setButtonStates] = useState({ //버튼종류
     매물종류: {
       전체: true,
       오피스텔: false,
@@ -83,10 +121,86 @@ export default function Search_list({ propertyType, setPropertyType }) {  // 파
     },
   });
 
-  useEffect(() => {
-    // 페이지가 로딩될 때 실행될 초기화 함수
-    initializePage();
-  }, []); // 빈 배열을 두어 컴포넌트가 처음으로 렌더링될 때만 실행
+  const getButtonStyle = (category, buttonName) => {
+    return {
+      padding: '10px',
+      backgroundColor: 'white',
+      color: buttonStates[category][buttonName] ? '#3cb3c5' : 'black',
+      border: buttonStates[category][buttonName]
+        ? '2px solid #3cb3c5'
+        : '2px solid #ddd',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      transition: 'color 0.3s, border-color 0.3s, box-shadow 0.3s',
+    };
+  };
+
+  const renderButtons = (category) => {
+    return Object.keys(buttonStates[category]).map((buttonName) => (
+      <button
+        key={buttonName}
+        type="button"
+        style={getButtonStyle(category, buttonName)}
+        onClick={() => handleButtonChange(category, buttonName)}
+      >
+        {buttonName}
+      </button>
+    ));
+  };
+
+  const renderRadios = (category) => {
+    return Object.keys(buttonStates[category]).map((buttonName) => (
+      <div key={buttonName}>
+        <input
+          type="radio"
+          id={buttonName}
+          name="inputDate"
+          value={buttonName}
+          style={{ verticalAlign: 'middle' }}
+          onChange={() => handleButtonChange(category, buttonName)}
+          checked={buttonStates[category][buttonName]}  // 추가된 부분
+        />
+        <span className='input_right_text'>{buttonName}</span>
+      </div>
+    ));
+  };
+
+  //날짜인풋 입력제한기능
+  const handleCustomDateChange = (e) => { 
+    const inputValue = e.target.value;
+
+    // 숫자만 허용
+    const numericValue = inputValue.replace(/\D/g, '');
+
+    // 8자리 제한
+    const limitedValue = numericValue.slice(0, 8);
+
+    // yyyy-mm-dd 형식으로 포맷
+    const formattedDate = limitedValue.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+
+    setCustomDate(formattedDate);
+  };
+
+  const getCurrentDateFormatted = () => { //현재날짜 구하기
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  };
+
+  const getPastDateFormatted = (daysAgo) => { //현재날짜 - 선택한날짜
+    const today = new Date();
+    const pastDate = new Date(today);
+    pastDate.setDate(today.getDate() - daysAgo);
+
+    const year = pastDate.getFullYear();
+    const month = String(pastDate.getMonth() + 1).padStart(2, '0');
+    const day = String(pastDate.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  };
 
   const initializePage = () => {
     handleButtonChange('매물종류', '전체');
@@ -94,7 +208,41 @@ export default function Search_list({ propertyType, setPropertyType }) {  // 파
     // handleButtonChange('거래종류', '전체');
   };
 
+  useEffect(() => {
+    // 페이지가 로딩될 때 실행될 초기화 함수
+    initializePage();
+  }, []); // 빈 배열을 두어 컴포넌트가 처음으로 렌더링될 때만 실행
 
+  // 유효한 날짜인지 확인하는 함수
+  const isValidCustomDate = (date) => {
+    // 간단한 예시로 YYYY-MM-DD 형식을 가정
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
+    return regex.test(date);
+  };
+
+  const aaa_date = (customDate) => {
+    if (!isValidCustomDate(customDate)) {
+      alert('올바른 날짜 형식을 입력해주세요.'); // 유효성 검사 실패 시 알림
+      return;
+    }
+    console.log(customDate);
+  
+    axios
+      .get('/api/propertyList', {
+        params: {
+          customDate: customDate,
+        },
+      })
+      .then((response) => {
+        console.log('Search Result:', response.data);
+        setPropertyType(response.data);
+      })
+      .catch((error) => {
+        console.error('Error during search:', error);
+      });
+  };
+  
+  // 필터를 바꿀때마다 결과를 바꿔주는 기능
   const handleButtonChange = (category, buttonName) => {
     console.log(`Button clicked: ${buttonName} in category: ${category}`);
 
@@ -170,51 +318,6 @@ export default function Search_list({ propertyType, setPropertyType }) {  // 파
       });
   };
 
-  const getButtonStyle = (category, buttonName) => {
-    return {
-      padding: '10px',
-      backgroundColor: 'white',
-      color: buttonStates[category][buttonName] ? '#3cb3c5' : 'black',
-      border: buttonStates[category][buttonName]
-        ? '2px solid #3cb3c5'
-        : '2px solid #ddd',
-      borderRadius: '5px',
-      cursor: 'pointer',
-      transition: 'color 0.3s, border-color 0.3s, box-shadow 0.3s',
-    };
-  };
-
-  const renderButtons = (category) => {
-    return Object.keys(buttonStates[category]).map((buttonName) => (
-      <button
-        key={buttonName}
-        type="button"
-        style={getButtonStyle(category, buttonName)}
-        onClick={() => handleButtonChange(category, buttonName)}
-      >
-        {buttonName}
-      </button>
-    ));
-  };
-
-  const renderRadios = (category) => {
-    return Object.keys(buttonStates[category]).map((buttonName) => (
-      <div key={buttonName}>
-        <input
-          type="radio"
-          id={buttonName}
-          name="inputDate"
-          value={buttonName}
-          style={{ verticalAlign: 'middle' }}
-          onChange={() => handleButtonChange(category, buttonName)}
-          checked={buttonStates[category][buttonName]}  // 추가된 부분
-        />
-        <span className='input_right_text'>{buttonName}</span>
-      </div>
-    ));
-  };
-
-
   return (
     <div className='Search_list'>
       {/* <form action="/search" method="get"> */}
@@ -284,29 +387,57 @@ export default function Search_list({ propertyType, setPropertyType }) {  // 파
                 value={customDate}
                 onChange={handleCustomDateChange}
               />
-              {/* <button
+              <button
                 type='button'
                 className='input-button'
                 style={{ marginBottom: "0px" }}
-                onClick={() => handleButtonChange('입력일', '특정날짜')}
+                onClick={() => aaa_date(customDate)}
               >
                 날짜입력
-              </button> */}
+              </button>
             </td>
           </tr>
           {/* 조건조회 */}
           <tr>
             <td className='header-cell'>조건조회</td>
             <td style={{ textAlign: 'left', borderTopWidth: '0px' }}>
-              <input type='text' placeholder='매물번호조회' className='styled-input'></input>
-              <button type='button' className='input-button'>조회</button>
+                <input
+                type='text'
+                placeholder='매물번호조회'
+                className='styled-input'
+                value={propertyNumber}
+                onChange={ProductIdChange}
+              />
+              <button type='button' className='input-button' onClick={productIdSearch}>
+                조회
+              </button>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <input type='text' className='styled-input' style={{ width: 'calc(10%)' }}></input>
+              <input
+              type='text'
+              placeholder='매물가 검색'
+              className='styled-input'
+              style={{ width: 'calc(10% - 6px)' }}
+              value={startPrice}
+              onChange={(e) => handlePriceChange(e, setStartPrice)}
+            />
+            <span style={{ marginRight: '8px' }}>~</span>
+            <input
+              type='text'
+              placeholder='매물가 검색'
+              className='styled-input'
+              style={{ width: 'calc(10% - 6px)' }}
+              value={endPrice}
+              onChange={(e) => handlePriceChange(e, setEndPrice)}
+            />
+              <button type='button' className='input-button' style={{ marginBottom: '0px' }} onClick={priceSearch}>
+              조회
+             </button>
+                {/* <input type='text' className='styled-input' style={{ width: 'calc(10%)' }}></input>
                 <span className='input_right_text'>동</span>
                 <input type='text' className='styled-input' style={{ width: 'calc(10%)' }}></input>
                 <span className='input_right_text'>호</span>
                 <input type='text' className='styled-input' style={{ width: 'calc(10%)' }}></input>
-                <span className='input_right_text'>번지</span>
+                <span className='input_right_text'>번지</span> */}
               </div>
             </td>
           </tr>

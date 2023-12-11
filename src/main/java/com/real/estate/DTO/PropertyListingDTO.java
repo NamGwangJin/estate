@@ -19,7 +19,7 @@ public class PropertyListingDTO {
     int bathroom;
     String roomuse;
     String inner_structure;
-    int administration_cost;
+    String administration_cost;
     String managementCost_includ;
     String building_date;
     String transactionType;
@@ -40,4 +40,5 @@ public class PropertyListingDTO {
     String product_title;
     String product_content;
     String product_state;
+    
 }

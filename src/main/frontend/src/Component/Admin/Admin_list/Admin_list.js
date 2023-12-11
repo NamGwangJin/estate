@@ -27,7 +27,6 @@ export default function Admin_list({ propertyType }) {
                 </td>
                 <td data-th="Property_number" style={{ textAlign: 'left' }}>
                   {elem.product_id}
-                  {elem.product_id}
                 </td>
                 <td data-th="Property_type">
                   {elem.product_type}
@@ -44,7 +43,7 @@ export default function Admin_list({ propertyType }) {
                   {elem.desiredAmount}
                 </td>
                 <td data-th="Registration_period">
-                  {elem.created}
+                  {elem.created ? elem.created.slice(0, 10) : 'N/A'}
                 </td>
                 <td data-th="Progress">
                   {elem.product_state}
