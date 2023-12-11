@@ -1,0 +1,93 @@
+.SearchMain hr {
+  border: 0.1px solid #c3c3c3;
+}
+.SearchSection select{
+  width: 200px;
+  height: 30px;
+  padding-left: 10px;
+  font-size: 18px;
+  color: #006fff;
+  border: 1px solid #006fff;
+  border-radius: 3px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+.SearchSection select::-ms-expand{
+  display: none;
+}
+
+.MapandList{
+  display: flex;
+  width: 100%;
+}
+
+.SearchMap {
+  flex:1;
+  height: 1000px;
+  background-color: #f0f0f0; /* 예시로 배경색을 지정합니다. */
+}
+
+.SearchList {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 20%;
+  height: 1000px;
+  /* padding: 10px; */
+  /* background-color: #e0e0e0; */
+}
+.productBox{
+  padding: 5px;
+  display: flex;
+  width: 100%;
+  height: 15%;
+  border-bottom: 0.1px solid #919191;
+}
+.productBox:hover{
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+.product_id_box{
+  border: 1px solid #cbcbcb;
+  width: 100px;
+  height: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+.productWord{
+  padding: 10px;
+}
+.product_type{
+  display: flex;
+}
+.ImgOne{
+  width: 200px;
+  height: 150px;
+}
+.circleMonth, .circleCharter, .circleSale {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  font-size: 12px;
+  /* margin-right: 1px; */
+  margin-top: 2px;
+}
+.circleMonth{
+  background-color: #4da8e5; /* 원의 배경색을 적절히 조절하세요 */
+}
+.circleCharter{
+  background-color: rgb(209, 197, 30); /* 원의 배경색을 적절히 조절하세요 */
+}
+.circleSale{
+  background-color: #ef5b5b; /* 원의 배경색을 적절히 조절하세요 */
+}
+.transaction{
+  margin-top: 2px;
+}

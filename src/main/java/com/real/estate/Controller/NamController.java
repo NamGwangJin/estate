@@ -1,5 +1,6 @@
 package com.real.estate.Controller;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -139,6 +140,41 @@ public class NamController {
         ProductDTO estateDetail = pDAO.getEstateDetail(no);
 
         return estateDetail;
+    }
+
+    // 매물 상세 이미지 불러오는 코드
+    @GetMapping("/api/estate/detail/img")
+    public ArrayList<ProductDTO> getEstateDetail_img(@RequestParam int no){
+        ArrayList<ProductDTO> img = pDAO.getEstateDetail_img(no);
+
+        return img;
+    }
+
+    // 매물 등록 주소를 이용하여 법정동 코드 SELECT
+    @PostMapping("/api/get/bjd_code")
+    public String getBjdCode(@RequestParam String location){
+        BigInteger bjd_code = pDAO.getBjdCode(location);
+
+        return String.valueOf(bjd_code);
+    }
+
+    // 매물 수정 코드
+    @PostMapping("/api/officetel/update")
+    public String update(@RequestParam int no, @RequestParam String building_use, @RequestParam String floor_open, @RequestParam String direction_criteria,
+                         @RequestParam String direction, @RequestParam String entrance, @RequestParam int rooms, @RequestParam int bathroom,
+                         @RequestParam String roomuse, @RequestParam String inner_structure, @RequestParam String administration_cost, @RequestParam String maintenance,
+                         @RequestParam String managementCost_includ, @RequestParam String building_dateType, @RequestParam String building_date, @RequestParam String transactionType,
+                         @RequestParam String desiredAmount, @RequestParam String loan, @RequestParam String existingTenant_deposit, @RequestParam String existingTenant_monthlyRent,
+                         @RequestParam String heating_method, @RequestParam String heating_fuel, @RequestParam String airCondition, @RequestParam String living_facilities,
+                         @RequestParam String security_facilities, @RequestParam String other_facilities, @RequestParam String balcony, @RequestParam String moveable_date,
+                         @RequestParam String product_title, @RequestParam String product_content){
+        pDAO.product_update(building_use, floor_open, direction_criteria, direction, entrance, rooms, bathroom, roomuse, inner_structure, administration_cost,
+        maintenance, managementCost_includ, building_dateType, building_date, transactionType, desiredAmount, loan, existingTenant_deposit,
+        existingTenant_monthlyRent, heating_method, heating_fuel, airCondition, living_facilities, security_facilities, other_facilities, balcony, moveable_date,
+        product_title, product_content, now, no);
+
+        return "매물 수정이 완료되었습니다";
+                
     }
 
 }

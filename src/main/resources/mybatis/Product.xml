@@ -22,7 +22,7 @@
         inner_structure=#{param15},
         administration_cost=#{param16}, 
         maintenance=#{param17}, 
-        managementCost_includ=#{param18}, 
+        managementCost_include=#{param18}, 
         building_dateType=#{param19}, 
         building_date=#{param20}, 
         transactionType=#{param21}, 
@@ -60,6 +60,114 @@
 </insert>
 
 <select id="getEstateDetail">
-select * from products where product_id=#{param1};
+select * from products where product_id = #{param1};
+</select>
+
+<select id="getEstateDetail_img">
+select b.img_no, b.img_productID, b.img_title
+from products a join products_img b on a.product_id = b.img_productID
+where product_id = #{param1};
+</select>
+
+<update id="product_update">
+update products set
+buliding_use=#{param1},
+floor_open=#{param2},
+direction_criteria=#{param3},
+direction=#{param4},
+entrance=#{param5},
+rooms=#{param6},
+bathroom=#{param7},
+roomuse=#{param8},
+inner_structure=#{param9},
+administration_cost=#{param10},
+maintenance=#{param11},
+managementCost_include=#{param12},
+building_dateType=#{param13},
+building_date=#{param14},
+transactionType=#{param15},
+desiredAmount=#{param16},
+loan=#{param17},
+existingTenant_deposit=#{param18},
+existingTenant_monthlyRent=#{param19},
+heating_method=#{param20},
+heating_fuel=#{param21},
+airCondition=#{param22},
+living_facilities=#{param23},
+security_facilities=#{param24},
+other_facilities=#{param25},
+balcony=#{param26},
+moveable_date=#{param27},
+product_title=#{param28},
+product_content=#{param29},
+updated=#{param30}
+where product_id = #{param31}
+</update>
+
+<!-- 법정동 코드 SELECT -->
+<select id="getBjdCode">
+select bjd_code from bjd where bjd_name=#{param1};
+</select>
+
+<select id="getAllProducts" resultType="com.real.estate.DTO.ProductDTO">
+SELECT
+  p.*,
+  pi.img_no,
+  pi.img_title
+  FROM
+  products p
+LEFT JOIN
+  (
+    SELECT
+      img_productID,
+      MIN(img_no) AS min_img_no
+    FROM
+      products_img
+    GROUP BY
+      img_productID
+  ) AS min_img
+ON
+  p.product_id = min_img.img_productID
+LEFT JOIN
+  products_img pi
+ON
+  min_img.img_productID = pi.img_productID
+  AND min_img.min_img_no = pi.img_no;
+</select>
+
+<select id="getProducts" resultType="com.real.estate.DTO.ProductDTO" parameterType="java.util.Map">
+  SELECT
+    p.*,
+    pi.img_no,
+    pi.img_title
+  FROM
+    products p
+  LEFT JOIN
+    (
+      SELECT
+        img_productID,
+        MIN(img_no) AS min_img_no
+      FROM
+        products_img
+      GROUP BY
+        img_productID
+    ) AS min_img
+  ON
+    p.product_id = min_img.img_productID
+  LEFT JOIN
+    products_img pi
+  ON
+    min_img.img_productID = pi.img_productID
+    AND min_img.min_img_no = pi.img_no
+  WHERE
+    <!-- transactionType이 선택된 경우 -->
+    <if test="transactionType != null and transactionType != ''">
+      p.transactionType = #{transactionType}
+    </if>
+    <!-- productType이 선택된 경우 -->
+    <if test="productType != null and productType != ''">
+      <if test="transactionType != null and transactionType != ''">AND</if>
+      p.product_type = #{productType}
+    </if>
 </select>
 </mapper>
