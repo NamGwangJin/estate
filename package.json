@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "react-kakao-maps": "^0.0.13",
+    "react-kakao-maps-sdk": "^1.1.24",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
