@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from '../header.js';
+import Admin_header from './Admin_header/Admin_header.js';
 import Bottom from '../bottom.js';
 import Admin_list from './Admin_list/Admin_list.js';
 import Search_list from './Search_list/Search_list.js'
@@ -10,7 +10,7 @@ export default function Admin() {
 
   return (
     <div className='App'>
-      <Header />
+      <Admin_header />
       <div className='mainSection'>
         {/* <Search_list />
           
