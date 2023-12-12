@@ -48,7 +48,7 @@ export default function SearchMain() {
       });
 
       searchList.map((list) => {
-        geocoder.addressSearch(list.location, function (result, status) {
+        geocoder.addressSearch(list.location, function (result, status) {   // 나중에 location + address 로 수정
           if (status === window.kakao.maps.services.Status.OK) {
             var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
             var marker = new window.kakao.maps.Marker({
@@ -63,6 +63,7 @@ export default function SearchMain() {
       });
     }
   };
+
   useEffect(() => {
     // 서버에서 데이터를 가져오는 코드
     const fetchData = async () => {
