@@ -132,7 +132,8 @@ LEFT JOIN
   products_img pi
 ON
   min_img.img_productID = pi.img_productID
-  AND min_img.min_img_no = pi.img_no;
+  AND min_img.min_img_no = pi.img_no
+  where p.product_state = '등록중';
 </select>
 
 <select id="getProducts" resultType="com.real.estate.DTO.ProductDTO" parameterType="java.util.Map">
@@ -169,5 +170,6 @@ ON
       <if test="transactionType != null and transactionType != ''">AND</if>
       p.product_type = #{productType}
     </if>
+    AND p.product_state = '등록중'
 </select>
 </mapper>
