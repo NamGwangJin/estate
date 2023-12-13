@@ -3,13 +3,16 @@ import React, { useEffect, useState } from 'react';
 import Header from '../header.js';
 import axios from 'axios';
 import './SearchMain.css';
+import Detail from '../Estate/EstateDetail.js';
 
-
+// 여기까지
 export default function SearchMain() {
 
   const [searchList, setSearchList] = useState([]);
   const [transactionType, setTransactionType] = useState('');
   const [productType, setProductType] = useState('');
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     // Kakao 맵 스크립트 로드 여부 확인
@@ -101,6 +104,15 @@ export default function SearchMain() {
   };
 
 
+  const openDetailModal = (product) => {
+    alert("asd");
+    setSelectedProduct(product);
+    setShowDetailModal(true);
+  };
+
+  const closeDetailModal = () => {
+    setShowDetailModal(false);
+  };
 
   return (
     <div className='SearchMain'>
@@ -132,7 +144,7 @@ export default function SearchMain() {
           </div>
           <div className='SearchList'>
             {searchList.map((list) => (
-              <div className='productBox' key={list.product_id}>
+              <div className='productBox' key={list.product_id} onClick={() => openDetailModal(list)}>
                 <div className='productIMG'>
                   <img className="ImgOne" src={`/img/${list.img_title || '이미지준비중.png'}`} alt={list.img_title} />
                 </div>
@@ -166,6 +178,11 @@ export default function SearchMain() {
               </div>
             ))}
           </div>
+          {showDetailModal && (
+            <div className='Detail' id='Detail'>
+              <Detail product={selectedProduct} onClose={closeDetailModal} />
+            </div>
+          )}
         </div>
       </div>
     </div>
