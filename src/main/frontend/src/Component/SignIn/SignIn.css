@@ -19,19 +19,55 @@
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 30%;
   }
   
-  .close {
-    float: right;
-    font-size: 28px;
+  .signin_close {
+    margin-left: 90%;
+    font-size: 30px;
     font-weight: bold;
     cursor: pointer;
   }
   
-  .close:hover,
-  .close:focus {
-    color: #000;
+  .signin_close:hover,
+  .signin_close:focus {
+    color: #3cb3c5;
     text-decoration: none;
+  }
+
+  .login_title {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .login_title h2 {
+    margin-bottom: 10px;
+  }
+
+  .login_title a {
+    cursor: pointer;
+    color: #3cb3c5;
+  }
+
+  .login_title a:hover {
+    color: black;
+  }
+
+  .login_title span {
+    color: gray;
+  }
+
+  .login_form input {
+    padding: 10px; /* 내부 여백 설정 */
+    border: 2px solid #ccc; /* 기본 테두리 스타일 및 색상 설정 */
+    border-radius: 8px; /* 둥근 테두리 설정 */
+    outline: none; /* 기본 포커스 효과 제거 */
+    transition: border-color 0.3s ease; /* 부드러운 전환 효과 추가 */
+  }
+
+  .login_form input:focus {
+    border: 2px solid #3cb3c5;; /* 원하는 색상 또는 스타일로 변경 */
+    outline: none; /* 기본 포커스 효과 제거 */
   }
   

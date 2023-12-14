@@ -80,12 +80,9 @@ export default function Header() {
               </div>
             </div>
             <div className='header_top_right'>
-              {admin === 1
-                ? <>
+              {admin === 1 && (
                   <button className='sign_btn box' onClick={() => handleNavigate('/admin')}>관리자 페이지</button>
-                </>
-                : <></>
-              }
+              )}
               {id === null
                 ? <>
                   <button className='sign_btn box' onClick={signInOpen}>로그인</button>
