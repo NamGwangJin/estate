@@ -12,7 +12,7 @@ export default function SearchBar() {
   };
 
   return (
-  <div className="main_slide_search_box main_search_back" style={{ position: 'relative', bottom: 0, backgroundColor: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>     <div className="mainSlide_search_wrap mainSlide_search_wrap_1140">
+  <div className="main_slide_search_box main_search_back" style={{ position: 'relative', bottom: 0, backgroundColor: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: '0' }}>     <div className="mainSlide_search_wrap mainSlide_search_wrap_1140">
       <form onSubmit={handleSubmit} id="form_search">
         {/* input 요소들의 hidden 값들 */}
         <div className="mainSlide_search_big">

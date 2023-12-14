@@ -59,7 +59,7 @@
     VALUES (#{product_id}, #{img_title});
 </insert>
 
-<select id="getEstateDetail">
+<select id="getEstateDetail" resultType="com.real.estate.DTO.ProductDTO">
 select * from products where product_id = #{param1};
 </select>
 
@@ -71,7 +71,7 @@ where product_id = #{param1};
 
 <update id="product_update">
 update products set
-buliding_use=#{param1},
+building_use=#{param1},
 floor_open=#{param2},
 direction_criteria=#{param3},
 direction=#{param4},
