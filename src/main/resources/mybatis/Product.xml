@@ -59,8 +59,8 @@
     VALUES (#{product_id}, #{img_title});
 </insert>
 
-<select id="getEstateDetail">
-select * from products where product_id = #{param1};
+<select id="getEstateDetail" parameterType="int" resultType="com.real.estate.DTO.ProductDTO">
+select * from products where product_id = #{product_id};
 </select>
 
 <select id="getEstateDetail_img">

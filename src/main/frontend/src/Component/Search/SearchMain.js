@@ -5,7 +5,6 @@ import axios from 'axios';
 import './SearchMain.css';
 import Detail from '../Estate/EstateDetail.js';
 
-// 여기까지
 export default function SearchMain() {
 
   const [searchList, setSearchList] = useState([]);
@@ -14,6 +13,7 @@ export default function SearchMain() {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  // 오류 뜨는거 잡기 --------------
   useEffect(() => {
     // Kakao 맵 스크립트 로드 여부 확인
     if (!window.kakao) {
@@ -32,8 +32,10 @@ export default function SearchMain() {
       // 이미 스크립트 로드되어 있을 때 바로 실행
       initializeMap();
     }
+    
   }, [[searchList]]);
 
+  
   const initializeMap = () => {
     const mapContainer = document.getElementById('SearchMap');
     if (mapContainer && searchList.length > 0) {
@@ -53,7 +55,7 @@ export default function SearchMain() {
         // 이 부분을 window.kakao.maps.load 콜백 안으로 이동
         window.kakao.maps.load(() => {
           const geocoder = new window.kakao.maps.services.Geocoder();
-          geocoder.addressSearch(list.location, function (result, status) {
+          geocoder.addressSearch(list.location, function (result, status) {   // location + building_name으로 바꾸기
             if (status === window.kakao.maps.services.Status.OK) {
               var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
               var marker = new window.kakao.maps.Marker({
@@ -107,8 +109,8 @@ export default function SearchMain() {
   };
 
 
-  const openDetailModal = (product) => {
-    setSelectedProduct(product);
+  const openDetailModal = (product_id) => {
+    setSelectedProduct(product_id);
     setShowDetailModal(true);
   };
 
@@ -120,23 +122,21 @@ export default function SearchMain() {
     <div className='SearchMain'>
       <Header />
       <div className='SearchSection'>
-        <div>
+        <div>  {/* 버튼 css */}
           <button onClick={handleReset}>초기화</button>
-          {/* <select> */}
           <select id='transactionTypeSelect' onChange={(e) => setTransactionType(e.target.value)}>
             <option value='' disabled selected>거래유형</option>
             <option value='매매'>매매</option>
             <option value='전세'>전세</option>
             <option value='월세'>월세</option>
           </select>
-          {/* <select> */}
           <select id='productTypeSelect' onChange={(e) => setProductType(e.target.value)}>
             <option value='' disabled selected>매물유형</option>
             <option value='오피스텔'>오피스텔</option>
             <option value='아파트'>아파트</option>
             <option value='상가'>상가</option>
             <option value='지식산업센터/사무실'>지식산업센터·사무실</option>
-            {/* 지식산업센터·사무실 로 바꾸기 */}
+            {/* 지식산업센터·사무실 로 바꾸기 ---------------------*/}
             <option value='토지'>토지</option>
             <option value='공장/창고'>공장·창고</option>
           </select>
@@ -144,6 +144,8 @@ export default function SearchMain() {
         <div className='MapandList'>
           <div className='SearchMap' id='SearchMap'>
             {/* 지도나옴 */}
+            {/* 축소 확대버튼 넣고싶당 */}
+            {/* 지도랑 리스트 연동하고싶다 제발ㅠ */}
           </div>
           <div className='SearchList'>
             {searchList.map((list) => (
@@ -183,7 +185,7 @@ export default function SearchMain() {
           </div>
           {showDetailModal && (
             <div className='Detail' id='Detail'>
-              <Detail product={selectedProduct} onClose={closeDetailModal} />
+              <Detail product_id={selectedProduct.product_id} onClose={closeDetailModal} />
             </div>
           )}
         </div>
