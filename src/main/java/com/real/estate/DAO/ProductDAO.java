@@ -16,7 +16,7 @@ public interface ProductDAO {
                     String administration_cost, String maintenance, String managementCost_includ, String building_dateType, String building_date, String transactionType, String desiredAmount, String loan, String existingTenant_deposit, String existingTenant_monthlyRent,
                     int total_parking, String parking_per_room, String heating_method, String heating_fuel, String airCondition, String living_facilities, String security_facilities, String other_facilities, String balcony, String moveable_date, String product_title, String product_content);
 
-  ProductDTO getEstateDetail(int no);
+  ProductDTO getEstateDetail(int product_id);
 
   ArrayList<ProductDTO> getEstateDetail_img(int no);
 
