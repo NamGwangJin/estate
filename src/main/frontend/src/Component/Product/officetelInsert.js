@@ -96,7 +96,6 @@ export default function OfficetelInsert() {
 
   const [buildingNames, setBuildingNames] = useState([]);
 
-
   useEffect(() => {
   // useEffect 내에서 getDongCodeNm 호출
   const sidoCodeNm = getSidoCodeNm();
@@ -135,17 +134,21 @@ export default function OfficetelInsert() {
                 // 원하는 데이터 추출
                 items = xmlDoc.getElementsByTagName('item'); // 'item' 태그에 있는 데이터 추출
                 const names = [];
+                const bunji = [];
                 
                 for (var i = 0; i < items.length; i++) {
                     var item = items[i];
                     var name = item.getElementsByTagName('bldNm')[0].textContent;
                     var main = item.getElementsByTagName('mainPurpsCdNm')[0].textContent;
+                    var bun = item.getElementsByTagName('bun')[0].textContent;
+                    var ji = item.getElementsByTagName('ji')[0].textContent;
 
                     if ( main !== category ) continue;
 
                     // 필요한 데이터를 추출하여 사용
-                    names.push(name);
-                    console.log(name, main);
+                    names.push({name: name, bun: bun, ji: ji});
+
+                    console.log(name, main, bun, '-', ji);
                 }
 
                 setBuildingNames(names); // 추출된 건물 이름을 상태에 설정
@@ -456,13 +459,12 @@ export default function OfficetelInsert() {
                   <td>단지명</td>
                   <td colSpan={3}>
                     <select className='styled-select' style={{ width: "30%" }} id='building_name'>
+                      <option>선택</option>
                       {buildingNames.map((name, index) => (
-                        <option key={index} value={name}>
-                          {name}
+                        <option key={index} value={name.bun + '-' + name.ji}>
+                          {name.name}
                         </option>
                       ))}
-                      <option value={"테스트"}>테스트</option> 
-                      {/* 나중에 지우기 */}
                     </select>
                   </td>
                 </tr>
