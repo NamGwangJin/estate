@@ -20,7 +20,6 @@ export default function SearchMain() {
       const script = document.createElement('script');
       script.async = true;
       script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=73dfe3bf43bd31398ab2de67c59cad97&libraries=services,clusterer&autoload=false`;
-      document.head.appendChild(script);
 
       script.onload = () => {
         // 스크립트 로드 완료 후 실행
@@ -28,6 +27,7 @@ export default function SearchMain() {
           initializeMap();
         })
       };
+      document.head.appendChild(script);
     } else {
       // 이미 스크립트 로드되어 있을 때 바로 실행
       initializeMap();
@@ -41,26 +41,29 @@ export default function SearchMain() {
         center: new kakao.maps.LatLng(37.6438713, 126.624015),
         level: 11,
       };
-
+  
       const map = new window.kakao.maps.Map(mapContainer, mapOption);
-      const geocoder = new window.kakao.maps.services.Geocoder();
       const clusterer = new window.kakao.maps.MarkerClusterer({
         map: map,
         averageCenter: true,
         minLevel: 4,
       });
-
+  
       searchList.map((list) => {
-        geocoder.addressSearch(list.location, function (result, status) {   // 나중에 location + address 로 수정
-          if (status === window.kakao.maps.services.Status.OK) {
-            var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-            var marker = new window.kakao.maps.Marker({
-              map: map,
-              position: coords,
-            });
-            clusterer.addMarker(marker);
-            map.setCenter(coords);
-          }
+        // 이 부분을 window.kakao.maps.load 콜백 안으로 이동
+        window.kakao.maps.load(() => {
+          const geocoder = new window.kakao.maps.services.Geocoder();
+          geocoder.addressSearch(list.location, function (result, status) {
+            if (status === window.kakao.maps.services.Status.OK) {
+              var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+              var marker = new window.kakao.maps.Marker({
+                map: map,
+                position: coords,
+              });
+              clusterer.addMarker(marker);
+              map.setCenter(coords);
+            }
+          });
         });
         return null;
       });
@@ -105,7 +108,6 @@ export default function SearchMain() {
 
 
   const openDetailModal = (product) => {
-    alert("asd");
     setSelectedProduct(product);
     setShowDetailModal(true);
   };
@@ -134,6 +136,7 @@ export default function SearchMain() {
             <option value='아파트'>아파트</option>
             <option value='상가'>상가</option>
             <option value='지식산업센터/사무실'>지식산업센터·사무실</option>
+            {/* 지식산업센터·사무실 로 바꾸기 */}
             <option value='토지'>토지</option>
             <option value='공장/창고'>공장·창고</option>
           </select>
