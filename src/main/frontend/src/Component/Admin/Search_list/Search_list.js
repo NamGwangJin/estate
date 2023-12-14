@@ -100,11 +100,7 @@ const priceSearch = () => {
     매물상태: {
       전체: true,
       등록중: false,
-      // 확인중: false,
-      // 확인실패: false,
-      // 서비스중: false,
-      // 거래완료: false,
-      // 종료예정: false,
+      등록종료: false,
     },
     거래종류: {
       전체: true,
@@ -416,7 +412,7 @@ const priceSearch = () => {
               type='text'
               placeholder='매물가 검색'
               className='styled-input'
-              style={{ width: 'calc(10% - 6px)' }}
+              style={{ width: 'calc(13% - 6px)' }}
               value={startPrice}
               onChange={(e) => handlePriceChange(e, setStartPrice)}
             />
@@ -425,7 +421,7 @@ const priceSearch = () => {
               type='text'
               placeholder='매물가 검색'
               className='styled-input'
-              style={{ width: 'calc(10% - 6px)' }}
+              style={{ width: 'calc(13% - 6px)' }}
               value={endPrice}
               onChange={(e) => handlePriceChange(e, setEndPrice)}
             />

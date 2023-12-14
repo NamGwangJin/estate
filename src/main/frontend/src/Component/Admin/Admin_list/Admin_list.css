@@ -104,6 +104,34 @@
     padding: 1em !important;
   }
 }
+.pagination {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.pagination-button {
+  background-color: white;
+  border: 1px solid #aaa;
+  color: #333;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px; /* 추가된 부분 */
+  border-radius: 5px; /* 추가된 부분 */
+}
+
+
+.pagination-button:hover {
+  background-color: #bbb;
+}
+
+.pagination-button.active {
+  background-color: #3cb3c5;
+  color: #fff;
+}
+
+
 
 
 
