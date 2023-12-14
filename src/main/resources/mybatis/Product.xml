@@ -71,7 +71,7 @@ where product_id = #{param1};
 
 <update id="product_update">
 update products set
-buliding_use=#{param1},
+building_use=#{param1},
 floor_open=#{param2},
 direction_criteria=#{param3},
 direction=#{param4},
