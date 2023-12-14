@@ -10,8 +10,6 @@ export default function AdminEstateEdit() {
   const params = new URLSearchParams(query);
   const no = params.get("no"); // 현재 매물의 번호를 쿼리스트링을 통해 가져옴
 
-  const [detail, setDetail] = useState([]);
-
   const [floorExposure, setFloorExposure] = useState('');
   const [usage, setUsage] = useState('');
   const [structure, setStructure] = useState('');
@@ -26,6 +24,8 @@ export default function AdminEstateEdit() {
   const [building_dateYear, setBuilding_dateYear] = useState('');
   const [building_dateMonth, setBuilding_dateMonth] = useState('');
   const [building_dateDay, setBuilding_dateDay] = useState('');
+  const [rooms, setRooms] = useState(0);
+  const [bathroom, setBathroom] = useState(0);
 
   const [managementCost_include, setManagementCost_include] = useState([]);
   const [airCondition, setAirCondition] = useState([]);
@@ -52,6 +52,8 @@ export default function AdminEstateEdit() {
     setState(newManagementCost);
   };
 
+  const [detail, setDetail] = useState([]);
+
   useEffect(() => {
     axios({
       method: "get",
@@ -66,19 +68,42 @@ export default function AdminEstateEdit() {
       });
   }, [no]);
 
-  // useEffect(() => {
-  //   axios({
-  //     method: "get",
-  //     url: '/api/estate/detail/img',
-  //     params: { no: no }
-  //   })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [no]);
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: '/api/estate/detail/img',
+      params: { no: no }
+    })
+      .then((res) => {
+        setImg(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [no]);
+
+      // 이미지 스크립트
+      const [selectedFiles, setSelectedFiles] = useState([]);  // 이미지파일 첨부
+
+      const handleFileChange = (e) => {
+          const files = e.target.files;
+          const filesArray = Array.from(files);
+          setSelectedFiles((prevFiles) => [...prevFiles, ...filesArray]);
+      };
+  
+      const handleRemoveImage = (index) => {
+          setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+      };
+
+      const [img, setImg] = useState([]);
+
+      const handleRemoveImg = (index) => {
+        // 이미지 목록에서 해당 인덱스의 이미지를 제외한 새로운 목록을 생성
+        const newImageList = img.filter((_, i) => i !== index);
+      
+        // 상태 업데이트
+        setImg(newImageList);
+      };
 
   useEffect(() => {
     // detail이 업데이트될 때마다 state를 설정
@@ -102,6 +127,8 @@ export default function AdminEstateEdit() {
       setHeating_method(detail.heating_method);
       setHeating_fuel(detail.heating_fuel);
       setBuilding_dateType(detail.building_dateType);
+      setRooms(detail.rooms);
+      setBathroom(detail.bathroom);
 
       let building_date = detail.building_date;
       if (building_date) {
@@ -298,19 +325,6 @@ export default function AdminEstateEdit() {
         setMoveable_date(enterableDate);
       }, [enterableDate]);
 
-    // 이미지 스크립트
-    const [selectedFiles, setSelectedFiles] = useState([]);  // 이미지파일 첨부
-
-    const handleFileChange = (e) => {
-        const files = e.target.files;
-        const filesArray = Array.from(files);
-        setSelectedFiles((prevFiles) => [...prevFiles, ...filesArray]);
-    };
-
-    const handleRemoveImage = (index) => {
-        setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-    };
-
     function update() {
       const building_use = document.getElementById('building_use').value;
       const direction_criteria = document.getElementById('direction_criteria').value;
@@ -361,17 +375,18 @@ export default function AdminEstateEdit() {
       formData.append('other_facilities', other_facilities);
       formData.append('balcony', balcony);
       formData.append('moveable_date', moveable_date);
+      formData.append('img',img);
       formData.append('product_title', product_title);
       formData.append('product_content', product_content);
   
       // 이미지가 선택되었을 때만 이미지 업로드 처리
-      // if (selectedFiles.length > 0) {
-      //   selectedFiles.forEach((file, index) => {
-      //     formData.append('images', file);  // 'images' 파트에 이미지 추가
-      //   });
-      // } else {
-      //   formData.append('images', new Blob(), 'empty-file');  // 이미지가 없을 경우 빈 파일 추가
-      // }
+      if (selectedFiles.length > 0) {
+        selectedFiles.forEach((file, index) => {
+          formData.append('images', file);  // 'images' 파트에 이미지 추가
+        });
+      } else {
+        formData.append('images', new Blob(), 'empty-file');  // 이미지가 없을 경우 빈 파일 추가
+      }
   
       axios({
         method: 'post',
@@ -481,9 +496,9 @@ export default function AdminEstateEdit() {
                 </tr>
                 <tr>
                   <td>방수</td>
-                  <td><input type='number' className='styled-input' id='rooms' value={detail.rooms} />개</td>
+                  <td><input type='number' className='styled-input' id='rooms' value={rooms} onChange={() => setRooms(document.getElementById('rooms').value)} />개</td>
                   <td>욕실수</td>
-                  <td><input type='number' className='styled-input' id='bathroom' value={detail.bathroom} />개</td>
+                  <td><input type='number' className='styled-input' id='bathroom' value={bathroom} onChange={() => setBathroom(document.getElementById('bathroom').value)} />개</td>
                 </tr>
                 <tr>
                   <td>용도</td>
@@ -842,9 +857,17 @@ export default function AdminEstateEdit() {
                       <input type='file' multiple onChange={handleFileChange} accept='image/*' /><br />
                       {/* 선택한 파일명 안나오게 하려면 라벨로 이미지등록 버튼 만들고, input file은 display:none 해놓고 클릭태그연결 */}
                       <div>
-                        {selectedFiles.length > 0 && (
-                          <p>{selectedFiles.length}개의 파일이 선택되었습니다.</p>
+                        {(img.length > 0 || selectedFiles.length > 0) && (
+                          <p>{img.length + selectedFiles.length}개의 파일이 선택되었습니다.</p>
                         )}
+                        {img.map((file, index) => (
+                          <div key={index} className="image-container">
+                            <img src={`/img/` + file.img_title} alt={`Preview ${index}`} />
+                            <button type='button' onClick={() => handleRemoveImg(index)} className="remove-button">
+                              X
+                            </button>
+                          </div>
+                        ))}
                         {selectedFiles.map((file, index) => (
                           <div key={index} className="image-container">
                             <img src={URL.createObjectURL(file)} alt={`Preview ${index}`} />

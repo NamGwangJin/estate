@@ -6,7 +6,7 @@ export default function Request_box() {
   return (
     <div className="container" style={{ display: 'block' }}>
       <div className="row main_realtime_zone" style={{ position: 'relative' }}>
-        <div className="request_box" style={{ display: 'inline-block', width: '100%', margin: '20px 0', position: 'relative', zIndex: 1 }}>
+        <div className="request_box" style={{ display: 'inline-block', width: '100%', margin: '20px 0', position: 'relative' }}>
           <div className="leftBox">
             <form id="quickCallForm" method="post" onSubmit={() => false}>
               <h2>간편 상담 문의</h2>

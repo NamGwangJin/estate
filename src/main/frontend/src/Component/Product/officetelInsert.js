@@ -113,9 +113,7 @@ export default function OfficetelInsert() {
     })
     .then((res) => {
       bjd_code = String(res.data);
-      let pageNo = 1;
       let items = '';
-      while(true) {
         var xhr = new XMLHttpRequest();
         var url = 'http://apis.data.go.kr/1613000/BldRgstService_v2/getBrTitleInfo'; /*URL*/
         var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'awBBm0hyTWbKIRKVbFl85MND2xq0q9rJJsqUONeQoaX0ThS%2Bc4R31pxCy4H67wC443%2F2mAkFDnfHrpWXXCalyQ%3D%3D'; /*Service Key*/
@@ -127,7 +125,7 @@ export default function OfficetelInsert() {
         queryParams += '&' + encodeURIComponent('startDate') + '=' + encodeURIComponent(''); /**/
         queryParams += '&' + encodeURIComponent('endDate') + '=' + encodeURIComponent(''); /**/
         queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('100'); /**/
-        queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent(String(pageNo)); /**/
+        queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('3'); /**/
         xhr.open('GET', url + queryParams);
         xhr.onreadystatechange = function () {
             if (this.readyState == 4) {
@@ -137,8 +135,6 @@ export default function OfficetelInsert() {
                 // 원하는 데이터 추출
                 items = xmlDoc.getElementsByTagName('item'); // 'item' 태그에 있는 데이터 추출
                 const names = [];
-
-                alert(items.length);
                 
                 for (var i = 0; i < items.length; i++) {
                     var item = items[i];
@@ -158,13 +154,6 @@ export default function OfficetelInsert() {
     
         xhr.send('');
 
-        if ( items.length < 100 ) {
-          alert("여기?");
-          break;
-        }
-
-        pageNo++;
-      }
     })
     .catch(error => {
       console.log(error);
@@ -273,7 +262,10 @@ export default function OfficetelInsert() {
 
 
   function upload() {
-    const product_type = document.getElementById('product_type').value;
+    const product_type_element = document.getElementById('product_type');
+    const selected_option = product_type_element.options[product_type_element.selectedIndex];
+    const product_type = selected_option.text;
+    
     const building_name = document.getElementById('building_name').value;
     const building_use = document.getElementById('building_use').value;
     const extent = document.getElementById('extent').value;
