@@ -139,7 +139,7 @@ export default function SearchMain() {
             {/* 지식산업센터·사무실 로 바꾸기 ---------------------*/}
             <option value='토지'>토지</option>
             <option value='공장/창고'>공장·창고</option>
-          </select>
+          </select> 
         </div>
         <div className='MapandList'>
           <div className='SearchMap' id='SearchMap'>
