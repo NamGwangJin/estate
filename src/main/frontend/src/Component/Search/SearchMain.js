@@ -1,27 +1,74 @@
+/* global kakao */
 import React, { useEffect, useState } from 'react';
 import Header from '../header.js';
 import axios from 'axios';
 import './SearchMain.css';
+import Detail from '../Estate/EstateDetail.js';
 
+// 여기까지
 export default function SearchMain() {
 
   const [searchList, setSearchList] = useState([]);
   const [transactionType, setTransactionType] = useState('');
   const [productType, setProductType] = useState('');
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    // 지도를 표시할 div 엘리먼트를 찾습니다.
+    // Kakao 맵 스크립트 로드 여부 확인
+    if (!window.kakao) {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=73dfe3bf43bd31398ab2de67c59cad97&libraries=services,clusterer&autoload=false`;
+
+      script.onload = () => {
+        // 스크립트 로드 완료 후 실행
+        window.kakao.maps.load(() => {
+          initializeMap();
+        })
+      };
+      document.head.appendChild(script);
+    } else {
+      // 이미 스크립트 로드되어 있을 때 바로 실행
+      initializeMap();
+    }
+  }, [[searchList]]);
+
+  const initializeMap = () => {
     const mapContainer = document.getElementById('SearchMap');
-
-    // 지도 옵션 설정
-    const mapOption = {
-      center: new window.kakao.maps.LatLng(37.6438713, 126.624015), // 지도의 중심좌표
-      level: 8, // 지도의 확대 레벨
-    };
-
-    // 지도를 생성합니다
-    const map = new window.kakao.maps.Map(mapContainer, mapOption);
-  }, []); // useEffect를 빈 배열로 전달하여 컴포넌트가 마운트될 때 한 번만 실행
+    if (mapContainer && searchList.length > 0) {
+      const mapOption = {
+        center: new kakao.maps.LatLng(37.6438713, 126.624015),
+        level: 11,
+      };
+  
+      const map = new window.kakao.maps.Map(mapContainer, mapOption);
+      const clusterer = new window.kakao.maps.MarkerClusterer({
+        map: map,
+        averageCenter: true,
+        minLevel: 4,
+      });
+  
+      searchList.map((list) => {
+        // 이 부분을 window.kakao.maps.load 콜백 안으로 이동
+        window.kakao.maps.load(() => {
+          const geocoder = new window.kakao.maps.services.Geocoder();
+          geocoder.addressSearch(list.location, function (result, status) {
+            if (status === window.kakao.maps.services.Status.OK) {
+              var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+              var marker = new window.kakao.maps.Marker({
+                map: map,
+                position: coords,
+              });
+              clusterer.addMarker(marker);
+              map.setCenter(coords);
+            }
+          });
+        });
+        return null;
+      });
+    }
+  };
 
   useEffect(() => {
     // 서버에서 데이터를 가져오는 코드
@@ -59,6 +106,16 @@ export default function SearchMain() {
     productTypeSelect.value = '';
   };
 
+
+  const openDetailModal = (product) => {
+    setSelectedProduct(product);
+    setShowDetailModal(true);
+  };
+
+  const closeDetailModal = () => {
+    setShowDetailModal(false);
+  };
+
   return (
     <div className='SearchMain'>
       <Header />
@@ -79,6 +136,7 @@ export default function SearchMain() {
             <option value='아파트'>아파트</option>
             <option value='상가'>상가</option>
             <option value='지식산업센터/사무실'>지식산업센터·사무실</option>
+            {/* 지식산업센터·사무실 로 바꾸기 */}
             <option value='토지'>토지</option>
             <option value='공장/창고'>공장·창고</option>
           </select>
@@ -89,7 +147,7 @@ export default function SearchMain() {
           </div>
           <div className='SearchList'>
             {searchList.map((list) => (
-              <div className='productBox' key={list.product_id}>
+              <div className='productBox' key={list.product_id} onClick={() => openDetailModal(list)}>
                 <div className='productIMG'>
                   <img className="ImgOne" src={`/img/${list.img_title || '이미지준비중.png'}`} alt={list.img_title} />
                 </div>
@@ -123,8 +181,15 @@ export default function SearchMain() {
               </div>
             ))}
           </div>
+          {showDetailModal && (
+            <div className='Detail' id='Detail'>
+              <Detail product={selectedProduct} onClose={closeDetailModal} />
+            </div>
+          )}
         </div>
       </div>
     </div>
   )
 }
+
+

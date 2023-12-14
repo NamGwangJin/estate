@@ -6,7 +6,7 @@ import DetailBody from './DetailBody.js';
 import '../../App.css';
 import axios from 'axios';
 
-export default function EstateDetail() {
+export default function EstateDetail({ product, onClose }) {
 
   const query = window.location.search;
   const params = new URLSearchParams(query);
@@ -15,28 +15,29 @@ export default function EstateDetail() {
   const [detail, setDetail] = useState([]);
 
   useEffect(() => {
-      axios({
-        method: "get",
-        url: '/api/estate/detail',
-        params: { no: no }
+    axios({
+      method: "get",
+      url: '/api/estate/detail',
+      params: { no: no }
+    })
+      .then((res) => {
+        setDetail(res.data);
       })
-        .then((res) => {
-          setDetail(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, [no]);
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [no]);
 
   return (
     <div>
-        <Header />
-            <div className='container1'>
-                <DetailHead />
+      {/* <Header /> */}
+      <div className='container1'>
+        <button className='closeButton' onClick={onClose}>X</button>
+        <DetailHead />
 
-                <DetailBody />
-            </div>
-        <Bottom />
+        <DetailBody />
+      </div>
+      {/* <Bottom /> */}
     </div>
   )
 }

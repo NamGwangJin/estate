@@ -1,7 +1,8 @@
 .SearchMain hr {
   border: 0.1px solid #c3c3c3;
 }
-.SearchSection select{
+
+.SearchSection select {
   width: 200px;
   height: 30px;
   padding-left: 10px;
@@ -14,19 +15,21 @@
   appearance: none;
   cursor: pointer;
 }
-.SearchSection select::-ms-expand{
+
+.SearchSection select::-ms-expand {
   display: none;
 }
 
-.MapandList{
+.MapandList {
   display: flex;
   width: 100%;
 }
 
 .SearchMap {
-  flex:1;
+  flex: 1;
   height: 1000px;
-  background-color: #f0f0f0; /* 예시로 배경색을 지정합니다. */
+  background-color: #f0f0f0;
+  /* 예시로 배경색을 지정합니다. */
 }
 
 .SearchList {
@@ -37,18 +40,21 @@
   /* padding: 10px; */
   /* background-color: #e0e0e0; */
 }
-.productBox{
+
+.productBox {
   padding: 5px;
   display: flex;
   width: 100%;
   height: 15%;
   border-bottom: 0.1px solid #919191;
 }
-.productBox:hover{
+
+.productBox:hover {
   background-color: #f4f4f4;
   cursor: pointer;
 }
-.product_id_box{
+
+.product_id_box {
   border: 1px solid #cbcbcb;
   width: 100px;
   height: 20px;
@@ -56,17 +62,23 @@
   font-weight: 500;
   text-align: center;
 }
-.productWord{
+
+.productWord {
   padding: 10px;
 }
-.product_type{
+
+.product_type {
   display: flex;
 }
-.ImgOne{
+
+.ImgOne {
   width: 200px;
   height: 150px;
 }
-.circleMonth, .circleCharter, .circleSale {
+
+.circleMonth,
+.circleCharter,
+.circleSale {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -79,15 +91,38 @@
   /* margin-right: 1px; */
   margin-top: 2px;
 }
-.circleMonth{
-  background-color: #4da8e5; /* 원의 배경색을 적절히 조절하세요 */
+
+.circleMonth {
+  background-color: #4da8e5;
+  /* 원의 배경색을 적절히 조절하세요 */
 }
-.circleCharter{
-  background-color: rgb(209, 197, 30); /* 원의 배경색을 적절히 조절하세요 */
+
+.circleCharter {
+  background-color: rgb(209, 197, 30);
+  /* 원의 배경색을 적절히 조절하세요 */
 }
-.circleSale{
-  background-color: #ef5b5b; /* 원의 배경색을 적절히 조절하세요 */
+
+.circleSale {
+  background-color: #ef5b5b;
+  /* 원의 배경색을 적절히 조절하세요 */
 }
-.transaction{
+
+.transaction {
   margin-top: 2px;
+}
+
+.Detail {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 55%;
+  height: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }

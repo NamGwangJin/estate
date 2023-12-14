@@ -12,7 +12,7 @@
   
   /* Header Cell Style */
   .header-cell {
-    font-weight: bold;
+    font-weight: normal;
   }
   
   /* Styled Select */
@@ -28,8 +28,8 @@
   .styled-input {
     width: calc(33.33% - 6px);
     padding: 8px;
-    /* margin-right: 6px; */
-    margin-bottom: 8px;
+    margin-right: 8px;
+    /* margin-bottom: 8px; */
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
@@ -64,6 +64,8 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: ;
     cursor: pointer;
   }
+  
+  
+  
