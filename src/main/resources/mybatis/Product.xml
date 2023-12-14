@@ -170,4 +170,5 @@ ON
       p.product_type = #{productType}
     </if>
 </select>
+
 </mapper>

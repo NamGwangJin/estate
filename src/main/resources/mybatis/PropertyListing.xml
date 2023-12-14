@@ -56,6 +56,19 @@
     </where>
 </select>
 
+<update id='recommend_update' parameterType="com.real.estate.DTO.PropertyListingDTO">
+    UPDATE products
+    SET recommend = '추천매물'
+    WHERE product_id = #{product_id};
+</update>
+
+
+<update id='recommend_clear' parameterType="com.real.estate.DTO.PropertyListingDTO">
+    UPDATE products
+    SET recommend = ''
+    WHERE product_id = #{product_id};
+</update>
+
 
 
 
