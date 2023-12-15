@@ -151,8 +151,8 @@ public class NamController {
 
     // 매물 상세 이미지 불러오는 코드
     @GetMapping("/api/estate/detail/img")
-    public ArrayList<ProductDTO> getEstateDetail_img(@RequestParam int no) {
-        ArrayList<ProductDTO> img = pDAO.getEstateDetail_img(no);
+    public ArrayList<ProductDTO> getEstateDetail_img(@RequestParam int product_id) {
+        ArrayList<ProductDTO> img = pDAO.getEstateDetail_img(product_id);
 
         return img;
     }

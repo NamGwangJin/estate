@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Bottom from '../bottom';
 
 export default function DetailHead({ product_id }) {
     const [detail, setDetail] = useState({});
@@ -104,7 +105,7 @@ export default function DetailHead({ product_id }) {
                         </li>
                         <li>
                             <span>중개업소 소재지</span>
-                            경기도 김포시 김포한강10로133번길 82 B동 1층 104호
+                            <a style={{ color: "black", textDecoration: "none" }} href='https://map.kakao.com/link/search/루루공인중개사사무소'>경기도 김포시 김포한강10로133번길 82 B동 1층 104호</a>
                             {/* 카카오맵 링크걸면 좋을듯 */}
                         </li>
                     </ul>
