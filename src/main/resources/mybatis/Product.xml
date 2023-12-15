@@ -63,10 +63,10 @@
 select * from products where product_id = #{product_id};
 </select>
 
-<select id="getEstateDetail_img">
+<select id="getEstateDetail_img" parameterType="int" resultType="com.real.estate.DTO.ProductDTO">
 select b.img_no, b.img_productID, b.img_title
 from products a join products_img b on a.product_id = b.img_productID
-where product_id = #{param1};
+where product_id = #{product_id};
 </select>
 
 <update id="product_update">
