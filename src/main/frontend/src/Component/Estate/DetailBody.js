@@ -47,7 +47,7 @@ export default function DetailBody({ product_id }) {
         const geocoder = new window.kakao.maps.services.Geocoder();
 
         // 주소로 좌표를 검색합니다
-        geocoder.addressSearch(detail.location, (result, status) => {   // locaiton + building_name 으로 바꾸기
+        geocoder.addressSearch(detail.location, (result, status) => {   // (detail.locaiton + detail.building_name) 으로 바꾸기
             // 정상적으로 검색이 완료됐으면
             if (status === window.kakao.maps.services.Status.OK) {
                 const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
