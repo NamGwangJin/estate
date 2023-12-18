@@ -3,6 +3,7 @@ package com.real.estate.Controller;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,8 @@ import com.real.estate.DAO.ProductDAO;
 import com.real.estate.DAO.PropertyListingDAO; // 올바른 클래스로 교체
 import com.real.estate.DTO.ProductDTO;
 import com.real.estate.DTO.PropertyListingDTO;
+import com.real.estate.DTO.TourDTO;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -103,5 +106,15 @@ public class YoonController {
         System.out.println("추천매물해제: " + product_id);
         return "success";
     }
+
+    @GetMapping("/api/get_recommend")
+    public ArrayList<PropertyListingDTO> get_recommend(){
+        ArrayList<PropertyListingDTO> Recommend = propertyListingDAO.get_recommend();
+        return Recommend;
+    }
+    
+    
+    
+    
 
 }

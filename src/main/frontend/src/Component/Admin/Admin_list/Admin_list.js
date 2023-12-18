@@ -16,53 +16,87 @@ export default function Admin_list({ propertyType }) {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-
-
-  const [checkboxStates, setCheckboxStates] = useState({});
-
-  const handleCheckboxChange = (productId) => {
-    setCheckboxStates((prevState) => {
-      const newState = { ...prevState };
-      newState[productId] = !prevState[productId];
+  const [checkedItems, setCheckedItems] = useState({}); // 변경
   
-      if (newState[productId]) {
-        console.log(`상품 ID ${productId}의 체크박스가 체크되었습니다. true에 대한 로직을 실행합니다.`);
+  const initializePage = (propertyType) => {
+    // propertyType 배열이 비어있지 않으면
+    if (propertyType.length > 0) {
+      // 각 요소의 recommend 값을 확인
+      const checkedItemsCopy = {}; // 변경
 
-        axios
-        .post('/api/recommend_update', null, {
-          params: {
-            product_id: productId,
-          },
-        })
-        .then((response) => {
-          console.log('서버 응답:', response.data);
-          // 서버 응답에 따른 추가 로직을 여기에 추가
-        })
-        .catch((error) => {
-          console.error('서버 요청 중 오류:', error);
-        });      
-      } else {
-        console.log(`상품 ID ${productId}의 체크박스가 체크 해제되었습니다. false에 대한 로직을 실행합니다.`);
+      propertyType.forEach((elem, index) => {
+        const recommendValue = elem.recommend;
 
-        axios
-        .post('/api/recommend_clear', null, {
-          params: {
-            product_id: productId,
-          },
-        })
-        .then((response) => {
-          console.log('서버 응답:', response.data);
-        })
-        .catch((error) => {
-          console.error('서버 요청 중 오류:', error);
-        });     
-      }
-      
-  
-      return newState;
-    });
+        // 값이 '추천매물'인 경우 특정 로직 수행
+        if (recommendValue === '추천매물') {
+          checkedItemsCopy[elem.product_id] = true; // 변경
+        }
+      });
+
+      setCheckedItems(checkedItemsCopy); // 변경
+      // 여기서 필요한 초기화 로직 수행
+    }
   };
+
+  useEffect(() => {
+    // 페이지가 로딩될 때 실행될 초기화 함수
+    initializePage(propertyType);
+  }, [propertyType]); // propertyType이 업데이트될 때마다 실행
   
+  const maxCheckedCount = 3; // 최대 체크 가능한 개수
+
+  
+  const handleCheckboxChange = (product_id) => {
+    // 현재 체크된 개수 확인
+    const currentCheckedCount = Object.values(checkedItems).filter((isChecked) => isChecked).length;
+  
+    // 체크 상태를 업데이트할 때 최대 개수 미만인 경우에만 업데이트
+    if (currentCheckedCount < maxCheckedCount || checkedItems[product_id]) {
+      setCheckedItems((prevCheckedItems) => {
+        const updatedCheckedItems = {
+          ...prevCheckedItems,
+          [product_id]: !prevCheckedItems[product_id],
+        };
+  
+        // 추가 기능을 넣을 수 있습니다.
+        if (updatedCheckedItems[product_id]) {
+          // 체크된 경우에 수행할 로직 추가
+          console.log(`상품 ID ${product_id}이(가) 체크되었습니다.`);
+          axios
+            .post('/api/recommend_update', null, {
+              params: {
+                product_id: product_id,
+              },
+            })
+            .then((response) => {
+              console.log('서버 응답:', response.data);
+              // 서버 응답에 따른 추가 로직을 여기에 추가
+            })
+            .catch((error) => {
+              console.error('서버 요청 중 오류:', error);
+            });
+        } else {
+          // 체크 해제된 경우에 수행할 로직 추가
+          console.log(`상품 ID ${product_id}이(가) 체크 해제되었습니다.`);
+  
+          axios
+            .post('/api/recommend_clear', null, {
+              params: {
+                product_id: product_id,
+              },
+            })
+            .then((response) => {
+              console.log('서버 응답:', response.data);
+            })
+            .catch((error) => {
+              console.error('서버 요청 중 오류:', error);
+            });
+        }
+  
+        return updatedCheckedItems;
+      });
+    }
+  };
   
   return (
     <div className="container2">
@@ -117,26 +151,16 @@ export default function Admin_list({ propertyType }) {
                   {elem.product_state}
                 </td>
                 <td data-th="Recommendation">
-                {/* <input
-                  type="checkbox"
-                  checked={checkboxStates[elem.product_id] || (elem.recommend === '추천매물')}
-                  onChange={() => handleCheckboxChange(elem.product_id)}
-                  disabled={
-                    Object.values(checkboxStates).filter((isChecked) => isChecked).length >= 3 &&
-                    !checkboxStates[elem.product_id]
-                  }
-                /> */}
-<input
-  type="checkbox"
-  checked={checkboxStates[elem.product_id] || (elem.recommend === '추천매물')}
-  onChange={() => handleCheckboxChange(elem.product_id)}
-  disabled={
-    Object.values(checkboxStates).filter((isChecked) => isChecked || (isChecked && elem.recommend === '추천매물')).length >= 3 &&
-    !checkboxStates[elem.product_id]
-  }
-/>
-
-
+                <input
+                    id={elem.product_id}
+                    type="checkbox"
+                    checked={checkedItems[elem.product_id] || false}
+                    onChange={() => handleCheckboxChange(elem.product_id)}
+                    disabled={
+                      Object.values(checkedItems).filter((isChecked) => isChecked && isChecked !== checkedItems[elem.product_id]).length >= maxCheckedCount
+                    }
+                    
+                  />
                 </td>
               </tr>
             ))
