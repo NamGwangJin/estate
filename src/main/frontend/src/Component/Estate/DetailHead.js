@@ -40,7 +40,7 @@ export default function DetailHead({ product_id }) {
                         <div id='area01'>
                             77.43
                             <span className='bar'> / </span>
-                            45.09 (DB)
+                            45.09
                             <span className='unit'> ㎡</span>
                         </div>
                     </div>

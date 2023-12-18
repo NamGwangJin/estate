@@ -29,7 +29,6 @@ export default function DetailBody({ product_id }) {
     useEffect(() => {
         // 지도를 표시할 div
         const mapContainer = document.getElementById('mm_map_id');
-        const staticMapContainer = document.getElementById('staticMap');  // 안쓸거면 삭제
 
         // 지도의 중심좌표
         const center = new window.kakao.maps.LatLng(33.450701, 126.570667);
@@ -58,33 +57,35 @@ export default function DetailBody({ product_id }) {
                     position: coords,
                 });
 
-                const staticMapOption = {           // 안쓸거면 삭제
-                    center: coords, // 이미지 지도의 중심좌표
-                    level: 1 // 이미지 지도의 확대 레벨
-                };
 
                 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                 map.setCenter(coords);
-                const staticMap = new window.kakao.maps.StaticMap(staticMapContainer, staticMapOption); // 안쓸거면 삭제
 
             }
         });
     }, [detail.location]); // useEffect를 빈 배열로 전달하여 컴포넌트가 마운트될 때 한 번만 실행
+
     return (
         <div>
             <div className='detail_body'>
                 <div id='detail_gallery' className='detail_gallery'>
                     <div id="img_type_id">
                         <div className="img_type_text on" id="img_type_text_0">위치</div>
-                        <div className="img_type_text" id="img_type_text_3">매물 사진</div> { /* 3항 연산자로 매물이 있을때만 보여줄것 */}
+                        {IMG.length > 0 ?
+                        <div className="img_type_text" id="img_type_text_3">매물 사진</div>
+                        :
+                        <></>
+                        }
                     </div>
                     <div className='gallery_wrap'>
-                        <div className='bx-wrapper'>
-                            <div className='bx-viewport' aria-live='polite' style={{ width: '100%', overflow: 'hidden', position: 'relative', height: '70px' }}>
+                        <div>
+                            <div aria-live='polite' style={{ width: '100%', overflow: 'hidden', position: 'relative', height: '70px' }}>
                                 <ul id="mm_img_list_id" className="gallery" style={{ width: '1215%', position: 'relative', transitionDuration: '0s', transform: 'translate3d(0px, 0px, 0px)' }}>
-
+                                    <li aria-hidden='false' style={{ float: 'left', listStyle: 'none', position: 'relative', width: '50px', marginRight: '10px' }}>
+                                        <img src='/img/detail/prev.png' style={{ width: '50px', height: '50px' ,cursor: 'pointer'}} id='prev' />
+                                    </li>
                                     <li aria-hidden='false' style={{ float: 'left', listStyle: 'none', position: 'relative', width: '72px', marginRight: '10px' }}>
-                                        <div style={{ width: '70px', height: '70px' }} className='on' img_type="0" id='staticMap'></div>
+                                        <img style={{ width: '70px', height: '70px' }} className='on' img_type="0" src='/img/gallery_pic1.jpg' />
                                     </li>
                                     {/* 이미지 불러오기 완료. 클릭하면 크게보기 만들까고민중 */}
                                     {IMG.map((list, index) => (
@@ -92,11 +93,10 @@ export default function DetailBody({ product_id }) {
                                             <img key={index} src={`/img/${list.img_title}`} style={{ width: '70px', height: '70px' }} id={`mm_img_id_${index}`} title="" img_type="3" />
                                         </li>
                                     ))}
+                                    <li aria-hidden='false' style={{ float: 'left', listStyle: 'none', position: 'relative', width: '50px', marginRight: '10px' }}>
+                                        <img src='/img/detail/next.png' style={{ width: '50px', height: '50px', cursor: 'pointer'}} id='next' />
+                                    </li>
                                 </ul>
-                            </div>
-                            <div className='bx-controls bx-has-controls-direction'>
-                                <a className='bx-prev disabled'>이전</a>
-                                <a className='bx-next disabled'>다음</a>
                             </div>
                         </div>
                     </div>
@@ -143,13 +143,13 @@ export default function DetailBody({ product_id }) {
                             <li>
                                 <div>
                                     <span style={{ display: 'table-cell', float: 'left' }}>방범창 / 베란다</span>
-                                    <div style={{ display: 'table-cell', width: '200px' }}><span>{detail.balcony}</span></div>
+                                    <div style={{ display: 'table-cell', width: '200px' }}>{detail.balcony}</div>
                                 </div>
                             </li>
                             <li>
                                 <div>
                                     <span style={{ display: 'table-cell', float: 'left' }}>냉방시설</span>
-                                    <div style={{ display: 'table-cell', width: '200px' }}>{detail.airCondition}</div>
+                                    <div style={{ display: 'table-cell', width: '200px' }}>{detail.airCondition} -</div>
                                 </div>
                             </li>
                             <li>
