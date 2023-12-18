@@ -9,6 +9,8 @@ public class PropertyListingDTO {
     String location;
     String building_name;
     String building_use;
+    String created;
+    String recommend;
     String extent;
     String address;
     String floor;
@@ -40,6 +42,4 @@ public class PropertyListingDTO {
     String product_title;
     String product_content;
     String product_state;
-    String created;
-    String recommend;
 }

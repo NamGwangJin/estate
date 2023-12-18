@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.real.estate.DTO.ProductDTO;
 import com.real.estate.DTO.PropertyListingDTO;
 import com.real.estate.DTO.QuestionDTO;
 
@@ -15,4 +16,6 @@ public interface PropertyListingDAO {
     int countProducts(Map<String, Object> queryParams);
     void recommend_update(int product_id);
     void recommend_clear(int product_id);
+    ArrayList<PropertyListingDTO> get_recommend();
+    
 }
