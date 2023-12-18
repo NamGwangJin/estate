@@ -397,7 +397,13 @@
 
 .img_type_text {
   display: table-cell !important;
-  padding: 0 0 10px 40px !important;
+  padding: 0 0 10px 110px !important;
+  cursor: pointer;
+}
+
+#img_type_id div:nth-child(2) {
+  display: table-cell !important;
+  padding: 0 0 10px 35px !important;
   cursor: pointer;
 }
 
