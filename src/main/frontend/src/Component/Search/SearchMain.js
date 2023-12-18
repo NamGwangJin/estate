@@ -13,29 +13,25 @@ export default function SearchMain() {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // 오류 뜨는거 잡기 --------------
   useEffect(() => {
-    // Kakao 맵 스크립트 로드 여부 확인
     if (!window.kakao) {
       const script = document.createElement('script');
       script.async = true;
       script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=73dfe3bf43bd31398ab2de67c59cad97&libraries=services,clusterer&autoload=false`;
 
       script.onload = () => {
-        // 스크립트 로드 완료 후 실행
         window.kakao.maps.load(() => {
           initializeMap();
         })
       };
       document.head.appendChild(script);
     } else {
-      // 이미 스크립트 로드되어 있을 때 바로 실행
       initializeMap();
     }
-    
+
   }, [[searchList]]);
 
-  
+
   const initializeMap = () => {
     const mapContainer = document.getElementById('SearchMap');
     if (mapContainer && searchList.length > 0) {
@@ -43,19 +39,19 @@ export default function SearchMain() {
         center: new kakao.maps.LatLng(37.6438713, 126.624015),
         level: 11,
       };
-  
+
       const map = new window.kakao.maps.Map(mapContainer, mapOption);
-      const clusterer = new window.kakao.maps.MarkerClusterer({
-        map: map,
-        averageCenter: true,
-        minLevel: 4,
-      });
-  
-      searchList.map((list) => {
-        // 이 부분을 window.kakao.maps.load 콜백 안으로 이동
-        window.kakao.maps.load(() => {
+
+      window.kakao.maps.load(() => {
+        const clusterer = new window.kakao.maps.MarkerClusterer({
+          map: map,
+          averageCenter: true,
+          minLevel: 4,
+        });
+
+        searchList.forEach((list) => {
           const geocoder = new window.kakao.maps.services.Geocoder();
-          geocoder.addressSearch(list.location, function (result, status) {   // location + building_name으로 바꾸기
+          geocoder.addressSearch(list.location, function (result, status) {    // (list.location+list.building_name) 으로 변경
             if (status === window.kakao.maps.services.Status.OK) {
               var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
               var marker = new window.kakao.maps.Marker({
@@ -67,10 +63,10 @@ export default function SearchMain() {
             }
           });
         });
-        return null;
       });
     }
   };
+
 
   useEffect(() => {
     // 서버에서 데이터를 가져오는 코드
@@ -78,7 +74,6 @@ export default function SearchMain() {
       try {
         let params = {};
 
-        // transactionType이나 productType 중 하나라도 선택되었을 경우에만 해당 필드를 추가
         if (transactionType) {
           params.transactionType = transactionType;
         }
@@ -96,7 +91,7 @@ export default function SearchMain() {
 
     fetchData(); // 함수 호출
 
-  }, [transactionType, productType]); // useEffect를 [transactionType, productType]로 설정하여 해당 상태가 변경될 때마다 실행
+  }, [transactionType, productType]); 
 
   // 초기화 버튼 클릭 시 상태를 초기화하고 전체 목록을 불러옴
   const handleReset = () => {
@@ -139,7 +134,7 @@ export default function SearchMain() {
             {/* 지식산업센터·사무실 로 바꾸기 ---------------------*/}
             <option value='토지'>토지</option>
             <option value='공장/창고'>공장·창고</option>
-          </select> 
+          </select>
         </div>
         <div className='MapandList'>
           <div className='SearchMap' id='SearchMap'>
