@@ -17,7 +17,7 @@ function Home() {
           <Request_box/>
           </div>
           <div className='inquiry1'>
-            {/* <Inquiry /> */}
+            <Inquiry />
           </div>
           <div className='inquiry2'>
             {/* <Inquiry /> */}

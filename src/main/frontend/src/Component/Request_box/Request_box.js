@@ -12,7 +12,7 @@ export default function Request_box() {
               <h2>간편 상담 문의</h2>
               <p>보다 쉽고 빠르게 문의를 남겨보세요!</p>
               <div className="table">
-                <div className="tr">
+                <div className="tr" style={{display:'flex'}}>
                   <div className="td">
                     <div>이름</div>
                     <div className="inputBox">
