@@ -12,7 +12,10 @@
     border-radius: 5px;
     width: 300px;
     text-align: center;
-    
+    position: fixed;
+    top: 20%;
+    right: 5%;
+    overflow: hidden;
   }
   
   .inquiry-title {
