@@ -7,7 +7,7 @@ import MainBox from './Component/MainBox/MainBox.js';
 import './App.css';
 import Request_box from './Component/Request_box/Request_box.js';
 
-function Home() {
+function Home() { 
     return (
         <div className="App">
           <Header />
