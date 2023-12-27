@@ -65,6 +65,138 @@ export default function DetailBody({ product_id }) {
         });
     }, [detail.location]); // useEffect를 빈 배열로 전달하여 컴포넌트가 마운트될 때 한 번만 실행
 
+    function handleNextButtonClick() {
+
+        // 첫 번째 상황: img_type_text_0인 id의 클래스에 on이 있을 때
+        const imgTypeText0 = document.getElementById('img_type_text_0');
+        const imgTypeText3 = document.getElementById('img_type_text_3');
+        const galleryWrap = document.getElementById('galleryWrap');
+        
+        if (imgTypeText0.classList.contains('on')) {
+          imgTypeText0.classList.remove('on');
+          imgTypeText3.classList.add('on');
+          
+          // id="detail_map_wrap"인 요소를 display none으로 변경
+          document.getElementById('detail_map_wrap').style.display = 'none';
+          // id="gallery"인 요소의 display none을 제거
+          document.getElementById('gallery').style.display = '';
+      
+          // <div id='galleryWrap'>인 요소에서 img_type이 0인 요소의 class에서 on을 제거하고 img_type이 3인 요소의 class에 on을 추가
+          const onElement = galleryWrap.querySelector('.on');
+          if (onElement) {
+            onElement.classList.remove('on');
+            const imgType3Element = galleryWrap.querySelector('[img_type="3"]');
+            if (imgType3Element) {
+              imgType3Element.classList.add('on');
+            }
+          }
+
+            // div id="gallery_img"인 요소의 img 태그들 중 첫 번째만 block으로 처리하고 나머지는 display none으로 처리
+            const galleryImg = document.getElementById('gallery_img');
+            const imgElements = galleryImg.querySelectorAll('img');
+            imgElements.forEach((img, index) => {
+                img.style.display = index === 0 ? 'block' : 'none';
+            });
+
+        } else {
+            const imgType3Element = galleryWrap.querySelector('.on');
+            if (imgType3Element) {
+              // <div id='galleryWrap'>인 요소에서 img_type=3인 요소들 중 on class가 적용되어있는 요소를 찾아서 on class를 제거하고 다음 img_type=3인 요소에 on class를 적용
+              imgType3Element.classList.remove('on');
+            
+              // 모든 img_type=3인 요소들을 가져옴
+              const imgType3Elements = galleryWrap.querySelectorAll('[img_type="3"]');
+              
+              // 현재 요소의 인덱스를 찾음
+              const currentIndex = Array.from(imgType3Elements).findIndex(el => el === imgType3Element);
+            
+              // 다음 img_type=3인 요소에 on class를 적용
+              const nextElement = imgType3Elements[(currentIndex + 1) % imgType3Elements.length];
+              if (nextElement) {
+                nextElement.classList.add('on');
+              }
+            
+              // 나머지 img_type=3인 요소들은 on class를 제거
+              imgType3Elements.forEach(el => {
+                if (el !== nextElement) {
+                  el.classList.remove('on');
+                }
+              });
+      
+            // div id="gallery_img"인 요소의 img 태그들 중 display되고 있는 요소를 찾아서 display none을 적용시키고 다음 이미지의 display none을 제거
+            const displayedImg = document.getElementById('gallery_img').querySelector('[style*="display: block"]');
+            if (displayedImg) {
+              displayedImg.style.display = 'none';
+              const nextImg = displayedImg.nextElementSibling;
+              if (nextImg) {
+                nextImg.style.display = '';
+              }
+            }
+          }
+        }
+      }
+
+      function handlePrevButtonClick() {
+        const imgTypeText0 = document.getElementById('img_type_text_0');
+        const imgTypeText3 = document.getElementById('img_type_text_3');
+        const galleryWrap = document.getElementById('galleryWrap');
+        const detailMapWrap = document.getElementById('detail_map_wrap');
+        const gallery = document.getElementById('gallery');
+        const galleryImg = document.getElementById('gallery_img');
+      
+        if (imgTypeText3.classList.contains('on')) {
+          // img_type_text_3인 id의 클래스에 on이 있을 때
+          imgTypeText3.classList.remove('on');
+          imgTypeText0.classList.add('on');
+      
+          // div id='galleryWrap'의 자식 중 img_type이 3인 요소의 class에서 on을 제거하고 img_type이 0인 요소에 on을 추가
+          const imgType3Element = galleryWrap.querySelector('.img_type_text.on[data-img-type="3"]');
+          if (imgType3Element) {
+            imgType3Element.classList.remove('on');
+            const imgType0Element = galleryWrap.querySelector('.img_type_text[data-img-type="0"]');
+            if (imgType0Element) {
+              imgType0Element.classList.add('on');
+            }
+          }
+      
+          // div id="detail_map_wrap"의 style을 display: none으로 변경하고 div id="gallery"의 style을 display: block으로 변경
+          if (detailMapWrap && gallery) {
+            detailMapWrap.style.display = 'none';
+            gallery.style.display = 'block';
+          }
+      
+          // div id="gallery_img"의 img 태그들 중 첫 번째를 block으로 처리하고 나머지는 display none으로 처리
+          if (galleryImg) {
+            const imgElements = galleryImg.querySelectorAll('img');
+            imgElements.forEach((img, index) => {
+              img.style.display = index === 0 ? 'block' : 'none';
+            });
+          }
+        } else {
+          // img_type_text_0인 id의 클래스에 on이 없을 때
+          const imgType0Element = galleryWrap.querySelector('.on[data-img-type="0"]');
+          if (imgType0Element) {
+            // div id='galleryWrap'의 자식 중 img_type이 0인 요소의 class에서 on을 제거하고 img_type이 3인 요소에 on을 추가
+            imgType0Element.classList.remove('on');
+            const imgType3Element = galleryWrap.querySelector('.img_type_text[data-img-type="3"]');
+            if (imgType3Element) {
+              imgType3Element.classList.add('on');
+            }
+      
+            // div id="gallery_img"의 img 태그들 중 display되고 있는 요소를 찾아서 display none을 적용시키고 이전 이미지의 display block을 제거
+            const displayedImg = galleryImg.querySelector('[style*="display: block"]');
+            if (displayedImg) {
+              displayedImg.style.display = 'none';
+              const prevImg = displayedImg.previousElementSibling;
+              if (prevImg) {
+                prevImg.style.display = '';
+              }
+            }
+          }
+        }
+      }
+      
+
     return (
         <div>
             <div className='detail_body'>
@@ -78,23 +210,22 @@ export default function DetailBody({ product_id }) {
                         }
                     </div>
                     <div className='gallery_wrap'>
-                        <div>
+                        <div id='galleryWrap'>
                             <div aria-live='polite' style={{ width: '100%', overflow: 'hidden', position: 'relative', height: '70px' }}>
                                 <ul id="mm_img_list_id" className="gallery" style={{ width: '1215%', position: 'relative', transitionDuration: '0s', transform: 'translate3d(0px, 0px, 0px)' }}>
                                     <li aria-hidden='false' style={{ float: 'left', listStyle: 'none', position: 'relative', width: '50px', marginRight: '10px' }}>
-                                        <img src='/img/detail/prev.png' style={{ width: '50px', height: '50px' ,cursor: 'pointer'}} id='prev' />
+                                        <img src='/img/detail/prev.png' style={{ width: '50px', height: '50px' ,cursor: 'pointer'}} id='prev' onClick={handlePrevButtonClick} />
                                     </li>
                                     <li aria-hidden='false' style={{ float: 'left', listStyle: 'none', position: 'relative', width: '72px', marginRight: '10px' }}>
                                         <img style={{ width: '70px', height: '70px' }} className='on' img_type="0" src='/img/gallery_pic1.jpg' />
                                     </li>
-                                    {/* 이미지 불러오기 완료. 클릭하면 크게보기 만들까고민중 */}
                                     {IMG.map((list, index) => (
                                         <li aria-hidden='false' style={{ float: 'left', listStyle: 'none', position: 'relative', width: '72px', marginRight: '10px' }}>
-                                            <img key={index} src={`/img/${list.img_title}`} style={{ width: '70px', height: '70px' }} id={`mm_img_id_${index}`} title="" img_type="3" />
+                                            <img key={index} src={`/img/${list.img_title}`} style={{ width: '70px', height: '70px' }} name={`mm_img_id_${index}`} title="" img_type="3" />
                                         </li>
                                     ))}
                                     <li aria-hidden='false' style={{ float: 'left', listStyle: 'none', position: 'relative', width: '50px', marginRight: '10px' }}>
-                                        <img src='/img/detail/next.png' style={{ width: '50px', height: '50px', cursor: 'pointer'}} id='next' />
+                                        <img src='/img/detail/next.png' style={{ width: '50px', height: '50px', cursor: 'pointer'}} id='next' onClick={handleNextButtonClick} />
                                     </li>
                                 </ul>
                             </div>
@@ -103,6 +234,15 @@ export default function DetailBody({ product_id }) {
                 </div>
                 <div id="detail_map_wrap" className="detail_map_wrap">
                     <div id="mm_map_id" className='detail_map'>
+
+                    </div>
+                </div>
+
+                <div id="gallery" className="detail_map_wrap" style={{display: 'none'}}>
+                    <div id="gallery_img" className='detail_map'>
+                        {IMG.map((list, index) => (
+                            <img key={index} src={`/img/${list.img_title}`} name={`mm_img_id_${index}`} style={{width: '100%', height: '100%'}}/>
+                        ))}
                     </div>
                 </div>
 
