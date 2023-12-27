@@ -114,4 +114,6 @@ button, input, select, textarea {
     cursor: pointer;
     transition: background .3s;
 }
-
+.inputBox{
+    margin-top: 5px;
+}

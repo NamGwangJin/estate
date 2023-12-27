@@ -1,9 +1,12 @@
 /* Styled Table */
+/* Styled Table */
 .styled-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border-radius: 10px;  /* 라운드 코너 적용 */
+  overflow: hidden; /* 라운드 코너를 제대로 보이게 하려면 overflow: hidden; 추가 */
+}
   
   .styled-table td {
     padding: 10px;

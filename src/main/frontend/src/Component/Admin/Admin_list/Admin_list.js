@@ -17,7 +17,7 @@ export default function Admin_list({ propertyType }) {
     setCurrentPage(newPage);
   };
   const [checkedItems, setCheckedItems] = useState({}); // 변경
-  
+
   const initializePage = (propertyType) => {
     // propertyType 배열이 비어있지 않으면
     if (propertyType.length > 0) {
@@ -42,14 +42,14 @@ export default function Admin_list({ propertyType }) {
     // 페이지가 로딩될 때 실행될 초기화 함수
     initializePage(propertyType);
   }, [propertyType]); // propertyType이 업데이트될 때마다 실행
-  
+
   const maxCheckedCount = 3; // 최대 체크 가능한 개수
 
-  
+
   const handleCheckboxChange = (product_id) => {
     // 현재 체크된 개수 확인
     const currentCheckedCount = Object.values(checkedItems).filter((isChecked) => isChecked).length;
-  
+
     // 체크 상태를 업데이트할 때 최대 개수 미만인 경우에만 업데이트
     if (currentCheckedCount < maxCheckedCount || checkedItems[product_id]) {
       setCheckedItems((prevCheckedItems) => {
@@ -57,7 +57,7 @@ export default function Admin_list({ propertyType }) {
           ...prevCheckedItems,
           [product_id]: !prevCheckedItems[product_id],
         };
-  
+
         // 추가 기능을 넣을 수 있습니다.
         if (updatedCheckedItems[product_id]) {
           // 체크된 경우에 수행할 로직 추가
@@ -78,7 +78,7 @@ export default function Admin_list({ propertyType }) {
         } else {
           // 체크 해제된 경우에 수행할 로직 추가
           console.log(`상품 ID ${product_id}이(가) 체크 해제되었습니다.`);
-  
+
           axios
             .post('/api/recommend_clear', null, {
               params: {
@@ -92,12 +92,12 @@ export default function Admin_list({ propertyType }) {
               console.error('서버 요청 중 오류:', error);
             });
         }
-  
+
         return updatedCheckedItems;
       });
     }
   };
-  
+
   return (
     <div className="container2">
       <table className="rwd-table">
@@ -130,6 +130,8 @@ export default function Admin_list({ propertyType }) {
                 </td>
                 <td data-th="Property_address" style={{ textAlign: 'left' }}>
                   {elem.location}
+                  <br />
+                  {elem.building_name}
                 </td>
                 <td data-th="Property_area">
                   [계]{elem.extent}
@@ -151,7 +153,7 @@ export default function Admin_list({ propertyType }) {
                   {elem.product_state}
                 </td>
                 <td data-th="Recommendation">
-                <input
+                  <input
                     id={elem.product_id}
                     type="checkbox"
                     checked={checkedItems[elem.product_id] || false}
@@ -159,7 +161,7 @@ export default function Admin_list({ propertyType }) {
                     disabled={
                       Object.values(checkedItems).filter((isChecked) => isChecked && isChecked !== checkedItems[elem.product_id]).length >= maxCheckedCount
                     }
-                    
+
                   />
                 </td>
               </tr>
