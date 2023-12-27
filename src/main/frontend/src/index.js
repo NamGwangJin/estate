@@ -20,6 +20,7 @@ import AdminEstateDetail from './Component/Estate/AdminEstateDetail';
 import AdminEstateEdit from './Component/Estate/AdminEstateEdit';
 import Product from './Component/Product/Product.js';
 import SearchMain from './Component/Search/SearchMain.js';
+import SearchGrid from './Component/Search/SearchGrid.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -42,6 +43,7 @@ root.render(
       <Route path={"/product/officetelInsert"} exact element={<OfficetelInsert />}></Route>
       <Route path={"/product"} exact element={<Product />}></Route>
       <Route path={"/Search"} exact element={<SearchMain />}></Route>
+      <Route path={"/Grid"} exact element={<SearchGrid />}></Route>
     </Routes>
   </BrowserRouter>
 );
