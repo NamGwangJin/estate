@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   padding: 1%;
-  margin-left: 10%;
+  justify-items: center;
 }
 
 .GridBox {
@@ -13,7 +13,9 @@
   border-radius: 5px;
   overflow: hidden;
   padding: 10px;
+  margin: 0 10px;
   margin-bottom: 10px;
+  background: #fff;
 }
 
 .GridproductIMG {
@@ -26,7 +28,7 @@
 }
 
 .GridproductWord {
-  padding: 5px;
+  padding: 10px;
 }
 
 .product_id_box {
@@ -42,7 +44,7 @@
   margin-right: 5px;
 }
 
-h4 {
+h3 {
   margin-top: 3px;
   margin-bottom: 5px;
 }

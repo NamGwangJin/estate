@@ -122,9 +122,9 @@ export default function SearchGrid() {
                   <><p className='transaction'><span className="circleSale">매</span> {list.desiredAmount ? `${list.desiredAmount} 만원` : <span style={{ fontWeight: "700" }}>가격협의</span>}</p></>
                 ) : null}
                 {/* 글자수가 길어지면 ... 로 바뀌는 로직. 나중에 글자수 사이즈 체크해서 글자수 수정 */}
-                <h4>{list.product_title.length > 20 ? `${list.product_title.slice(0, 20)}...` : list.product_title}</h4>
+                <h3>{list.product_title.length > 20 ? `${list.product_title.slice(0, 20)}...` : list.product_title}</h3>
                 <p>{list.location}</p>
-                <hr style={{ width: "200px" }} />
+                <hr style={{ width: "250px" }} />
                 <div className='product_type'>
                   {list.product_type === "오피스텔" || list.product_type === "아파트" ? (   // 인서트될때 업무시설로 되어있음. 광진 확인
                     <><span>{list.product_type}</span><hr /><span>{list.building_name}</span><hr /><span>{list.extent}</span></>
