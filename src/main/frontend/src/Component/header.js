@@ -81,16 +81,17 @@ export default function Header() {
             </div>
             <div className='header_top_right'>
               {admin === 1 && (
-                  <button className='sign_btn box' onClick={() => handleNavigate('/admin')}>관리자 페이지</button>
+                  <button className='btn btn-ruru' style={{marginRight: '5px'}} onClick={() => handleNavigate('/admin')}>관리자 페이지</button>
               )}
               {id === null
                 ? <>
-                  <button className='sign_btn box' onClick={signInOpen}>로그인</button>
+                  <button className='btn btn-ruru' onClick={signInOpen}>로그인</button>
                   <SignIn isOpen={signIn} onClose={signInClose} />
-                  <button className='sign_btn box' onClick={signUpOpen}>회원가입</button>
+                  &nbsp;
+                  <button className='btn btn-ruru' onClick={signUpOpen}>회원가입</button>
                   <SignUp isOpen={signUp} onClose={signUpClose} />
                 </>
-                : <button className='sign_btn box' onClick={logout}>로그아웃</button>
+                : <button className='btn btn-ruru' onClick={logout}>로그아웃</button>
               }
             </div>
           </div>
