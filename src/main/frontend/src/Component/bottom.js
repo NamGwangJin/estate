@@ -1,16 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react';
 import './bottom.css';
+import TermsConditions from './TermsConditions';
+import PrivacyPolicy from './PrivacyPolicy';
 
 export default function Bottom() {
+
+  const [isTermsModalOpen, setTermsModalOpen] = useState(false);
+  const [isPrivacyModalOpen, setPrivacyModalOpen] = useState(false);
+
+  const openTermsModal = () => {
+    setTermsModalOpen(true);
+  };
+
+  const closeTermsModal = () => {
+    setTermsModalOpen(false);
+  };
+
+  const openPrivacyModal = () => {
+    setPrivacyModalOpen(true);
+  };
+  
+  const closePrivacyModal = () => {
+    setPrivacyModalOpen(false);
+  };
+
   return (
     <div className='footer'>
       <div className='footer_top'>
         <div className='wrap_1140'>
           <ul className='footer_ul'>
-            <li><a href='#'>회사소개</a></li>
-            <li><a href='#'>의뢰하기</a></li>
-            <li><a href='#'>이용약관</a></li>
-            <li><a href='#'>개인정보처리방침</a></li>
+            <li><a href='/intro'>회사소개</a></li>
+            <li><a href='/requestWrite'>의뢰하기</a></li>
+            <li><a href='#' onClick={openTermsModal}>이용약관</a></li>
+            {/* 이용약관 모달 */}
+            {isTermsModalOpen && <TermsConditions onClose={closeTermsModal} />}
+            <li><a href='#' onClick={openPrivacyModal}>개인정보처리방침</a></li>
+            {/* 개인정보처리방침 모달 */}
+            {isPrivacyModalOpen && <PrivacyPolicy onClose={closePrivacyModal} />}
           </ul>
         </div>
       </div>
