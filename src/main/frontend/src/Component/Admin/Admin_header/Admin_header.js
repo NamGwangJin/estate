@@ -67,7 +67,7 @@ export default function Admin_header() {
 
   return (
     <div className='header_wrap' style={{ opacity: 1 }}>
-      <div className='header_category_wrap'>
+      {/* <div className='header_category_wrap'>
         <div className='header_top_wrap'>
           <div className='header_1140'>
             <div className='header_top_left'>
@@ -98,12 +98,12 @@ export default function Admin_header() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className='header_bottom'>
         <div className='header-left'>
-          <span className='navbar_logo' style={{ cursor: 'pointer' }} onClick={() => handleNavigate('/')}>
+          {/* <span className='navbar_logo' style={{ cursor: 'pointer' }} onClick={() => handleNavigate('/')}>
             <img className='logo_header logo' src="/img/bottomLogo.png" alt='푸터 로고' />
-          </span>
+          </span> */}
         </div>
         <div className='header_center'>
           <ul className='header_menu_etc_box'>
@@ -119,16 +119,6 @@ export default function Admin_header() {
             <li className='header_list'>
               <a onClick={() => handleNavigate('/tour')}>투어 리스트</a>
             </li>
-            {/* <li className='header_list'>
-              <a onClick={() => handleNavigate('/qna')}>질문과 답변</a>
-            </li>
-
-            <li className='header_list'>
-              <a onClick={() => handleNavigate('/intro')}>회사소개</a>
-            </li>
-            <li className='header_list'>
-              <a onClick={() => window.location.href = 'https://blog.naver.com/youghoa'}>블로그</a>
-            </li> */}
           </ul>
         </div>
       </div>
