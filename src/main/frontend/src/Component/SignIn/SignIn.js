@@ -54,7 +54,7 @@ export default function SignIn({ isOpen, onClose }) {
 
   return (    
     <div className={`modal ${isOpen ? 'open' : ''}`}>
-      <div className="modal-content">
+      <div className="modal-content-sign">
         <div>
           <a className="signin_close" onClick={onClose}>&times;</a>
         </div>
