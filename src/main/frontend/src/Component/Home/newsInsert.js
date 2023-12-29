@@ -3,6 +3,7 @@ import Header from '../header.js';
 import Bottom from '../bottom.js';
 import axios from 'axios'; 
 import './newsInsert.css';
+import Admin_header from '../Admin/Admin_header/Admin_header.js';
 
 
 export default function NewsInsert() {
@@ -44,6 +45,7 @@ export default function NewsInsert() {
   return (
     <div className='newsInsert'>
       <Header />
+      <Admin_header/>
       <h2 className='title'>부동산뉴스</h2>
       <div className='insertBox'>
         <input type='text' className='newsInput' id='news_title' placeholder='제목을 입력하시오' />

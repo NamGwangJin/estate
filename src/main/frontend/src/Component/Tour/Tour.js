@@ -4,6 +4,7 @@ import Bottom from '../bottom'
 import '../../App.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Admin_header from '../Admin/Admin_header/Admin_header';
 
 export default function Tour() {
   
@@ -25,6 +26,7 @@ export default function Tour() {
   return (
     <div className='App'>
         <Header />
+        <Admin_header/>
         <div className='body'>
             <div className='title'>
                 매물 투어 신청
