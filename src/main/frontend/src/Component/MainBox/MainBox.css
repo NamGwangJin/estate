@@ -47,5 +47,7 @@
     left: 665px;
   }
 
-
+  .link-no-underline {
+    text-decoration: none;
+  }
   

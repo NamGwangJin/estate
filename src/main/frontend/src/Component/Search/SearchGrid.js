@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../header.js';
 import Bottom from '../bottom.js';
 import axios from 'axios';
@@ -8,10 +9,16 @@ import './SearchGrid.css';
 
 
 export default function SearchGrid() {
+  const navigate = useNavigate();  // useHistory 대신 useNavigate를 사용
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const productTypeFromUrl = searchParams.get('category');
+
 
   const [searchList, setSearchList] = useState([]);
   const [transactionType, setTransactionType] = useState('');
-  const [productType, setProductType] = useState('');
+  // const [productType, setProductType] = useState('');
+  const [productType, setProductType] = useState(productTypeFromUrl || '');  // URL 파라미터 값으로 초기화
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 

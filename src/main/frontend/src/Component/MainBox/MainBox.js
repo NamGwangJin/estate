@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; 
 import './MainBox.css';
 
 export default function MainBox() {
@@ -11,16 +12,30 @@ export default function MainBox() {
         { name: '토지', image: "./././img/landscape.png" },
       ];
 
+  // return (
+  //   <div className="container">
+  //   {/* <h2 className='매물종류'>매물종류</h2> */}
+  //     {categories.map((category, index) => (
+  //       <div className="category-box" key={index}>
+  //         <div className="img-box">
+  //           <img src={category.image} className="category-image" />
+  //         </div>
+  //         <p className="category-text">{category.name}</p>
+  //       </div>
+  //     ))}
+  //   </div>
+  // );
   return (
     <div className="container">
-    {/* <h2 className='매물종류'>매물종류</h2> */}
       {categories.map((category, index) => (
-        <div className="category-box" key={index}>
-          <div className="img-box">
-            <img src={category.image} className="category-image" />
+        <Link to={`/Grid?category=${category.name}`} className="link-no-underline" key={index}>
+          <div className="category-box">
+            <div className="img-box">
+              <img src={category.image} className="category-image" alt={category.name} />
+            </div>
+            <p className="category-text">{category.name}</p>
           </div>
-          <p className="category-text">{category.name}</p>
-        </div>
+        </Link>
       ))}
     </div>
   );
