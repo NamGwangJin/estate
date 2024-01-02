@@ -172,5 +172,34 @@ ON
     </if>
     AND p.product_state = '등록중'
 </select>
-
+<select id="getLateArrayList" resultType="com.real.estate.DTO.ProductDTO">
+SELECT
+  p.*,
+  pi.img_no,
+  pi.img_title
+FROM
+  products p
+LEFT JOIN
+  (
+    SELECT
+      img_productID,
+      MIN(img_no) AS min_img_no
+    FROM
+      products_img
+    GROUP BY
+      img_productID
+  ) AS min_img
+ON
+  p.product_id = min_img.img_productID
+LEFT JOIN
+  products_img pi
+ON
+  min_img.img_productID = pi.img_productID
+  AND min_img.min_img_no = pi.img_no
+WHERE
+  p.product_state = '등록중'
+ORDER BY
+  p.created DESC
+Limit 6;
+</select>
 </mapper>

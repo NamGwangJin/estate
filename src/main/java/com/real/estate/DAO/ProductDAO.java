@@ -36,4 +36,5 @@ public interface ProductDAO {
 
   ArrayList<ProductDTO> getProducts(Map<String, String> filterParams);
 
+  ArrayList<ProductDTO> getLateArrayList();
 }

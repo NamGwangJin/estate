@@ -561,3 +561,8 @@
   align-items: center; /* 수직 가운데 정렬 */
   text-align: center; /* 텍스트를 수평 가운데 정렬 */
 }
+.getLateArrayList{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* 3개의 열, 각 열의 너비는 동일합니다. */
+  gap: 20px;
+}

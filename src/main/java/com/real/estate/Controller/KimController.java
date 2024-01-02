@@ -152,4 +152,8 @@ public class KimController {
         ArrayList<ProductDTO> searchList = pDAO.getProducts(filterParams);
         return searchList;
     }
+    @GetMapping("/api/getLatestProduct")
+    public ArrayList<ProductDTO> getLateArrayList(){
+        return pDAO.getLateArrayList();
+    }
 }
