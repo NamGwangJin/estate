@@ -156,4 +156,8 @@ public class KimController {
     public ArrayList<ProductDTO> getLateArrayList(){
         return pDAO.getLateArrayList();
     }
+    @GetMapping("/api/getRecommendList")
+    public ArrayList<ProductDTO> getRecommendList(){
+        return pDAO.getRecommendList();
+    }
 }
