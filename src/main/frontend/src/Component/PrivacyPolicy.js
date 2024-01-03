@@ -1,4 +1,5 @@
 import React from 'react'
+import './TermsConditions.css'
 
 export default function PrivacyPolicy({onClose}) {
   return (
