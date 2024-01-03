@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
 import './SignUp.css';
 import axios from 'axios';
+import PrivacyModal from './PrivacyModal';
 
 export default function SignUp({ isOpen, onClose }) {
+
+  const [isPrivacyModalOpen, setPrivacyModalOpen] = useState(false);
+
+  const openPrivacyModal = () => {
+    setPrivacyModalOpen(true);
+    document.getElementById('sign-up-btn').style.display = 'none';
+  };
+  
+  const closePrivacyModal = () => {
+    setPrivacyModalOpen(false);
+    document.getElementById('sign-up-btn').style = '';
+  };
+
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -70,14 +84,15 @@ export default function SignUp({ isOpen, onClose }) {
             <div className="form-group m-t text-left">
 
                 <div className="check">
-                    <small style={{marginRight: '150px', marginLeft: '20px'}}><a href="#modal-privacy" className="text-info">개인보호 정책</a></small>
+                    <small style={{marginRight: '150px', marginLeft: '20px'}}><a href="#modal-privacy" className="text-info" onClick={openPrivacyModal}>개인보호 정책</a></small>
+                    {isPrivacyModalOpen && <PrivacyModal onClose={closePrivacyModal} />}
                     <input id="terms_agree" name="terms_agree" type="checkbox" />
                     <label className="이용약관" htmlFor="terms_agree"><span>이용약관 동의</span></label>
                 </div>
             </div>
 
-            <div className="form-group">
-                <button type="submit" className='btn btn-ruru'>가입하기</button>
+            <div>
+                <button type="submit" className='btn btn-ruru' id='sign-up-btn'>가입하기</button>
             </div>
         </form>
       </div>
