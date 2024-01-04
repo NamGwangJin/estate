@@ -13,6 +13,7 @@ import QuestionWrite from './Component/QNA/QuestionWrite.js'
 import QuestionDetail from './Component/QNA/QuestionDetail.js'
 import Tour from './Component/Tour/Tour.js'
 import TourApliy from './Component/Tour/TourApliy.js'
+import TourDetail from './Component/Tour/TourDetail.js'
 import Admin from './Component/Admin/Admin.js'
 import EstateDetail from './Component/Estate/EstateDetail.js';
 import OfficetelInsert from './Component/Product/officetelInsert.js'
@@ -36,6 +37,7 @@ root.render(
       <Route path={"/question/detail"} exact element={<QuestionDetail />}></Route>
       <Route path={"/tour"} exact element={<Tour />}></Route>
       <Route path={"/tour/apliy"} exact element={<TourApliy />}></Route>
+      <Route path={"/tour/detail"} exact element={<TourDetail />}></Route>
       <Route path={"/admin"} exact element={<Admin />}></Route>
       <Route path={"/estate/detail"} exact element={<EstateDetail />}></Route>
       <Route path={"/admin/estate/detail"} exact element={<AdminEstateDetail />}></Route>

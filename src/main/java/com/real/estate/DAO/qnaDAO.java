@@ -15,5 +15,6 @@ public interface qnaDAO {
     QuestionDTO getDetail(int no);
     void tourApliy(String date, String time, String local, String name, String phone, String content, String writer, String created);
     ArrayList<TourDTO> getTourList();
+    TourDTO getTourDetail(int no);
 
 }

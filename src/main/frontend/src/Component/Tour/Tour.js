@@ -23,6 +23,10 @@ export default function Tour() {
     })
   }, [])
 
+  function detail(tour_no) {
+    navigate('/tour/detail?no=' + tour_no);
+  }
+
   return (
     <div className='App'>
         <Header />
@@ -44,7 +48,7 @@ export default function Tour() {
                 </thead>
                 <tbody>
                     {tourList.map((elem, index) => (
-                    <tr key={index}>
+                    <tr key={index} onClick={() => detail(elem.tour_no)}>
                         <td>{elem.tour_no}</td>
                         <td>{elem.tour_date}</td>
                         <td>{elem.tour_time}</td>
