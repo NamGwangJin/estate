@@ -136,6 +136,14 @@ public class NamController {
         return TourList;
     }
 
+    // 투어 신청 내역 불러오는 코드
+    @GetMapping("/api/tour/view")
+    public TourDTO getTourDetail(@RequestParam int no) {
+        TourDTO tourDetail = qnaDAO.getTourDetail(no);
+
+        return tourDetail;
+    }
+
     // 매물 상세 페이지 불러오는 코드
     // @GetMapping("/api/estate/detail")
     // public ProductDTO getEstateDetail(@RequestParam int no){
