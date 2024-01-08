@@ -23,7 +23,7 @@ insert into tour set tour_date = #{param1}, tour_time = #{param2}, tour_local = 
 select * from tour;
 </select>
 
-<select id="getTourDetail" resultType=:"com.real.estate.DTO.TourDTO">
+<select id="getTourDetail" resultType="com.real.estate.DTO.TourDTO">
 select * from tour where tour_no=#{param1};
 </select>
 
