@@ -6,6 +6,8 @@ import axios from 'axios';
 
 export default function EstateDetail({ product_id, onClose }) {
   const [detail, setDetail] = useState([]);
+  const [headItem, setHeadItem] = useState(null);
+  const [bodyItem, setBodyItem] = useState(null);
 
   useEffect(() => {
     // productId로 서버에 요청을 보내 상세 정보를 가져옴
@@ -23,6 +25,7 @@ export default function EstateDetail({ product_id, onClose }) {
   let ji = '';
 
   useEffect(() => {
+    if (detail.location) {
       axios({
           method: 'post',
           url: '/api/get/bjd_code',
@@ -62,6 +65,25 @@ export default function EstateDetail({ product_id, onClose }) {
                         var ji = item.getElementsByTagName('ji')[0].textContent;
     
                         console.log(name, main, bun, '-', ji);
+
+                        var indrMechUtcnt = item.getElementsByTagName('indrMechUtcnt')[0].textContent;
+                        var oudrMechUtcnt = item.getElementsByTagName('oudrMechUtcnt')[0].textContent;
+                        var indrAutoUtcnt = item.getElementsByTagName('indrAutoUtcnt')[0].textContent;
+                        var oudrAutoUtcnt = item.getElementsByTagName('oudrAutoUtcnt')[0].textContent;
+
+                        var parking = parseInt(indrAutoUtcnt + indrMechUtcnt + oudrAutoUtcnt + oudrMechUtcnt);
+
+                        setHeadItem({
+                          grndFlrCnt: item.getElementsByTagName('grndFlrCnt')[0].textContent
+                        });
+
+                        setBodyItem({
+                          name: name,
+                          platPlc: item.getElementsByTagName('platPlc')[0].textContent,
+                          dongNm: item.getElementsByTagName('dongNm')[0].textContent,
+                          hhldCnt: item.getElementsByTagName('hhldCnt')[0].textContent,
+                          parking: parking
+                        });
                     }
                 }
             };
@@ -72,16 +94,17 @@ export default function EstateDetail({ product_id, onClose }) {
         .catch(error => {
           console.log(error);
         });
-  }, [detail]);
+    }
+  }, [detail.location]);
 
   return (
     <div>
       <div className='container1'>
         <button className='closeButton' onClick={onClose}>X</button>
-        {detail && <DetailHead product_id={product_id} detail={detail} />}
+        {detail && <DetailHead product_id={product_id} detail={detail} headItem={headItem} />}
 
 
-        {detail && <DetailBody product_id={product_id} detail={detail} />}
+        {detail && <DetailBody product_id={product_id} detail={detail} bodyItem={bodyItem} />}
       </div>
     </div>
   )
