@@ -9,6 +9,8 @@ import Admin_header from '../Admin/Admin_header/Admin_header';
 export default function Tour() {
   
   const [tourList, setTourList] = useState([]);
+
+  const navigate = useNavigate();
   
   useEffect(() => { // 투어 신청 리스트 불러오는 함수
     axios({
