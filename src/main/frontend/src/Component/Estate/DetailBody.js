@@ -289,7 +289,7 @@ export default function DetailBody({ product_id }) {
                             <li>
                                 <div>
                                     <span style={{ display: 'table-cell', float: 'left' }}>냉방시설</span>
-                                    <div style={{ display: 'table-cell', width: '200px' }}>{detail.airCondition} -</div>
+                                    <div style={{ display: 'table-cell', width: '200px' }}>{detail.airCondition}</div>
                                 </div>
                             </li>
                             <li>
